@@ -1,0 +1,23 @@
+.tableContainer {
+  @apply w-full overflow-x-auto 
+}
+
+.tableContainer table{
+  @apply w-full text-sm text-center
+}
+
+.tableContainer thead {
+  @apply text-sm text-slate-500 font-bold
+}
+
+.tableContainer thead tr {
+  @apply border-b border-gray-200 py-4
+}
+
+.tableContainer thead tr th {
+  @apply text-[16px] py-4
+}
+
+.tableContainer tbody tr td {
+  @apply py-4 border-b
+}
