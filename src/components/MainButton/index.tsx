@@ -1,10 +1,13 @@
 type Props = {
-  text: string
+  text: string;
+  className?: string;
 }
 
-export function MainButton ({text}: Props) {
+export function MainButton ({ text, className }: Props) {
   return (
-    <button className="bg-blue-600 text-white text-lg px-4 py-2 rounded-md hover:bg-blue-700">
+    <button 
+      className={`bg-blue-700 text-white text-lg px-4 py-2 rounded-md hover:bg-blue-800 ${className}`}
+    >
       { text }
     </button>
   )
