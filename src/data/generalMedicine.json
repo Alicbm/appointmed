@@ -638,5 +638,21 @@
     "doctor": "Ezri Borgne",
     "patient_status": true,
     "status": false
+  },
+  {
+    "id": 41,
+    "registry_number": "9560437488",
+    "first_name": "Alic",
+    "last_name": "Barandica",
+    "department": null,
+    "city": "Santa Marta",
+    "email": "alic@gmial.com",
+    "eps": "Sanitas",
+    "name_hospital": "Sanitas",
+    "date": "3/17/2023",
+    "hour": 93,
+    "doctor": "El pepe",
+    "patient_status": true,
+    "status": false
   }
 ]

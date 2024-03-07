@@ -1,27 +1,57 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { MainButton } from "../MainButton";
+import { GeneralMedicineFilter, GeneralMedicineIT } from "../../types";
 
 type Props = {
-  listData: string[];
+  listData: ListDataType[];
+  data: GeneralMedicineIT[];
+  setData: Function;
 };
 
-export function FilterItem({ listData }: Props) {
+type ListDataType = {
+  label: string;
+  value: string;
+};
+
+export function FilterItem({ listData, data, setData }: Props) {
   const [showListData, setShowListData] = useState(false);
-  const [text, setText] = useState("");
+
+  const [inputSelectText, setInputSelectText] = useState("");
+  const [inputText, setInputText] = useState("");
+
   const [filteredData, setFilteredData] = useState("");
 
-  const newData = listData.filter((item) =>
+  const listFiltered = listData.filter((item) =>
     filteredData.length > 0
-      ? item.toLowerCase().includes(filteredData.toLowerCase())
+      ? item.label.toLowerCase().includes(filteredData.toLowerCase())
       : listData
   );
+
+  const handleSearch = () => {
+    setData(
+      data.filter((item: GeneralMedicineIT) => {
+        const searchText = inputText.toLowerCase();
+        const fieldToSearch =
+          item[inputSelectText as keyof GeneralMedicineFilter];
+
+        if (fieldToSearch.toLowerCase().includes(searchText)) {
+          return item;
+        } else if (fieldToSearch.toLowerCase() === searchText) {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleClearFilter = () => setData(data);
 
   return (
     <div className="flex gap-4">
       <div className="relative flex items-end w-full h-[45px] bg-slate-100 rounded-md">
         <input
-          value={text}
+          value={inputSelectText}
           placeholder="Seleccionar item"
           className="w-full h-full bg-transparent outline-none px-4 rounded-md border border-slate-300 focus:border-2 focus:border-blue-600"
         />
@@ -37,15 +67,16 @@ export function FilterItem({ listData }: Props) {
               />
             </div>
             <ul className="max-h-[200px] px-4 pb-4 overflow-y-scroll">
-              {newData.map((item) => (
+              {listFiltered.map((item) => (
                 <li
+                  key={item.label}
                   onClick={() => {
-                    setText(item);
+                    setInputSelectText(item.value);
                     setShowListData(false);
                   }}
                   className="p-2 rpunded-sm cursor-pointer hover:bg-gray-200"
                 >
-                  {item}
+                  {item.label}
                 </li>
               ))}
             </ul>
@@ -63,10 +94,19 @@ export function FilterItem({ listData }: Props) {
       <input
         placeholder="Buscar..."
         className="w-full h-[45px] bg-slate-100 outline-none px-4 rounded-md border border-slate-300 focus:border-2 focus:border-blue-600"
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => setInputText(e.target.value)}
       />
 
-      <MainButton text="Buscar" className="min-w-[150px]" />
+      <MainButton
+        text="Buscar"
+        className="min-w-[150px]"
+        onClick={handleSearch}
+      />
+      <MainButton
+        text="Limpiar"
+        className="min-w-[150px] bg-red-600 hover:bg-red-700"
+        onClick={handleClearFilter}
+      />
     </div>
   );
 }

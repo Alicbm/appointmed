@@ -14,3 +14,5 @@ export interface GeneralMedicineIT {
   patient_status: boolean,
   status: boolean
 }
+
+export type GeneralMedicineFilter = Pick<GeneralMedicineIT, 'registry_number' | 'first_name' | 'last_name' | 'eps'>

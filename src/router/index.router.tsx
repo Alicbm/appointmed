@@ -2,7 +2,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import { MainStructure } from '../pages'
 import { ListRequest } from '../pages/MedicinaGeneral/components/ListRequest'
 import { NewRequest } from '../pages/MedicinaGeneral/components/NewRequest'
-import { Header } from '../components/Header'
+// import { Header } from '../components/Header'
 
 export function Router() {
   return (
