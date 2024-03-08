@@ -5,63 +5,158 @@ import { MainButton } from "../../../../components/MainButton";
 import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
-import { data } from '../../../../data/eps.json'
+import { data } from "../../../../data/eps.json";
+import { useForm } from 'react-hook-form'
+import { TypeButton } from "../../../../types";
 
 export function NewRequest() {
   const [checked, setChecked] = useState(true);
 
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
+  const onSubmit = handleSubmit((data) => console.log(data))
+
   return (
-    <div>
+    <form onSubmit={onSubmit} className="grid gap-5">
       <TemplatePage
         title="Medicina General: Ingreso de Solicitudes"
         text="Desde aquí podrás ingresar las solicitudes al área de medicina general"
+        buttonText="Ver Solicitudes"
+        route="/dashboard/medicina-general/"
       />
 
-      <SubtitleInputs text="A. Seleccionar Tipo Entidad de Salud Promotora" />
+      <div>
+        <SubtitleInputs text="A. Seleccionar Tipo Entidad de Salud Promotora" />
 
-      <div className="grid grid-cols-2 mb-10">
-        <InputCheck
-          label="EPS"
-          checked={checked}
-          onClick={() => setChecked(!checked)}
-        />
-        <InputCheck
-          label="IPS"
-          checked={!checked}
-          onClick={() => setChecked(!checked)}
-        />
+        <div className="grid grid-cols-2">
+          <InputCheck
+            label="EPS"
+            checked={checked}
+            onClick={() => setChecked(!checked)}
+          />
+          <InputCheck
+            label="IPS"
+            checked={!checked}
+            onClick={() => setChecked(!checked)}
+          />
+        </div>
       </div>
 
-      <SubtitleInputs text="B. Datos del Solicitante" />
+      <div>
+        <SubtitleInputs text="B. Datos del Solicitante" />
 
-      <div className="grid grid-cols-3 gap-4 mb-10">
-        <Input label="Nro Registro" />
-        <Input label="Nombre" />
-        <Input label="Apellido" />
-        <Input label="Correo Electrónico" />
-        <InputSelect label="Seleccionar EPS" listData={data} />
+        <div className="grid grid-cols-3 gap-4">
+          {/* <div>
+            <input type="email" {...register('pepe', { required: true, pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'El email ta malito'
+            } } )}/>
+            {(errors['pepe']?.type === 'pattern') && <span>Eamil malo</span>}
+            {(errors['pepe']?.type === 'required') && <span>campo requerido</span>}
+          </div> */}
+          <Input 
+            label="Número de Registro" 
+            fieldName="registry_number"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+          <Input 
+            label="Nombre" 
+            fieldName="first_name"
+            register={register}
+            rules={{ required: true, minLength: 2, maxLength: 20 }}
+            errors={errors}
+          />
+          <Input 
+            label="Apellido" 
+            fieldName="last_name"
+            register={register}
+            rules={{ required: true, minLength: 2, maxLength: 20 }}
+            errors={errors}
+          />
+          <Input 
+            label="Correo Electrónico" 
+            fieldName="email"
+            register={register}
+            rules={{ required: true, pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'El email ta malito'
+            } }}
+            errors={errors}
+          />
+          <InputSelect label="Seleccionar EPS" listData={data} />
+        </div>
       </div>
 
-      <SubtitleInputs text="C. Lugar de la Cita Médica" />
+      <div>
+        <SubtitleInputs text="C. Lugar de la Cita Médica" />
 
-      <div className="grid grid-cols-3 gap-4 mb-10">
-        <Input label="Departamento" />
-        <Input label="Ciudad" />
-        <Input label="Centro Médico" />
+        <div className="grid grid-cols-3 gap-4">
+          <Input 
+            label="Departamento" 
+            fieldName="department"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+          <Input 
+            label="Ciudad" 
+            fieldName="city"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+          <Input 
+            label="Centro Médico" 
+            fieldName="name_hospital"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+        </div>
       </div>
 
-      <SubtitleInputs text="D. Fecha de la Cita Médica" />
+      <div>
+        <SubtitleInputs text="D. Fecha de la Cita Médica" />
 
-      <div className="grid grid-cols-2 gap-4 mb-10">
-        <Input label="Seleccionar Fecha" />
-        <Input label="Seleccionar Hora" />
+        <div className="grid grid-cols-2 gap-4">
+          <Input 
+            label="Seleccionar Fecha" 
+            fieldName="date"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+          <Input 
+            label="Seleccionar Hora" 
+            fieldName="hour"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+        </div>
       </div>
 
-      <SubtitleInputs text="E. Estado del paciente y preferencias" />
+      <div>
+        <SubtitleInputs text="E. Estado del paciente y preferencias" />
 
-      <div className="grid grid-cols-2 gap-4 mb-10">
-        <Input label="Selecciona Médico" />
-        <Input label="Estado del Paciente" />
+        <div className="grid grid-cols-2 gap-4">
+          <Input 
+            label="Selecciona Médico" 
+            fieldName="doctor"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+          <Input 
+            label="Estado del Paciente" 
+            fieldName="patient_status"
+            register={register}
+            rules={{ required: true }}
+            errors={errors}
+          />
+        </div>
       </div>
 
       <div className="pl-5">
@@ -69,9 +164,9 @@ export function NewRequest() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 my-8">
-        <MainButton text="Enviar Solicitud" />
         <MainButton text="Descargar PDF" />
+        <MainButton type={TypeButton.submit} text="Enviar Solicitud" />
       </div>
-    </div>
+    </form>
   );
 }

@@ -14,7 +14,7 @@ export function ListRequest() {
         title="Medicina General: Solitudes ingresadas"
         text="Desde aquí podrás visualizar las solicitudes ingresadas del área de medicina general"
         route="/dashboard/medicina-general/create"
-        button
+        buttonText="Nueva Solicitud"
       />
 
       <div>

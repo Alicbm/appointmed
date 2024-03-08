@@ -83,7 +83,7 @@ export function SideBar() {
             className={`${selected ? 'bg-slate-200': ''} flex items-center text-slate-500 cursor-pointer px-4 py-2 rounded-md hover:bg-slate-200`}
             onClick={() => navigate(route)}
           >
-            <span className="mr-2">{icon}</span> {label}
+            <span className="text-lg mr-3">{icon}</span> {label}
           </li>
         ))}
       </ul>
