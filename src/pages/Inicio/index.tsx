@@ -57,7 +57,7 @@ export function Inicio() {
             !Bienvenido a nuestra plataforma virtual! Desde aquí podrás reservar
             tus citas medicas en las clinicas y hospitales de tu preferencia.
           </p>
-          <MainButton text="Explorar plataforma" className="w-[250px]"/>
+          <MainButton text="Explorar plataforma" className="w-[250px] bg-sky-700 hover:bg-sky-800"/>
         </div>
         <div>
           <img 
@@ -90,7 +90,10 @@ export function Inicio() {
                 <div className="bg-slate-100 p-4">
                   <h4 className="text-xl text-blue-700 mb-2">{item.text}</h4>
                   <p className="text-gray-700 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo unde est reiciendis dolor</p>
-                  <MainButton text="Explorar" className="h-[30px] text-sm px-5" />
+                  <div className="flex gap-2">
+                    <MainButton text="Ver" className="w-full h-[30px] bg-sky-700 hover:bg-sky-800 text-sm px-5" />
+                    <MainButton text="Crear" className="w-full h-[30px] text-sm px-5 bg-black hover:bg-gray-900" />
+                  </div>
                 </div>
               </div>
             ))

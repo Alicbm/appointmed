@@ -33,7 +33,7 @@ export function Input({
         className={classNames([
           verifyError
             ? "border-2 border-red-400"
-            : "border border-gray-200 focus:border-2 focus:border-blue-600",
+            : "border border-gray-200 focus:border-2 focus:border-sky-700",
           "w-full h-full text-gray-800 bg-transparent peer outline-none px-4 pt-6 rounded-md",
         ])}
         {...register(fieldName, rules)}
@@ -43,9 +43,9 @@ export function Input({
         htmlFor={label}
         className={classNames([
           text.length > 0
-            ? "absolute top-1 left-3 text-blue-600"
-            : "absolute top-[16px] left-4 text-gray-500 transition-all peer-focus:top-1 peer-focus:left-3 peer-focus:text-blue-600",
-          (verifyError && text.length === 0) ? "text-red-600" : "text-blue-600",
+            ? "absolute top-1 left-3 text-sky-700"
+            : "absolute top-[16px] left-4 text-gray-500 transition-all peer-focus:top-1 peer-focus:left-3 peer-focus:text-sky-700",
+          (verifyError && text.length === 0) ? "text-red-600" : "text-gray-500",
         ])}
       >
         {label}

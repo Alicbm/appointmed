@@ -164,8 +164,8 @@ export function NewRequest() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 my-8">
-        <MainButton text="Descargar PDF" />
-        <MainButton type={TypeButton.submit} text="Enviar Solicitud" />
+        <MainButton text="Descargar PDF" className="bg-black hover:bg-gray-900" />
+        <MainButton type={TypeButton.submit} text="Enviar Solicitud" className="bg-sky-700 hover:bg-sky-800" />
       </div>
     </form>
   );

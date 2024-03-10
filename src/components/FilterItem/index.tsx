@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { MainButton } from "../MainButton";
 import { GeneralMedicineFilter, GeneralMedicineIT } from "../../types";
+import { useFilterPage } from "../../hooks/useFilterPage";
 
 type Props = {
   listData: ListDataType[];
@@ -16,6 +17,8 @@ type ListDataType = {
 };
 
 export function FilterItem({ listData, data, setData }: Props) {
+  const { setActualPage } = useFilterPage(data, setData)
+
   const [showListData, setShowListData] = useState(false);
 
   const [inputSelectText, setInputSelectText] = useState("");
@@ -45,7 +48,15 @@ export function FilterItem({ listData, data, setData }: Props) {
     );
   };
 
-  const handleClearFilter = () => setData(data);
+  const handleClearFilter = () => {
+    setInputSelectText("")
+    setInputText("")
+    
+    setActualPage({
+      start: 0,
+      end: 1  
+    })
+  }
 
   return (
     <div className="flex gap-4">
@@ -53,7 +64,7 @@ export function FilterItem({ listData, data, setData }: Props) {
         <input
           value={inputSelectText}
           placeholder="Seleccionar item"
-          className="w-full h-full bg-transparent outline-none px-4 rounded-md border border-slate-300 focus:border-2 focus:border-blue-600"
+          className="w-full h-full bg-transparent outline-none px-4 rounded-md border border-slate-300 focus:border-2 focus:border-sky-700"
         />
 
         {showListData && (
@@ -84,7 +95,7 @@ export function FilterItem({ listData, data, setData }: Props) {
         )}
 
         <span
-          className="absolute right-4 top-[10px] text-xl text-blue-700 cursor-pointer p-1 rounded-sm hover:bg-blue-100"
+          className="absolute right-4 top-[10px] text-xl text-sky-700 cursor-pointer p-1 rounded-sm hover:bg-sky-100"
           onClick={() => setShowListData(!showListData)}
         >
           <IoIosArrowDown />
@@ -92,19 +103,20 @@ export function FilterItem({ listData, data, setData }: Props) {
       </div>
 
       <input
+        value={inputText}
         placeholder="Buscar..."
-        className="w-full h-[45px] bg-slate-100 outline-none px-4 rounded-md border border-slate-300 focus:border-2 focus:border-blue-600"
+        className="w-full h-[45px] bg-slate-100 outline-none px-4 rounded-md border border-slate-300 focus:border-2 focus:border-sky-700"
         onChange={(e) => setInputText(e.target.value)}
       />
 
       <MainButton
         text="Buscar"
-        className="min-w-[150px]"
+        className="min-w-[150px] bg-sky-700 hover:bg-sky-800"
         onClick={handleSearch}
       />
       <MainButton
         text="Limpiar"
-        className="min-w-[150px] bg-red-600 hover:bg-red-700"
+        className="min-w-[150px] bg-black hover:bg-gray-900"
         onClick={handleClearFilter}
       />
     </div>

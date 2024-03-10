@@ -25,13 +25,13 @@ export function InputSelect({ label, type, listData }: Props) {
         type={type || "text"}
         name={label}
         value={text}
-        className="w-full h-full bg-transparent peer outline-none px-4 pt-6 rounded-md border border-gray-200 focus:border-2 focus:border-blue-600"
+        className="w-full h-full bg-transparent peer outline-none px-4 pt-6 rounded-md border border-gray-200 focus:border-2 focus:border-sky-700"
       />
       <label
         htmlFor={label}
         className={`${
-          text.length > 0 ? "top-1 left-3 text-blue-600" : ""
-        } absolute top-[16px] left-4 text-gray-500 transition-all peer-focus:top-1 peer-focus:left-3 peer-focus:text-blue-600`}
+          text.length > 0 ? "top-1 left-3 text-sky-700" : ""
+        } absolute top-[16px] left-4 text-gray-500 transition-all peer-focus:top-1 peer-focus:left-3 peer-focus:text-sky-700`}
       >
         {label}
       </label>
@@ -63,7 +63,7 @@ export function InputSelect({ label, type, listData }: Props) {
       )}
 
       <span
-        className="absolute right-4 top-[15px] text-xl text-blue-700 cursor-pointer p-1 rounded-sm hover:bg-blue-100"
+        className="absolute right-4 top-[15px] text-xl text-sky-700 cursor-pointer p-1 rounded-sm hover:bg-sky-100"
         onClick={() => setShowListData(!showListData)}
       >
         <IoIosArrowDown />

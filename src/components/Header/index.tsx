@@ -13,8 +13,8 @@ export function Header () {
       </div>
 
     <div className='flex gap-4'>
-      <MainButton text='Cambiar de Cuenta' className='h-[35px] text-[16px] bg-black hover:bg-gray-800' />
-      <MainButton text='Cerrar Sesión' className='h-[35px] text-[16px] bg-red-600 hover:bg-red-700' />
+      <MainButton text='Cambiar de Cuenta' className='h-[35px] text-[16px] bg-sky-700 hover:bg-sky-800' />
+      <MainButton text='Cerrar Sesión' className='h-[35px] text-[16px] bg-black hover:bg-gray-900' />
     </div>
 
     </header>

@@ -70,7 +70,7 @@ export function SideBar() {
     <div>
       <div className="w-[250px] text-gray-800 bg-slate-100 py-4 px-2 rounded-md overflow-hidden mb-2">
         <div className="bg-slate-2000 px-4 py-3 bg-slate-200 rounded-md mb-4">
-          <p className="flex items-center text-2xl text-blue-700 font-bold tracking-wider">
+          <p className="flex items-center text-2xl text-sky-700 font-bold tracking-wider">
             <span className="mr-2">
               <FaUserCircle />
             </span>
@@ -90,10 +90,10 @@ export function SideBar() {
         </ul>
       </div>
 
-      <div className="flex justify-around items-center gap-8 w-[250px] text-blue-700 text-4xl bg-blue-50 py-4 px-6 rounded-md">
-        <span className="cursor-pointer hover:text-blue-700"><FaGithub /></span>
-        <span className="cursor-pointer hover:text-blue-700"><FaLinkedin /></span>
-        <span className="cursor-pointer hover:text-blue-700"><FaUserCircle /></span>
+      <div className="flex justify-around items-center gap-8 w-[250px] text-sky-700 text-4xl bg-slate-100 py-4 px-6 rounded-md">
+        <span className="cursor-pointer hover:text-sky-800"><FaGithub /></span>
+        <span className="cursor-pointer hover:text-sky-800"><FaLinkedin /></span>
+        <span className="cursor-pointer hover:text-sky-800"><FaUserCircle /></span>
       </div>
     </div>
   );

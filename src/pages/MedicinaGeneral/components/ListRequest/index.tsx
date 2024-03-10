@@ -4,10 +4,15 @@ import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import data from "../../../../data/generalMedicine.json";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_GENERAL_MEDICINE } from "../../graphql/Query/GetAllGeneralMedicine";
 
 export function ListRequest() {
+  const { data: fetchData } = useQuery(GET_ALL_GENERAL_MEDICINE)
   const [filterData, setFilterData] = useState(data);
 
+  const newData = fetchData?.getAllGeneralMedicineRequest
+ 
   return (
     <div className="grid gap-6">
       <TemplatePage
@@ -42,13 +47,13 @@ export function ListRequest() {
             </tr>
           </thead>
           <tbody>
-            {filterData.map((item, index) => (
+            {newData?.map((item, index) => (
               <tr key={index} className={`${index % 2 == 0 && "bg-slate-50"}`}>
-                <td>{item.registry_number}</td>
-                <td>{item.first_name}</td>
-                <td>{item.last_name}</td>
+                <td>{item.registryNumber}</td>
+                <td>{item.firsName}</td>
+                <td>{item.lastName}</td>
                 <td>{item.eps}</td>
-                <td>{item.registry_number}</td>
+                <td>{item.medicalCenter}</td>
               </tr>
             ))}
           </tbody>
