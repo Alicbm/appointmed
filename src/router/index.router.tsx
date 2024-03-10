@@ -2,15 +2,17 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import { MainStructure } from '../pages'
 import { ListRequest } from '../pages/MedicinaGeneral/components/ListRequest'
 import { NewRequest } from '../pages/MedicinaGeneral/components/NewRequest'
-// import { Header } from '../components/Header'
+import { Inicio } from '../pages/Inicio'
+import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
 
 export function Router() {
   return (
     <HashRouter>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path='/dashboard' element={<MainStructure />} >
-          <Route index path='' element={<p>Este es el inicio</p>}/>
+          <Route index path='' element={<Inicio />}/>
           <Route path='medicina-general' element={<ListRequest />}/>
           <Route path='medicina-general/create' element={<NewRequest />}/>
           <Route path='odontologia' element={<p>Este es odontologia</p>}/>
@@ -20,6 +22,7 @@ export function Router() {
           <Route path='optometria' element={<p>Este es optometria</p>}/>
         </Route>
       </Routes>
+      <Footer />
     </HashRouter>
   )
 }

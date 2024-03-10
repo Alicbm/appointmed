@@ -17,7 +17,7 @@ export function MainButton ({ text, className, onClick, type }: Props) {
   return (
     <button 
       type={type || 'button'}
-      className={`bg-blue-700 text-white text-lg px-4 py-2 rounded-md hover:bg-blue-800 ${className}`}
+      className={`flex justify-center items-center bg-blue-700 text-white text-lg px-4 py-2 rounded-md hover:bg-blue-800 ${className}`}
       onClick={onClick}
     >
       { text }

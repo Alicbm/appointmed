@@ -1,8 +1,8 @@
 import { AiFillHome, AiFillMedicineBox } from "react-icons/ai";
+import { FaGithub, FaLinkedin, FaUserCircle  } from "react-icons/fa";
 import { FaTeeth, FaBaby, FaEye } from "react-icons/fa6";
 import { TbGenderAndrogyne } from "react-icons/tb";
 import { MdPsychology } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 type RoutesType = {
@@ -67,26 +67,34 @@ export function SideBar() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-[250px] text-gray-800 bg-slate-100 py-4 px-2 rounded-md overflow-hidden">
-      <div className="bg-slate-2000 px-4 py-3 bg-slate-200 rounded-md mb-4">
-        <p className="flex items-center text-2xl text-blue-700 font-bold tracking-wider">
-          <span className="mr-2">
-            <FaUserCircle />
-          </span>
-          <span>Username</span>
-        </p>
+    <div>
+      <div className="w-[250px] text-gray-800 bg-slate-100 py-4 px-2 rounded-md overflow-hidden mb-2">
+        <div className="bg-slate-2000 px-4 py-3 bg-slate-200 rounded-md mb-4">
+          <p className="flex items-center text-2xl text-blue-700 font-bold tracking-wider">
+            <span className="mr-2">
+              <FaUserCircle />
+            </span>
+            <span>Username</span>
+          </p>
+        </div>
+
+        <ul className="grid gap-4 text-lg">
+          {routes.map(({ label, route, icon, selected }) => (
+            <li
+              className={`${selected ? 'bg-slate-200': ''} flex items-center text-slate-500 cursor-pointer px-4 py-2 rounded-md hover:bg-slate-200`}
+              onClick={() => navigate(route)}
+            >
+              <span className="text-lg mr-3">{icon}</span> {label}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <ul className="grid gap-4 text-lg">
-        {routes.map(({ label, route, icon, selected }) => (
-          <li
-            className={`${selected ? 'bg-slate-200': ''} flex items-center text-slate-500 cursor-pointer px-4 py-2 rounded-md hover:bg-slate-200`}
-            onClick={() => navigate(route)}
-          >
-            <span className="text-lg mr-3">{icon}</span> {label}
-          </li>
-        ))}
-      </ul>
+      <div className="flex justify-around items-center gap-8 w-[250px] text-blue-700 text-4xl bg-blue-50 py-4 px-6 rounded-md">
+        <span className="cursor-pointer hover:text-blue-700"><FaGithub /></span>
+        <span className="cursor-pointer hover:text-blue-700"><FaLinkedin /></span>
+        <span className="cursor-pointer hover:text-blue-700"><FaUserCircle /></span>
+      </div>
     </div>
   );
 }
