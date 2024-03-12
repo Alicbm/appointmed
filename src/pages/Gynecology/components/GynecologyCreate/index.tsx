@@ -9,7 +9,7 @@ import { data } from "../../../../data/eps.json";
 import { useForm } from 'react-hook-form'
 import { TypeButton } from "../../../../types";
 
-export function NewRequest() {
+export function GynecologyCreate() {
   const [checked, setChecked] = useState(true);
 
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -19,10 +19,10 @@ export function NewRequest() {
   return (
     <form onSubmit={onSubmit} className="grid gap-5">
       <TemplatePage
-        title="Medicina General: Ingreso de Solicitudes"
-        text="Desde aquí podrás ingresar las solicitudes al área de medicina general"
+        title="Ginecología: Ingreso de Solicitudes"
+        text="Desde aquí podrás ingresar las solicitudes al área de ginecología"
         buttonText="Ver Solicitudes"
-        route="/dashboard/medicina-general/"
+        route="/dashboard/ginecologia/"
       />
 
       <div>

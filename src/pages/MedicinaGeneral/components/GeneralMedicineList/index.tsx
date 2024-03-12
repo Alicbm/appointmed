@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
 import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
 import { TemplatePage } from "../../../../components/TemplatePage";
-import data from "../../../../data/generalMedicine.json";
-import { useQuery } from "@apollo/client";
 import { GET_ALL_GENERAL_MEDICINE } from "../../graphql/Query/GetAllGeneralMedicine";
+import { BaseIT } from "../../../../types";
+// import data from "../../../../data/generalMedicine.json";
 
-export function ListRequest() {
-  const { data: fetchData } = useQuery(GET_ALL_GENERAL_MEDICINE)
-  const [filterData, setFilterData] = useState(data);
+export function GeneralMedicineList() {
+  const { data: fetchData } = useQuery(GET_ALL_GENERAL_MEDICINE);
+  const newData: BaseIT[] = fetchData?.getAllGeneralMedicineRequest;
 
-  const newData = fetchData?.getAllGeneralMedicineRequest
- 
+  const [filterData, setFilterData] = useState(newData);
+
+  useEffect(() => {
+    setFilterData(newData);
+  }, [newData]);
+
   return (
     <div className="grid gap-6">
       <TemplatePage
@@ -25,12 +30,12 @@ export function ListRequest() {
       <div>
         <FilterItem
           listData={[
-            { label: "Nro Expediente", value: "registry_number" },
-            { label: "Nombre", value: "first_name" },
-            { label: "Apellido", value: "last_name" },
+            { label: "Nro Expediente", value: "registryNumber" },
+            { label: "Nombre", value: "firstName" },
+            { label: "Apellido", value: "lastName" },
             { label: "EPS", value: "eps" },
           ]}
-          data={data}
+          data={newData}
           setData={setFilterData}
         />
       </div>
@@ -47,20 +52,20 @@ export function ListRequest() {
             </tr>
           </thead>
           <tbody>
-            {newData?.map((item, index) => (
+            {filterData?.map((item: BaseIT, index: number) => (
               <tr key={index} className={`${index % 2 == 0 && "bg-slate-50"}`}>
-                <td>{item.registryNumber}</td>
-                <td>{item.firsName}</td>
-                <td>{item.lastName}</td>
-                <td>{item.eps}</td>
-                <td>{item.medicalCenter}</td>
+                <td>{item?.registryNumber}</td>
+                <td>{item?.firstName}</td>
+                <td>{item?.lastName}</td>
+                <td>{item?.eps}</td>
+                <td>{item?.medicalCenter}</td>
               </tr>
             ))}
           </tbody>
         </Table>
       </div>
 
-      <Pagination data={data} setData={setFilterData} />
+      <Pagination data={newData} setData={setFilterData} />
     </div>
   );
 }

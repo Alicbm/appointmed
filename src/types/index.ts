@@ -1,23 +1,24 @@
-export interface GeneralMedicineIT {
-  id: number;
-  registry_number: string;
-  first_name: string;
-  last_name: string;
-  department: null | string;
-  city: string;
+export interface BaseIT {
+  id: string;
+  typeService: string;
+  registryNumber: number;
+  firstName: string;
+  lastName: string;
   email: string;
   eps: string;
-  name_hospital: string;
+  department: string;
+  city: string;
+  medicalCenter: string;
   date: string;
-  hour: number;
+  hour: string;
   doctor: string;
-  patient_status: boolean;
-  status: boolean;
+  patientStatus: string;
+  status: string;
 }
 
-export type GeneralMedicineFilter = Pick<
-  GeneralMedicineIT,
-  "registry_number" | "first_name" | "last_name" | "eps"
+export type FilterItemType = Pick<
+  BaseIT,
+  "registryNumber" | "firstName" | "lastName" | "eps"
 >;
 
 export enum TypeButton {

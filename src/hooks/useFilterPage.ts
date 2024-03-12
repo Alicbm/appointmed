@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { useEffect, useState } from "react";
-import { GeneralMedicineIT } from "../types";
+import { BaseIT } from "../types";
 
-export const useFilterPage = (data: GeneralMedicineIT[] , setData: Function) => {
+export const useFilterPage = (data: BaseIT[] , setData: Function) => {
   const [actualPage, setActualPage] = useState({
     start: 0,
     end: 1
   })
 
   const items: number[] = [];
-  const allPages = Math.ceil(data.length / 10);
+  const allPages = Math.ceil(data?.length / 10);
 
   for (let i = 1; i <= allPages; i++) {
     items.push(i);
@@ -20,7 +20,7 @@ export const useFilterPage = (data: GeneralMedicineIT[] , setData: Function) => 
       const start = actualPage.start * 10;
       const end = actualPage.end * 10;
 
-      const newData = data.slice(start, end)
+      const newData = data?.slice(start, end)
       setData(newData)
     }
 

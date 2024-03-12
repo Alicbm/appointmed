@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { MainButton } from "../MainButton";
-import { GeneralMedicineFilter, GeneralMedicineIT } from "../../types";
+import { FilterItemType, BaseIT } from "../../types";
 import { useFilterPage } from "../../hooks/useFilterPage";
 
 type Props = {
   listData: ListDataType[];
-  data: GeneralMedicineIT[];
+  data: BaseIT[];
   setData: Function;
 };
 
@@ -27,21 +27,21 @@ export function FilterItem({ listData, data, setData }: Props) {
   const [filteredData, setFilteredData] = useState("");
 
   const listFiltered = listData.filter((item) =>
-    filteredData.length > 0
+    filteredData?.length > 0
       ? item.label.toLowerCase().includes(filteredData.toLowerCase())
       : listData
   );
 
   const handleSearch = () => {
     setData(
-      data.filter((item: GeneralMedicineIT) => {
+      data.filter((item: BaseIT) => {
         const searchText = inputText.toLowerCase();
         const fieldToSearch =
-          item[inputSelectText as keyof GeneralMedicineFilter];
+          item[inputSelectText as keyof FilterItemType];
 
-        if (fieldToSearch.toLowerCase().includes(searchText)) {
+        if (String(fieldToSearch).toLowerCase().includes(searchText)) {
           return item;
-        } else if (fieldToSearch.toLowerCase() === searchText) {
+        } else if (String(fieldToSearch).toLowerCase() === searchText) {
           return item;
         }
       })
