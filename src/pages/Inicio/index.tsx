@@ -49,11 +49,11 @@ export function Inicio() {
     <div className="grid gap-6">
       <div className="flex justify-between gap-2 bg-slate-100 rounded-lg overflow-hidden">
         <div className="flex flex-col gap-2 p-4">
-          <h1 className="text-blue-700 text-4xl font-bold">Alic, Bienvenido</h1>
-          <h2 className="text-gray-700 text-xl">
+          <h1 className="text-sky-800 text-4xl font-bold">Alic, Bienvenido</h1>
+          <h2 className="text-gray-600 text-xl">
             En Appointmed estamos encantados de recibirte
           </h2>
-          <p className="text-gray-600 leading-8 mb-2">
+          <p className="text-gray-500 leading-8 mb-2">
             !Bienvenido a nuestra plataforma virtual! Desde aquí podrás reservar
             tus citas medicas en las clinicas y hospitales de tu preferencia.
           </p>

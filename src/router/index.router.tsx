@@ -15,12 +15,14 @@ import { PediatricsList } from '../pages/Pediatrics/components/PediatricsList'
 import { PediatricsCreate } from '../pages/Pediatrics/components/PediatricsCreate'
 import { OptometryCreate } from '../pages/Optometry/components/OptometryCreate'
 import { OptometryList } from '../pages/Optometry/components/OptometryList'
+import { Login } from '../pages/Login'
 
 export function Router() {
   return (
     <HashRouter>
       <Header />
       <Routes>
+        <Route path='/' element={<Login />} />
         <Route path='/dashboard' element={<MainStructure />} >
           <Route index path='' element={<Inicio />}/>
           <Route path='medicina-general' element={<GeneralMedicineList />}/>

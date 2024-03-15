@@ -22,8 +22,6 @@ export function Input({
   const [text, setText] = useState("");
 
   const verifyError = errors && errors[fieldName]
-
-  console.log(errors);
   
   return (
     <div className="relative flex items-end w-full h-[55px] bg-gray-100 rounded-md">
