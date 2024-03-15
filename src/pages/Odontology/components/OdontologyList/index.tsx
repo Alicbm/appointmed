@@ -4,13 +4,13 @@ import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
 import { TemplatePage } from "../../../../components/TemplatePage";
-import { GET_ALL_GENERAL_MEDICINE } from "../../graphql/Query/GetAllGeneralMedicine";
+import { GET_ALL_ODONTOLOGY } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
-// import data from "../../../../data/generalMedicine.json";
+import { NotResults } from "../../../../components/NotResults";
 
 export function OdontologyList() {
-  const { data: fetchData } = useQuery(GET_ALL_GENERAL_MEDICINE);
-  const newData: BaseIT[] = fetchData?.getAllGeneralMedicineRequest;
+  const { data: fetchData } = useQuery(GET_ALL_ODONTOLOGY);
+  const newData: BaseIT[] = fetchData?.getAllOdontologyRequest;
 
   const [filterData, setFilterData] = useState(newData);
 
@@ -42,26 +42,41 @@ export function OdontologyList() {
 
       <div className="w-full bg-slate-100 rounded-lg overflow-hidden">
         <Table>
-          <thead>
-            <tr>
-              <th>Nro Expediente</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>EPS</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filterData?.map((item: BaseIT, index: number) => (
-              <tr key={index} className={`${index % 2 == 0 && "bg-slate-50"}`}>
-                <td>{item?.registryNumber}</td>
-                <td>{item?.firstName}</td>
-                <td>{item?.lastName}</td>
-                <td>{item?.eps}</td>
-                <td>{item?.medicalCenter}</td>
-              </tr>
-            ))}
-          </tbody>
+          {filterData?.length > 0 ? (
+            <>
+              <thead>
+                <tr>
+                  <th>Nro Expediente</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>EPS</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filterData?.map((item: BaseIT, index: number) => (
+                  <tr
+                    key={index}
+                    className={`${index % 2 == 0 && "bg-slate-50"}`}
+                  >
+                    <td>{item?.registryNumber}</td>
+                    <td>{item?.firstName}</td>
+                    <td>{item?.lastName}</td>
+                    <td>{item?.eps}</td>
+                    <td>{item?.medicalCenter}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </>
+          ) : (
+            <NotResults
+              text={
+                newData?.length === 0
+                  ? "No hay elementos en esta sección"
+                  : "No hay resultados para la busqueda"
+              }
+            />
+          )}
         </Table>
       </div>
 

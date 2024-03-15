@@ -4,12 +4,13 @@ import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
 import { TemplatePage } from "../../../../components/TemplatePage";
-import { GET_ALL_GENERAL_MEDICINE } from "../../graphql/Query/GetAllGeneralMedicine";
+import { GET_ALL_OPTOMETRY } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
+import { NotResults } from "../../../../components/NotResults";
 
 export function OptometryList() {
-  const { data: fetchData } = useQuery(GET_ALL_GENERAL_MEDICINE);
-  const newData: BaseIT[] = fetchData?.getAllGeneralMedicineRequest;
+  const { data: fetchData } = useQuery(GET_ALL_OPTOMETRY);
+  const newData: BaseIT[] = fetchData?.getAllOptometryRequest;
 
   const [filterData, setFilterData] = useState(newData);
 
@@ -41,6 +42,8 @@ export function OptometryList() {
 
       <div className="w-full bg-slate-100 rounded-lg overflow-hidden">
         <Table>
+        {filterData?.length > 0 ? (
+            <>
           <thead>
             <tr>
               <th>Nro Expediente</th>
@@ -61,6 +64,16 @@ export function OptometryList() {
               </tr>
             ))}
           </tbody>
+          </>
+          ) : (
+            <NotResults
+              text={
+                newData?.length === 0
+                  ? "No hay elementos en esta sección"
+                  : "No hay resultados para la busqueda"
+              }
+            />
+          )}
         </Table>
       </div>
 

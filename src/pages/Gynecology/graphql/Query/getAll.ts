@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const GET_ALL_GENERAL_MEDICINE = gql`
-  query getAllGeneralMedicineRequest {
-    getAllGeneralMedicineRequest {
+export const GET_ALL_GYNECOLOGY = gql`
+  query getAllGynecologyRequest {
+    getAllGynecologyRequest {
       id
  		  typeService
 		  registryNumber

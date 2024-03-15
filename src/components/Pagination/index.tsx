@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { GeneralMedicineIT } from "../../types";
+import { BaseIT } from "../../types";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { useFilterPage } from "../../hooks/useFilterPage";
 
 type Props = {
-  data: GeneralMedicineIT[];
+  data: BaseIT[];
   setData: Function;
 };
 
