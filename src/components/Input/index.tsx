@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldValues, UseFormRegister, UseFormReturn } from "react-hook-form";
 import { classNames } from "../../utils";
 import { useState } from "react";
 
@@ -6,25 +6,28 @@ type Props = {
   label: string;
   type?: string;
   fieldName: string;
-  register: UseFormRegister<FieldValues>;
   rules?: Parameters<UseFormRegister<FieldValues>>[1];
-  errors?: FieldErrors<FieldValues>;
+  allForm: UseFormReturn<FieldValues>;
 };
 
 export function Input({
   label,
   type,
-  register,
   fieldName,
   rules,
-  errors,
+  allForm
 }: Props) {
   const [text, setText] = useState("");
+
+  const { register, setValue, formState: { errors } } = allForm;
 
   const verifyError = errors && errors[fieldName]
   
   return (
-    <div className="relative flex items-end w-full h-[55px] bg-gray-100 rounded-md">
+    <div className={classNames([ 
+      "relative flex items-end w-full h-[55px] rounded-md",
+      text.length > 0 ? 'bg-[#E8F0FE]' : 'bg-gray-100'
+     ])}>
       <input
         id={label}
         type={type || "text"}
@@ -35,7 +38,10 @@ export function Input({
           "w-full h-full text-gray-800 bg-transparent peer outline-none px-4 pt-6 rounded-md",
         ])}
         {...register(fieldName, rules)}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+          setValue && setValue(fieldName, e.target.value);
+        }}
       />
       <label
         htmlFor={label}

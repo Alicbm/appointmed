@@ -5,16 +5,39 @@ import { MainButton } from "../../../../components/MainButton";
 import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
-import { data } from "../../../../data/eps.json";
-import { useForm } from 'react-hook-form'
-import { TypeButton } from "../../../../types";
+import { data as epsList } from "../../../../data/eps.json";
+import { FieldValues, useForm } from "react-hook-form";
+import { CreateRequestIT, TypeButton } from "../../../../types";
+import { useMutation } from "@apollo/client";
+import { CREATE_ODONTOLOGY } from "../../graphql/Mutation/createRequest";
 
 export function OdontologyCreate() {
   const [checked, setChecked] = useState(true);
+  const [createOdontologyRequest] = useMutation(CREATE_ODONTOLOGY);
 
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const allForm = useForm();
 
-  const onSubmit = handleSubmit((data) => console.log(data))
+  const onSubmit = allForm?.handleSubmit(
+    async (getData: CreateRequestIT | FieldValues) => {
+      await createOdontologyRequest({
+        variables: {
+          typeService: checked ? "EPS" : "IPS",
+          registryNumber: Number(getData?.registryNumber),
+          firstName: getData?.firstName,
+          lastName: getData?.lastName,
+          email: getData?.email,
+          eps: getData?.eps,
+          department: getData?.department,
+          city: getData?.city,
+          medicalCenter: getData?.medicalCenter,
+          date: getData?.date,
+          hour: getData?.hour,
+          doctor: getData?.doctor,
+          patientStatus: getData?.patientStatus,
+        },
+      });
+    }
+  );
 
   return (
     <form onSubmit={onSubmit} className="grid gap-5">
@@ -54,38 +77,44 @@ export function OdontologyCreate() {
             {(errors['pepe']?.type === 'pattern') && <span>Eamil malo</span>}
             {(errors['pepe']?.type === 'required') && <span>campo requerido</span>}
           </div> */}
-          <Input 
-            label="Número de Registro" 
-            fieldName="registry_number"
-            register={register}
+          <Input
+            type="number"
+            label="Número de Registro"
+            fieldName="registryNumber"
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
-          <Input 
-            label="Nombre" 
-            fieldName="first_name"
-            register={register}
+          <Input
+            label="Nombre"
+            fieldName="firstName"
+            allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
-            errors={errors}
           />
-          <Input 
-            label="Apellido" 
-            fieldName="last_name"
-            register={register}
+          <Input
+            label="Apellido"
+            fieldName="lastName"
+            allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
-            errors={errors}
           />
-          <Input 
-            label="Correo Electrónico" 
+          <Input
+            label="Correo Electrónico"
             fieldName="email"
-            register={register}
-            rules={{ required: true, pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'El email ta malito'
-            } }}
-            errors={errors}
+            allForm={allForm}
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "El email ta malito",
+              },
+            }}
           />
-          <InputSelect label="Seleccionar EPS" listData={data} />
+          <InputSelect
+            label="Seleccionar EPS"
+            listData={epsList}
+            fieldName="eps"
+            allForm={allForm}
+            rules={{ required: true }}
+          />
         </div>
       </div>
 
@@ -93,26 +122,23 @@ export function OdontologyCreate() {
         <SubtitleInputs text="C. Lugar de la Cita Médica" />
 
         <div className="grid grid-cols-3 gap-4">
-          <Input 
-            label="Departamento" 
+          <Input
+            label="Departamento"
             fieldName="department"
-            register={register}
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
-          <Input 
-            label="Ciudad" 
+          <Input
+            label="Ciudad"
             fieldName="city"
-            register={register}
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
-          <Input 
-            label="Centro Médico" 
-            fieldName="name_hospital"
-            register={register}
+          <Input
+            label="Centro Médico"
+            fieldName="medicalCenter"
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
         </div>
       </div>
@@ -121,19 +147,17 @@ export function OdontologyCreate() {
         <SubtitleInputs text="D. Fecha de la Cita Médica" />
 
         <div className="grid grid-cols-2 gap-4">
-          <Input 
-            label="Seleccionar Fecha" 
+          <Input
+            label="Seleccionar Fecha"
             fieldName="date"
-            register={register}
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
-          <Input 
-            label="Seleccionar Hora" 
+          <Input
+            label="Seleccionar Hora"
             fieldName="hour"
-            register={register}
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
         </div>
       </div>
@@ -142,19 +166,17 @@ export function OdontologyCreate() {
         <SubtitleInputs text="E. Estado del paciente y preferencias" />
 
         <div className="grid grid-cols-2 gap-4">
-          <Input 
-            label="Selecciona Médico" 
+          <Input
+            label="Selecciona Médico"
             fieldName="doctor"
-            register={register}
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
-          <Input 
-            label="Estado del Paciente" 
-            fieldName="patient_status"
-            register={register}
+          <Input
+            label="Estado del Paciente"
+            fieldName="patientStatus"
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
         </div>
       </div>
@@ -164,8 +186,15 @@ export function OdontologyCreate() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 my-8">
-        <MainButton text="Descargar PDF" className="bg-black hover:bg-gray-900" />
-        <MainButton type={TypeButton.submit} text="Enviar Solicitud" className="bg-sky-700 hover:bg-sky-800" />
+        <MainButton
+          text="Descargar PDF"
+          className="bg-black hover:bg-gray-900"
+        />
+        <MainButton
+          type={TypeButton.submit}
+          text="Enviar Solicitud"
+          className="bg-sky-700 hover:bg-sky-800"
+        />
       </div>
     </form>
   );

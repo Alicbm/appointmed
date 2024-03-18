@@ -71,6 +71,7 @@ export function GynecologyList() {
             </>
           ) : (
             <NotResults
+              route="/dashboard/ginecologia/create"
               text={
                 newData?.length === 0
                   ? "No hay elementos en esta sección"

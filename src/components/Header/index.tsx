@@ -1,14 +1,17 @@
-import logo from '../../images/appointmed_logo.png'
+import { useNavigate } from 'react-router-dom'
 import { MainButton } from '../MainButton'
+import logo from '../../images/appointmed_logo.png'
 
 export function Header () {
+  const navigate = useNavigate()
+
   return (
     <header className="flex justify-between items-center w-full max-w-[1200px] h-[80px] bg-slate-100 border-b border-slate-200 rounded-md px-8 mx-auto">
-      <div>
+      <div onClick={() => navigate('/dashboard')}>
         <img 
           src={logo} 
           alt="Appointmed" 
-          className='h-[50px]'
+          className='h-[50px] cursor-pointer'
         />
       </div>
 

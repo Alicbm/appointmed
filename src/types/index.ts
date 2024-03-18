@@ -1,7 +1,7 @@
 export interface BaseIT {
   id: string;
   typeService: string;
-  registryNumber: number;
+  registryNumber: number | string;
   firstName: string;
   lastName: string;
   email: string;
@@ -19,6 +19,11 @@ export interface BaseIT {
 export type FilterItemType = Pick<
   BaseIT,
   "registryNumber" | "firstName" | "lastName" | "eps"
+>;
+
+export type CreateRequestIT = Omit<
+  BaseIT,
+  "id" | "status"
 >;
 
 export enum TypeButton {

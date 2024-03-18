@@ -67,6 +67,7 @@ export function OptometryList() {
           </>
           ) : (
             <NotResults
+              route="/dashboard/optometria/create"
               text={
                 newData?.length === 0
                   ? "No hay elementos en esta sección"

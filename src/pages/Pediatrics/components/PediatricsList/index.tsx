@@ -70,6 +70,7 @@ export function PediatricsList() {
             </>
           ) : (
             <NotResults
+              route="/dashboard/pediatria/create"
               text={
                 newData?.length === 0
                   ? "No hay elementos en esta sección"

@@ -70,6 +70,7 @@ export function PsychiatryList() {
             </>
           ) : (
             <NotResults
+              route="/dashboard/psiquiatria/create"
               text={
                 newData?.length === 0
                   ? "No hay elementos en esta sección"

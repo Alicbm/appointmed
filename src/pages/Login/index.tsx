@@ -6,13 +6,9 @@ import { InputSelect } from "../../components/InputSelect";
 import bgImage from './images/bgImage.jpg'
 
 export function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const allForm = useForm();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = allForm?.handleSubmit((data) => console.log(data));
 
   return (
     <form
@@ -33,21 +29,21 @@ export function Login() {
           </div>
           <InputSelect
             label="Ingresar como"
+            allForm={allForm}
+            fieldName="user"
             listData={["Administrador", "Usuario Automatico", "Usuario propio"]}
           />
           <Input
             label="Usuario"
             fieldName="usuario"
-            register={register}
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
           <Input
             label="Contraseña"
             fieldName="contraseña"
-            register={register}
+            allForm={allForm}
             rules={{ required: true }}
-            errors={errors}
           />
 
           <MainButton text="Ingresar" className="w-full h-[50px] bg-sky-800 hover:bg-sky-900" />
