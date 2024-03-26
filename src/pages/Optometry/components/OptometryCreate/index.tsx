@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../../../components/Input";
 import { InputCheck } from "../../../../components/InputCheck";
 import { MainButton } from "../../../../components/MainButton";
@@ -10,34 +10,74 @@ import { FieldValues, useForm } from "react-hook-form";
 import { CreateRequestIT, TypeButton } from "../../../../types";
 import { useMutation } from "@apollo/client";
 import { CREATE_OPTOMETRY } from "../../graphql/Mutation/createRequest";
+import { AlertModal } from "../../../../components/AlertModal";
+import { ModalSentData } from "../../../../components/ModalSentData";
 
 export function OptometryCreate() {
   const [checked, setChecked] = useState(true);
+  const [correct, setCorrect] = useState(false);
+  const [dataSent, setDataSent] = useState(false);
+  const [requeriments, setRequeriments] = useState(false);
+  const [clearForm, setClearForm] = useState(false);
+  const [downloadRequest, setDownloadRequest] = useState(false);
+
   const [createOptometryRequest] = useMutation(CREATE_OPTOMETRY);
 
   const allForm = useForm();
 
+  const onDownloadRequest = () => {
+    setClearForm(false);
+    setDownloadRequest(true);
+  };
+
+  const onClearForm = () => {
+    setDownloadRequest(false);
+    setClearForm(true);
+  };
+
+  console.log(requeriments)
+
   const onSubmit = allForm?.handleSubmit(
     async (getData: CreateRequestIT | FieldValues) => {
-      await createOptometryRequest({
-        variables: {
-          typeService: checked ? "EPS" : "IPS",
-          registryNumber: Number(getData?.registryNumber),
-          firstName: getData?.firstName,
-          lastName: getData?.lastName,
-          email: getData?.email,
-          eps: getData?.eps,
-          department: getData?.department,
-          city: getData?.city,
-          medicalCenter: getData?.medicalCenter,
-          date: getData?.date,
-          hour: getData?.hour,
-          doctor: getData?.doctor,
-          patientStatus: getData?.patientStatus,
-        },
-      });
+      try {
+        if (requeriments) {
+          setCorrect(false);
+          await createOptometryRequest({
+            variables: {
+              typeService: checked ? "EPS" : "IPS",
+              registryNumber: Number(getData?.registryNumber),
+              firstName: getData?.firstName,
+              lastName: getData?.lastName,
+              email: getData?.email,
+              eps: getData?.eps,
+              department: getData?.department,
+              city: getData?.city,
+              medicalCenter: getData?.medicalCenter,
+              date: getData?.date,
+              hour: getData?.hour,
+              doctor: getData?.doctor,
+              patientStatus: getData?.patientStatus,
+            },
+          });
+
+          setDataSent(true);
+        } else {
+          alert("Es necesario que acepte los terminos y condiciones");
+        }
+      } catch (err) {
+        setCorrect(true);
+        setDataSent(true);
+      }
     }
   );
+
+  useEffect(() => {
+    if (dataSent) {
+      setTimeout(() => {
+        setDataSent(false);
+      }, 3000);
+    }
+  }, [dataSent]);
 
   return (
     <form onSubmit={onSubmit} className="grid gap-5">
@@ -182,13 +222,22 @@ export function OptometryCreate() {
       </div>
 
       <div className="pl-5">
-        <InputCheck label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!' />
+        <InputCheck
+          label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!'
+          onClick={() => setRequeriments(!requeriments)}
+        />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 my-8">
+      <div className="grid grid-cols-3 gap-4 my-8">
+        <MainButton
+          text="Limpiar Formulario"
+          className="bg-red-600 hover:bg-red-700"
+          onClick={onClearForm}
+        />
         <MainButton
           text="Descargar PDF"
           className="bg-black hover:bg-gray-900"
+          onClick={onDownloadRequest}
         />
         <MainButton
           type={TypeButton.submit}
@@ -196,6 +245,54 @@ export function OptometryCreate() {
           className="bg-sky-700 hover:bg-sky-800"
         />
       </div>
+
+      {dataSent && (
+        <div className="fixed top-[50px] right-2">
+          <ModalSentData error={correct} />
+        </div>
+      )}
+
+      {downloadRequest && (
+        <AlertModal
+          title="Descargar PDF"
+          text="Para descargar la solicitud en PDF primero debes enviar la solicitud"
+        >
+          <MainButton
+            text="Cancelar"
+            className="w-full bg-red-600 hover:bg-red-700"
+            onClick={() => setDownloadRequest(false)}
+          />
+          <MainButton
+            text="Enviar Solicitud"
+            className="w-full bg-sky-700 hover:bg-sky-800"
+            onClick={() => {
+              onSubmit();
+              setDownloadRequest(false);
+            }}
+          />
+        </AlertModal>
+      )}
+
+      {clearForm && (
+        <AlertModal
+          title="Limpiar Formulario"
+          text="¿Estás seguro que deseas limpiar el formulario?"
+        >
+          <MainButton
+            text="Cancelar"
+            className="w-full bg-red-600 hover:bg-red-700"
+            onClick={() => setClearForm(false)}
+          />
+          <MainButton
+            text="Limpiar"
+            className="w-full bg-sky-700 hover:bg-sky-800"
+            onClick={() => {
+              allForm.reset();
+              setClearForm(false);
+            }}
+          />
+        </AlertModal>
+      )}
     </form>
   );
 }

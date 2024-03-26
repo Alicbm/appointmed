@@ -8,13 +8,14 @@ type Props = {
 
 export function InputCheck ({ label, checked, onClick }: Props) {
   return (
-    <div onClick={onClick}>
+    <div>
       <input 
         type="checkbox" 
         name={label}
         id={label} 
         className="mr-2"
         checked={checked}
+        onClick={onClick}
       />
       <label 
         htmlFor={label}

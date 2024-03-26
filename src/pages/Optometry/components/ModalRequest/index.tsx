@@ -2,7 +2,7 @@
 import { IoClose } from "react-icons/io5";
 import { Input } from "../../../../components/Input";
 import { MainButton } from "../../../../components/MainButton";
-import { Modal } from "../../../../components/Modal";
+import { ContainerModal } from "../../../../components/ContainerModal";
 import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { BaseIT } from "../../../../types";
@@ -14,7 +14,7 @@ type Props = {
 
 export function ModalRequest({ data, setModal }: Props) {
   return (
-    <Modal>
+    <ContainerModal>
       <div className="relative grid gap-5 w-[70%] h-full bg-slate-50 px-6 pb-10 pt-14 mx-auto overflow-y-scroll rounded-lg overflow-hidden">
         <div 
           className="absolute top-5 right-5 text-3xl text-sky-800 bg-slate-100 hover:text-black cursor-pointer"
@@ -91,6 +91,6 @@ export function ModalRequest({ data, setModal }: Props) {
           />
         </div>
       </div>
-    </Modal>
+    </ContainerModal>
   );
 }

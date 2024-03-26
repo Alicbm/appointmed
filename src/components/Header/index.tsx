@@ -1,7 +1,7 @@
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { MainButton } from "../MainButton";
-import { Modal } from "../Modal";
+import { ContainerModal } from "../ContainerModal";
 import logo from "../../images/appointmed_logo.png";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ export function Header() {
       </div>
 
       {modal && (
-        <Modal>
+        <ContainerModal>
           <div className="relative flex flex-col justify-center gap-8 w-[500px] h-[250px] bg-slate-50 px-8 py-5 rounded-md">
             <span 
               className="absolute top-4 right-4 text-gray-600 text-4xl hover:text-gray-700 cursor-pointer"
@@ -57,7 +57,7 @@ export function Header() {
               />
             </div>
           </div>
-        </Modal>
+        </ContainerModal>
       )}
     </header>
   );

@@ -11,38 +11,57 @@ import { useMutation } from "@apollo/client";
 import { CREATE_GENERAL_MEDICINE } from "../../graphql/Mutation/createRequest";
 import { data as epsList } from "../../../../data/eps.json";
 import { ModalSentData } from "../../../../components/ModalSentData";
+import { AlertModal } from "../../../../components/AlertModal";
 
 export function GeneralMedicineCreate() {
   const [checked, setChecked] = useState(true);
   const [correct, setCorrect] = useState(false);
   const [dataSent, setDataSent] = useState(false);
+  const [requeriments, setRequeriments] = useState(false);
+  const [clearForm, setClearForm] = useState(false);
+  const [downloadRequest, setDownloadRequest] = useState(false);
+
   const [createGeneralMedicineRequest] = useMutation(CREATE_GENERAL_MEDICINE);
 
   const allForm = useForm();
 
+  const onDownloadRequest = () => {
+    setClearForm(false);
+    setDownloadRequest(true);
+  };
+
+  const onClearForm = () => {
+    setDownloadRequest(false);
+    setClearForm(true);
+  };
+
   const onSubmit = allForm?.handleSubmit(
     async (getData: CreateRequestIT | FieldValues) => {
       try {
-        setCorrect(false);
-        await createGeneralMedicineRequest({
-          variables: {
-            typeService: checked ? "EPS" : "IPS",
-            registryNumber: Number(getData?.registryNumber),
-            firstName: getData?.firstName,
-            lastName: getData?.lastName,
-            email: getData?.email,
-            eps: getData?.eps,
-            department: getData?.department,
-            city: getData?.city,
-            medicalCenter: getData?.medicalCenter,
-            date: getData?.date,
-            hour: getData?.hour,
-            doctor: getData?.doctor,
-            patientStatus: getData?.patientStatus,
-          },
-        });
+        if (requeriments) {
+          setCorrect(false);
+          await createGeneralMedicineRequest({
+            variables: {
+              typeService: checked ? "EPS" : "IPS",
+              registryNumber: Number(getData?.registryNumber),
+              firstName: getData?.firstName,
+              lastName: getData?.lastName,
+              email: getData?.email,
+              eps: getData?.eps,
+              department: getData?.department,
+              city: getData?.city,
+              medicalCenter: getData?.medicalCenter,
+              date: getData?.date,
+              hour: getData?.hour,
+              doctor: getData?.doctor,
+              patientStatus: getData?.patientStatus,
+            },
+          });
 
-        setDataSent(true);
+          setDataSent(true);
+        } else {
+          alert("Es necesario que acepte los terminos y condiciones");
+        }
       } catch (err) {
         setCorrect(true);
         setDataSent(true);
@@ -201,13 +220,22 @@ export function GeneralMedicineCreate() {
       </div>
 
       <div className="pl-5">
-        <InputCheck label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!' />
+        <InputCheck
+          label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!'
+          onClick={() => setRequeriments(!requeriments)}
+        />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 my-8">
+      <div className="grid grid-cols-3 gap-4 my-8">
+        <MainButton
+          text="Limpiar Formulario"
+          className="bg-red-600 hover:bg-red-700"
+          onClick={onClearForm}
+        />
         <MainButton
           text="Descargar PDF"
           className="bg-black hover:bg-gray-900"
+          onClick={onDownloadRequest}
         />
         <MainButton
           type={TypeButton.submit}
@@ -220,6 +248,48 @@ export function GeneralMedicineCreate() {
         <div className="fixed top-[50px] right-2">
           <ModalSentData error={correct} />
         </div>
+      )}
+
+      {downloadRequest && (
+        <AlertModal
+          title="Descargar PDF"
+          text="Para descargar la solicitud en PDF primero debes enviar la solicitud"
+        >
+          <MainButton
+            text="Cancelar"
+            className="w-full bg-red-600 hover:bg-red-700"
+            onClick={() => setDownloadRequest(false)}
+          />
+          <MainButton
+            text="Enviar Solicitud"
+            className="w-full bg-sky-700 hover:bg-sky-800"
+            onClick={() => {
+              onSubmit();
+              setDownloadRequest(false);
+            }}
+          />
+        </AlertModal>
+      )}
+
+      {clearForm && (
+        <AlertModal
+          title="Limpiar Formulario"
+          text="¿Estás seguro que deseas limpiar el formulario?"
+        >
+          <MainButton
+            text="Cancelar"
+            className="w-full bg-red-600 hover:bg-red-700"
+            onClick={() => setClearForm(false)}
+          />
+          <MainButton
+            text="Limpiar"
+            className="w-full bg-sky-700 hover:bg-sky-800"
+            onClick={() => {
+              allForm.reset();
+              setClearForm(false);
+            }}
+          />
+        </AlertModal>
       )}
     </form>
   );
