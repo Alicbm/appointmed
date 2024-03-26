@@ -7,12 +7,19 @@ import { TemplatePage } from "../../../../components/TemplatePage";
 import { GET_ALL_PSYCHIATRY } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
 import { NotResults } from "../../../../components/NotResults";
+import { IoEye } from "react-icons/io5";
+import { ModalRequest } from "../ModalRequest";
 
 export function PsychiatryList() {
   const { data: fetchData } = useQuery(GET_ALL_PSYCHIATRY);
   const newData: BaseIT[] = fetchData?.getAllPsychiatryRequest;
 
   const [filterData, setFilterData] = useState(newData);
+  const [modalRequest, setModalRequest] = useState(false);
+  const [idRequest, setIdRequest] = useState("");
+
+  const requestSelected = newData?.filter((item) => item?.id == idRequest);
+
 
   useEffect(() => {
     setFilterData(newData);
@@ -51,6 +58,7 @@ export function PsychiatryList() {
                   <th>Apellido</th>
                   <th>EPS</th>
                   <th>Estado</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -64,6 +72,15 @@ export function PsychiatryList() {
                     <td>{item?.lastName}</td>
                     <td>{item?.eps}</td>
                     <td>{item?.medicalCenter}</td>
+                    <td
+                      className="flex justify-center items-center text-sky-800 text-xl cursor-pointer hover:text-sky-900"
+                      onClick={() => {
+                        setModalRequest(true);
+                        setIdRequest(item.id);
+                      }}
+                    >
+                      <IoEye />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -82,6 +99,8 @@ export function PsychiatryList() {
       </div>
 
       <Pagination data={newData} setData={setFilterData} />
+
+      {modalRequest && <ModalRequest data={requestSelected} setModal={setModalRequest} />}
     </div>
   );
 }

@@ -7,12 +7,18 @@ import { TemplatePage } from "../../../../components/TemplatePage";
 import { GET_ALL_GYNECOLOGY } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
 import { NotResults } from "../../../../components/NotResults";
+import { ModalRequest } from "../ModalRequest";
+import { IoEye } from "react-icons/io5";
 
 export function GynecologyList() {
   const { data: fetchData } = useQuery(GET_ALL_GYNECOLOGY);
   const newData: BaseIT[] = fetchData?.getAllGynecologyRequest;
 
   const [filterData, setFilterData] = useState(newData);
+  const [modalRequest, setModalRequest] = useState(false);
+  const [idRequest, setIdRequest] = useState("");
+
+  const requestSelected = newData?.filter((item) => item.id == idRequest);
 
   useEffect(() => {
     setFilterData(newData);
@@ -51,6 +57,7 @@ export function GynecologyList() {
                   <th>Apellido</th>
                   <th>EPS</th>
                   <th>Estado</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
 
@@ -65,6 +72,15 @@ export function GynecologyList() {
                     <td>{item?.lastName}</td>
                     <td>{item?.eps}</td>
                     <td>{item?.medicalCenter}</td>
+                    <td
+                      className="flex justify-center items-center text-sky-800 text-xl cursor-pointer hover:text-sky-900"
+                      onClick={() => {
+                        setModalRequest(true);
+                        setIdRequest(item.id);
+                      }}
+                    >
+                      <IoEye />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -83,6 +99,8 @@ export function GynecologyList() {
       </div>
 
       <Pagination data={newData} setData={setFilterData} />
+
+      {modalRequest && <ModalRequest data={requestSelected} setModal={setModalRequest} />}
     </div>
   );
 }

@@ -18,6 +18,10 @@
   @apply text-[16px] py-4
 }
 
-.tableContainer tbody tr td {
+.tableContainer tbody tr{
   @apply text-gray-600 py-4 border-b
+}
+
+.tableContainer tbody tr td {
+  @apply py-4
 }

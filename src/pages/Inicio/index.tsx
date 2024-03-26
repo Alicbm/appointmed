@@ -76,7 +76,7 @@ export function Inicio() {
           </p>
           <MainButton
             text="Explorar plataforma"
-            className="w-[250px] bg-sky-700 hover:bg-sky-800"
+            className="w-[250px] bg-sky-800 hover:bg-sky-900"
           />
         </div>
         <div>
@@ -101,7 +101,7 @@ export function Inicio() {
                     <div className="flex justify-center items-center w-[110px] h-[110px] border-2 border-slate-300 rounded-[50%]">
                       <img
                         src={item.image}
-                        alt=""
+                        alt={item.text}
                         className="w-[70px] h-[70px] opacity-[.4]"
                       />
                     </div>
@@ -117,12 +117,12 @@ export function Inicio() {
                 <div className="flex gap-2">
                   <MainButton
                     text="Ver"
-                    className="w-full h-[30px] bg-sky-700 hover:bg-sky-800 text-sm px-5"
+                    className="w-full h-[30px] bg-sky-800 hover:bg-sky-900 text-sm px-5"
                     onClick={() => navigate(item.listRoute)}
                   />
                   <MainButton
                     text="Crear"
-                    className="w-full h-[30px] text-sm px-5 bg-black hover:bg-gray-900"
+                    className="w-full h-[30px] text-sm px-5 bg-black hover:bg-gray-950"
                     onClick={() => navigate(item.createRoute)}
                   />
                 </div>
