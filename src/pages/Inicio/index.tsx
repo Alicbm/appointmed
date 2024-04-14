@@ -122,7 +122,7 @@ export function Inicio() {
                   />
                   <MainButton
                     text="Crear"
-                    className="w-full h-[30px] text-sm px-5 bg-black hover:bg-gray-950"
+                    className="w-full h-[30px] text-sm px-5 border border-sky-800 text-sky-900"
                     onClick={() => navigate(item.createRoute)}
                   />
                 </div>

@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Input } from "../../components/Input";
-import { MainButton } from "../../components/MainButton";
-import logo from "../../images/appointmed_logo.png";
-import { InputSelect } from "../../components/InputSelect";
-import bgImage from './images/bgImage.jpg'
+import bgImage from "./images/bgImage.jpg";
+import { LoginUser } from "./components/Login";
+import { RegisterUser } from "./components/Register";
+import { useState } from "react";
 
 export function Login() {
+  const [login, setLogin] = useState(true);
   const allForm = useForm();
 
   const onSubmit = allForm?.handleSubmit((data) => console.log(data));
@@ -16,46 +16,18 @@ export function Login() {
       className="fixed top-0 left-0 right-0 bottom-0 flex h-[100vh] z-10"
     >
       <div className="w-[50%] bg-slate-50 filter brightness-[.5]">
-        <img 
-          src={bgImage} 
-          alt="Appointmed" 
+        <img
+          src={bgImage}
+          alt="Appointmed"
           className="w-[100%] h-[100%] object-cover"
         />
       </div>
-      <div className="flex items-center w-[50%] bg-slate-50 p-10">
-        <div className="flex flex-col items-center w-full max-w-[450px] gap-4 mx-auto">
-          <div className="flex justify-center w-full bg-gray-100 border border-gray-200 px-4 py-1 rounded-md">
-            <img src={logo} alt="Appointmed" />
-          </div>
-          <InputSelect
-            label="Ingresar como"
-            allForm={allForm}
-            fieldName="user"
-            listData={["Administrador", "Usuario Automatico", "Usuario propio"]}
-          />
-          <Input
-            label="Usuario"
-            fieldName="usuario"
-            allForm={allForm}
-            rules={{ required: true }}
-          />
-          <Input
-            label="Contraseña"
-            fieldName="contraseña"
-            allForm={allForm}
-            rules={{ required: true }}
-          />
 
-          <MainButton text="Ingresar" className="w-full h-[50px] bg-sky-800 hover:bg-sky-900" />
-
-          <div>
-            <p className="text-center text-sm text-gray-500">
-              ¿No tienes cuenta?{" "}
-              <span className="text-sky-800 underline cursor-pointer">Crea tu propia cuenta</span>
-            </p>
-          </div>
-        </div>
-      </div>
+      {login ? (
+        <LoginUser allForm={allForm} setLogin={setLogin} />
+      ) : (
+        <RegisterUser allForm={allForm} setLogin={setLogin} />
+      )}
     </form>
   );
 }
