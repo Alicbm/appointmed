@@ -23,8 +23,13 @@ export type FilterItemType = Pick<
 
 export type CreateRequestIT = Omit<
   BaseIT,
-  "id" | "status"
+  "id"
 >;
+
+export type LoginType = {
+  email: string;
+  password: string;
+}
 
 export enum TypeButton {
   button = 'button',

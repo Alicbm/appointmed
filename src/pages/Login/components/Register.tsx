@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { FieldValues, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Input } from "../../../components/Input";
 import { MainButton } from "../../../components/MainButton";
 import logo from "../../../images/appointmed_logo.png";
 
 type Props = {
-  allForm: UseFormReturn<FieldValues>;
   setLogin: Function;
 };
 
-export function RegisterUser({ allForm, setLogin }: Props) {
+export function RegisterUser({ setLogin }: Props) {
+  const allForm = useForm();
+
   return (
     <div className="flex items-center w-[50%] bg-slate-50 p-10">
       <div className="flex flex-col items-center w-full max-w-[450px] gap-4 mx-auto">

@@ -15,7 +15,7 @@ export function AlertModal ({ title, text, children }: Props) {
           {text}
         </p>
 
-        <div className="flex gap-4">
+        <div className="flex justify-center gap-4">
           { children }
         </div>
       </div>

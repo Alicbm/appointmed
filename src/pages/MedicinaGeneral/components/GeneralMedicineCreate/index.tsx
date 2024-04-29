@@ -37,6 +37,8 @@ export function GeneralMedicineCreate() {
 
   const onSubmit = allForm?.handleSubmit(
     async (getData: CreateRequestIT | FieldValues) => {
+      console.log(getData)
+
       try {
         if (requeriments) {
           setCorrect(false);
@@ -55,6 +57,7 @@ export function GeneralMedicineCreate() {
               hour: getData?.hour,
               doctor: getData?.doctor,
               patientStatus: getData?.patientStatus,
+              status: 'Pendiente'
             },
           });
 
@@ -65,6 +68,7 @@ export function GeneralMedicineCreate() {
       } catch (err) {
         setCorrect(true);
         setDataSent(true);
+        console.log(err)
       }
     }
   );

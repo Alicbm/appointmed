@@ -1,10 +1,5 @@
 import { MouseEventHandler } from "react";
-
-enum TypeButton {
-  button = 'button',
-  reset = 'reset',
-  submit =  "submit",
-}
+import { TypeButton } from "../../types";
 
 type Props = {
   text: string;

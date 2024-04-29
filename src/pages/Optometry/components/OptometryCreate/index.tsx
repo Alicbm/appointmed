@@ -35,8 +35,6 @@ export function OptometryCreate() {
     setClearForm(true);
   };
 
-  console.log(requeriments)
-
   const onSubmit = allForm?.handleSubmit(
     async (getData: CreateRequestIT | FieldValues) => {
       try {
@@ -57,6 +55,7 @@ export function OptometryCreate() {
               hour: getData?.hour,
               doctor: getData?.doctor,
               patientStatus: getData?.patientStatus,
+              status: 'Pendiente'
             },
           });
 

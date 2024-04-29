@@ -55,6 +55,7 @@ export function PsychiatryCreate() {
               hour: getData?.hour,
               doctor: getData?.doctor,
               patientStatus: getData?.patientStatus,
+              status: 'Pendiente'
             },
           });
 

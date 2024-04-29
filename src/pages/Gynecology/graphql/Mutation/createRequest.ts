@@ -15,21 +15,25 @@ export const CREATE_GYNECOLOGY = gql`
     $hour: String!
     $doctor: String!
     $patientStatus: String!
+    $status: String
   ) {
     createGynecologyRequest(
-      typeService: $typeService
-      registryNumber: $registryNumber
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      eps: $eps
-      department: $department
-      city: $city
-      medicalCenter: $medicalCenter
-      date: $date
-      hour: $hour
-      doctor: $doctor
-      patientStatus: $patientStatus
+      dto: {
+        typeService: $typeService
+        registryNumber: $registryNumber
+        firstName: $firstName
+        lastName: $lastName
+        email: $email
+        eps: $eps
+        department: $department
+        city: $city
+        medicalCenter: $medicalCenter
+        date: $date
+        hour: $hour
+        doctor: $doctor
+        patientStatus: $patientStatus
+        status: $status
+      }
     ) {
       id
       typeService

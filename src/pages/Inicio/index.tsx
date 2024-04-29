@@ -93,8 +93,8 @@ export function Inicio() {
           Servicios Destacados
         </h2>
         <div className="grid grid-cols-3 gap-4">
-          {services.map((item) => (
-            <div className="rounded-lg overflow-hidden">
+          {services.map((item, index) => (
+            <div key={index} className="rounded-lg overflow-hidden">
               <div className="flex justify-center items-center w-full h-[80px] bg-slate-200 overflow-hidden">
                 <div className="flex justify-center items-center w-[210px] h-[210px] border-2 border-slate-300 rounded-[50%]">
                   <div className="flex justify-center items-center w-[160px] h-[160px] border-2 border-slate-100 rounded-[50%]">
@@ -122,7 +122,7 @@ export function Inicio() {
                   />
                   <MainButton
                     text="Crear"
-                    className="w-full h-[30px] text-sm px-5 border border-sky-800 text-sky-900"
+                    className="w-full h-[30px] text-sm px-5 border border-sky-800 text-sky-950"
                     onClick={() => navigate(item.createRoute)}
                   />
                 </div>
