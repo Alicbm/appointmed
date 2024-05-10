@@ -6,6 +6,8 @@ import { ContainerModal } from "../../../../components/ContainerModal";
 import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { BaseIT } from "../../../../types";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFFile } from "../../../../components/PDFFile";
 
 type Props = {
   data: BaseIT[];
@@ -16,7 +18,7 @@ export function ModalRequest({ data, setModal }: Props) {
   return (
     <ContainerModal>
       <div className="relative grid gap-5 w-[70%] h-full bg-slate-50 px-6 pb-10 pt-14 mx-auto overflow-y-scroll rounded-lg overflow-hidden">
-        <div 
+        <div
           className="absolute top-5 right-5 text-3xl text-sky-800 bg-slate-100 hover:text-black cursor-pointer"
           onClick={() => setModal(false)}
         >
@@ -80,10 +82,25 @@ export function ModalRequest({ data, setModal }: Props) {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <MainButton
-            text="Descargar PDF"
-            className="bg-black hover:bg-gray-900"
-          />
+          <PDFDownloadLink
+            document={<PDFFile data={data[0]} />}
+            fileName="resume_request.pdf"
+            className="w-full"
+          >
+            {({ loading }) =>
+              loading ? (
+                <MainButton
+                  text="Cargando PDF"
+                  className="w-full bg-black hover:bg-gray-900"
+                />
+              ) : (
+                <MainButton
+                  text="Descargar PDF"
+                  className="w-full bg-black hover:bg-gray-900"
+                />
+              )
+            }
+          </PDFDownloadLink>
           <MainButton
             text="Modificar Solicitud"
             className="bg-sky-700 hover:bg-sky-800"

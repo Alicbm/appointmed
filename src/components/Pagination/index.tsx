@@ -15,8 +15,8 @@ export function Pagination({ data, setData }: Props) {
     <div className="flex justify-between items-center text-gray-600 mt-6">
       <div>
         <p>
-          Página <span className="text-bold">{ actualPage.end }</span> de{" "}
-          <span className="text-bold">{allPages}</span>
+          Página <span className="text-bold">{ actualPage.end || 0}</span> de{" "}
+          <span className="text-bold">{allPages || 0}</span>
         </p>
       </div>
 

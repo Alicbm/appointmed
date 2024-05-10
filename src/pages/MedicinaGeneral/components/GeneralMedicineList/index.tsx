@@ -31,6 +31,7 @@ export function GeneralMedicineList() {
         text="Desde aquí podrás visualizar las solicitudes ingresadas del área de medicina general"
         route="/dashboard/medicina-general/create"
         buttonText="Nueva Solicitud"
+        data={newData}
       />
 
       <div>
@@ -47,59 +48,59 @@ export function GeneralMedicineList() {
       </div>
 
       <div className="w-full bg-slate-100 rounded-lg overflow-hidden">
-        <Table>
-          {filterData?.length > 0 ? (
-            <>
-              <thead>
-                <tr>
-                  <th>Nro Expediente</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>EPS</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filterData?.map((item: BaseIT, index: number) => (
-                  <tr
-                    key={index}
-                    className={`${index % 2 == 0 && "bg-slate-50"}`}
+        {filterData?.length > 0 ? (
+          <Table>
+            <thead>
+              <tr>
+                <th>Nro Expediente</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>EPS</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filterData?.map((item: BaseIT, index: number) => (
+                <tr
+                  key={index}
+                  className={`${index % 2 == 0 && "bg-slate-50"}`}
+                >
+                  <td>{item?.registryNumber}</td>
+                  <td>{item?.firstName}</td>
+                  <td>{item?.lastName}</td>
+                  <td>{item?.eps}</td>
+                  <td>{item?.medicalCenter}</td>
+                  <td
+                    className="flex justify-center items-center text-sky-800 text-xl cursor-pointer hover:text-sky-900"
+                    onClick={() => {
+                      setModalRequest(true);
+                      setIdRequest(item.id);
+                    }}
                   >
-                    <td>{item?.registryNumber}</td>
-                    <td>{item?.firstName}</td>
-                    <td>{item?.lastName}</td>
-                    <td>{item?.eps}</td>
-                    <td>{item?.medicalCenter}</td>
-                    <td
-                      className="flex justify-center items-center text-sky-800 text-xl cursor-pointer hover:text-sky-900"
-                      onClick={() => {
-                        setModalRequest(true);
-                        setIdRequest(item.id);
-                      }}
-                    >
-                      <IoEye />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </>
-          ) : (
-            <NotResults
-              route="/dashboard/medicina-general/create"
-              text={
-                newData?.length === 0
-                  ? "No hay elementos en esta sección"
-                  : "No hay resultados para la busqueda"
-              }
-            />
-          )}
-        </Table>
+                    <IoEye />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <NotResults
+            route="/dashboard/medicina-general/create"
+            text={
+              newData?.length === 0
+                ? "No hay elementos en esta sección"
+                : "No hay resultados para la busqueda"
+            }
+          />
+        )}
       </div>
 
       <Pagination data={newData} setData={setFilterData} />
 
-      {modalRequest && <ModalRequest data={requestSelected} setModal={setModalRequest} />}
+      {modalRequest && (
+        <ModalRequest data={requestSelected} setModal={setModalRequest} />
+      )}
     </div>
   );
 }

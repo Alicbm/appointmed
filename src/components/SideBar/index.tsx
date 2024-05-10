@@ -87,6 +87,7 @@ export function SideBar() {
         <ul className="grid gap-4 text-lg">
           {routes.map(({ label, route, icon, selected }) => (
             <li
+              key={label}
               className={`${
                 selected ? "bg-slate-200" : ""
               } flex items-center text-slate-500 cursor-pointer px-4 py-2 rounded-md hover:bg-slate-200`}

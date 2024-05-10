@@ -26,9 +26,9 @@ export function FilterItem({ listData, data, setData }: Props) {
 
   const [filteredData, setFilteredData] = useState("");
 
-  const listFiltered = listData.filter((item) =>
+  const listFiltered = listData?.filter((item) =>
     filteredData?.length > 0
-      ? item.label.toLowerCase().includes(filteredData.toLowerCase())
+      ? item?.label?.toLowerCase()?.includes(filteredData.toLowerCase())
       : listData
   );
 
@@ -63,6 +63,7 @@ export function FilterItem({ listData, data, setData }: Props) {
       <div className="relative flex items-end w-full h-[45px] bg-slate-100 rounded-md">
         <input
           value={inputSelectText}
+          onChange={(e) => setInputSelectText(e.target.value)}
           placeholder="Seleccionar item"
           className="w-full h-full bg-transparent outline-none px-4 rounded-md border border-slate-300 focus:border-2 focus:border-sky-700"
         />
