@@ -19,7 +19,7 @@ export function InputCheck ({ label, checked, onClick }: Props) {
       />
       <label 
         htmlFor={label}
-        className="text-lg text-gray-600"
+        className="text-md text-gray-600 sm:text-lg"
       >{ label }</label>
     </div>
   )

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { FieldValues, useForm } from "react-hook-form";
 import { Input } from "../../../../components/Input";
 import { InputCheck } from "../../../../components/InputCheck";
 import { MainButton } from "../../../../components/MainButton";
@@ -6,9 +8,7 @@ import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
-import { FieldValues, useForm } from "react-hook-form";
 import { CreateRequestIT, TypeButton } from "../../../../types";
-import { useMutation } from "@apollo/client";
 import { CREATE_GYNECOLOGY } from "../../graphql/Mutation/createRequest";
 import { ModalSentData } from "../../../../components/ModalSentData";
 import { AlertModal } from "../../../../components/AlertModal";
@@ -106,15 +106,7 @@ export function GynecologyCreate() {
       <div>
         <SubtitleInputs text="B. Datos del Solicitante" />
 
-        <div className="grid grid-cols-3 gap-4">
-          {/* <div>
-            <input type="email" {...register('pepe', { required: true, pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'El email ta malito'
-            } } )}/>
-            {(errors['pepe']?.type === 'pattern') && <span>Eamil malo</span>}
-            {(errors['pepe']?.type === 'required') && <span>campo requerido</span>}
-          </div> */}
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           <Input
             type="number"
             label="Número de Registro"
@@ -159,7 +151,7 @@ export function GynecologyCreate() {
       <div>
         <SubtitleInputs text="C. Lugar de la Cita Médica" />
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           <Input
             label="Departamento"
             fieldName="department"
@@ -184,7 +176,7 @@ export function GynecologyCreate() {
       <div>
         <SubtitleInputs text="D. Fecha de la Cita Médica" />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           <Input
             label="Seleccionar Fecha"
             fieldName="date"
@@ -203,7 +195,7 @@ export function GynecologyCreate() {
       <div>
         <SubtitleInputs text="E. Estado del paciente y preferencias" />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           <Input
             label="Selecciona Médico"
             fieldName="doctor"
@@ -226,7 +218,7 @@ export function GynecologyCreate() {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-4 my-8">
+      <div className="grid gap-4 my-8 sm:grid-cols-3">
         <MainButton
           text="Limpiar Formulario"
           className="bg-red-600 hover:bg-red-700"

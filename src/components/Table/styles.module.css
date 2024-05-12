@@ -15,7 +15,7 @@
 }
 
 .tableContainer thead tr th {
-  @apply text-[16px] py-4
+  @apply text-[14px] py-4 md:text-[16px]
 }
 
 .tableContainer tbody tr{

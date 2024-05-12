@@ -25,7 +25,7 @@ export function PediatricsList() {
   }, [newData]);
 
   return (
-    <div className="grid gap-6">
+    <div className="grid justify-center gap-6">
       <TemplatePage
         title="Pediatría: Solitudes ingresadas"
         text="Desde aquí podrás visualizar las solicitudes ingresadas del área de pediatría"

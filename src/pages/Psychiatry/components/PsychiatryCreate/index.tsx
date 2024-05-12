@@ -107,15 +107,7 @@ export function PsychiatryCreate() {
       <div>
         <SubtitleInputs text="B. Datos del Solicitante" />
 
-        <div className="grid grid-cols-3 gap-4">
-          {/* <div>
-            <input type="email" {...register('pepe', { required: true, pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'El email ta malito'
-            } } )}/>
-            {(errors['pepe']?.type === 'pattern') && <span>Eamil malo</span>}
-            {(errors['pepe']?.type === 'required') && <span>campo requerido</span>}
-          </div> */}
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           <Input
             type="number"
             label="Número de Registro"
@@ -160,7 +152,7 @@ export function PsychiatryCreate() {
       <div>
         <SubtitleInputs text="C. Lugar de la Cita Médica" />
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           <Input
             label="Departamento"
             fieldName="department"
@@ -185,7 +177,7 @@ export function PsychiatryCreate() {
       <div>
         <SubtitleInputs text="D. Fecha de la Cita Médica" />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           <Input
             label="Seleccionar Fecha"
             fieldName="date"
@@ -204,7 +196,7 @@ export function PsychiatryCreate() {
       <div>
         <SubtitleInputs text="E. Estado del paciente y preferencias" />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           <Input
             label="Selecciona Médico"
             fieldName="doctor"
@@ -227,7 +219,7 @@ export function PsychiatryCreate() {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-4 my-8">
+      <div className="grid gap-4 my-8 sm:grid-cols-3">
         <MainButton
           text="Limpiar Formulario"
           className="bg-red-600 hover:bg-red-700"

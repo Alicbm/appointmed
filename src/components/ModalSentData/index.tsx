@@ -6,7 +6,7 @@ type Props = {
 
 export function ModalSentData ({ error }: Props) {
   return (
-    <div className={`${error ? 'bg-red-50 border-2 border-red-500' : 'bg-green-50 border-2 border-green-500'} flex justify-center items-center gap-2 h-[50px] rounded-md px-6 py-2`}>
+    <div className={`${error ? 'bg-red-50 border-2 border-red-500' : 'bg-green-50 border-2 border-green-500'} flex justify-center items-center gap-2 h-[70px] rounded-md px-6 py-2 sm:h-[50px]`}>
       <p className={`${error ? 'text-red-500' : 'text-green-500'} text-xl text-center`}>
         {
           error

@@ -25,7 +25,7 @@ export function GynecologyList() {
   }, [newData]);
 
   return (
-    <div className="grid gap-6">
+    <div className="grid justify-center gap-6">
       <TemplatePage
         title="Ginecología: Solitudes ingresadas"
         text="Desde aquí podrás visualizar las solicitudes ingresadas del área de ginecología"

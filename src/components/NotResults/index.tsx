@@ -11,7 +11,7 @@ export function NotResults({ text, route }: Props) {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 py-10">
-      <p className="text-xl text-gray-500">
+      <p className="text-xl text-center text-gray-500">
         {text}
       </p>
       <MainButton 

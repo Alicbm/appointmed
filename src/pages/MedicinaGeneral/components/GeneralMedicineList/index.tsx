@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
+import { IoEye } from "react-icons/io5";
 import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
@@ -7,7 +8,6 @@ import { TemplatePage } from "../../../../components/TemplatePage";
 import { GET_ALL_GENERAL_MEDICINE } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
 import { NotResults } from "../../../../components/NotResults";
-import { IoEye } from "react-icons/io5";
 import { ModalRequest } from "../ModalRequest";
 
 export function GeneralMedicineList() {
@@ -25,7 +25,7 @@ export function GeneralMedicineList() {
   }, [newData]);
 
   return (
-    <div className="grid gap-6">
+    <div className="grid justify-center gap-6 lg:justify-normal">
       <TemplatePage
         title="Medicina General: Solitudes ingresadas"
         text="Desde aquí podrás visualizar las solicitudes ingresadas del área de medicina general"

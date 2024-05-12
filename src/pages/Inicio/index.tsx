@@ -34,7 +34,7 @@ services.push({
 services.push({
   image: gynecology,
   text: "Ginecología",
-  listRoute: "/dashboard/ginecologia/create",
+  listRoute: "/dashboard/ginecologia",
   createRoute: "/dashboard/ginecologia/create",
 });
 
@@ -66,8 +66,8 @@ export function Inicio() {
     <div className="grid gap-6">
       <div className="flex justify-between gap-2 bg-slate-100 rounded-lg overflow-hidden">
         <div className="flex flex-col gap-2 p-4">
-          <h1 className="text-sky-800 text-4xl font-bold">Alic, Bienvenido</h1>
-          <h2 className="text-gray-600 text-xl">
+          <h1 className="text-sky-800 text-3xl font-bold md:text-4xl">Alic, Bienvenido</h1>
+          <h2 className="text-gray-600 text-lg md:text-xl">
             En Appointmed estamos encantados de recibirte
           </h2>
           <p className="text-gray-500 leading-8 mb-2">
@@ -79,7 +79,7 @@ export function Inicio() {
             className="w-[250px] bg-sky-800 hover:bg-sky-900"
           />
         </div>
-        <div>
+        <div className="hidden sm:block md:block">
           <img
             src={initialImg}
             alt="Appointmed"
@@ -92,7 +92,7 @@ export function Inicio() {
         <h2 className="text-sky-800 text-2xl font-bold pl-4 mb-6">
           Servicios Destacados
         </h2>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {services.map((item, index) => (
             <div key={index} className="rounded-lg overflow-hidden">
               <div className="flex justify-center items-center w-full h-[80px] bg-slate-200 overflow-hidden">
@@ -122,7 +122,7 @@ export function Inicio() {
                   />
                   <MainButton
                     text="Crear"
-                    className="w-full h-[30px] text-sm px-5 border border-sky-800 text-sky-950"
+                    className="w-full h-[30px] text-sm px-5 border border-sky-800 text-black"
                     onClick={() => navigate(item.createRoute)}
                   />
                 </div>
