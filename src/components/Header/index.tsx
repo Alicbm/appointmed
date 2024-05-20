@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineMenu } from "react-icons/md";
 import { MainButton } from "../MainButton";
 import { ContainerModal } from "../ContainerModal";
 import { MobileSideBar } from "../MobileSideBar";
+import { AuthContext } from "../../AuthContext";
 import logo from "../../images/appointmed_logo.png";
 
 export function Header() {
+  const context = useContext(AuthContext);
+
   const [modal, setModal] = useState(false);
   const [sideBar, setSideBar] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleLoggout = () => {
+    localStorage.removeItem('AUTH_TOKEN_APPOINTMED')
+    context?.setUser(null)
+    navigate('/')
+    setModal(false)
+  }
 
   return (
     <header className="flex flex-col items-center w-full max-w-[1200px] bg-slate-100 border-b border-slate-200 rounded-sm px-4 py-2 mx-auto sm:flex-row sm:justify-between sm:px-8">
@@ -74,10 +84,7 @@ export function Header() {
               <MainButton
                 text="Cerrar Sesión"
                 className="w-full text-[16px] bg-sky-800 hover:bg-sky-900"
-                onClick={() => {
-                  navigate('/')
-                  setModal(false)
-                }}
+                onClick={handleLoggout}
               />
             </div>
           </div>

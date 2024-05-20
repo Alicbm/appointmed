@@ -10,16 +10,18 @@ import {
 } from "@apollo/client";
 import { App } from "./App/App.tsx";
 import "./index.css";
+import { AuthProvider } from "./AuthContext/index.tsx";
 
 const httpLink = new HttpLink({ uri: "http://localhost:3000/graphql" });
 
 const authLink = new ApolloLink((operation, forward) => {
   const auth = localStorage.getItem("AUTH_TOKEN_APPOINTMED");
+  const data = auth !== null && JSON.parse(auth) 
 
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      Authorization: 'Bearer ' + auth,
+      Authorization: 'Bearer ' + data?.login?.access_token,
     },
   }));
 
@@ -34,7 +36,9 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ApolloProvider>
   </React.StrictMode>
 );

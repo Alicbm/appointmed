@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
@@ -10,14 +10,16 @@ import { LOGIN } from "../graphql/Mutation/createRequest";
 import { LoginType } from "../../../types";
 import { AlertModal } from "../../../components/AlertModal";
 import logo from "../../../images/appointmed_logo.png";
+import { AuthContext } from "../../../AuthContext";
 
 type Props = {
   setLogin: Function;
 };
 
 export function LoginUser({ setLogin }: Props) {
-  const [auth, setAuth] = useState(false);
+  const context = useContext(AuthContext)
 
+  const [auth, setAuth] = useState(false);
   const [login] = useMutation(LOGIN);
   const allForm = useForm();
 
@@ -33,11 +35,13 @@ export function LoginUser({ setLogin }: Props) {
           }
         });
 
-        localStorage.setItem('AUTH_TOKEN_APPOINTMED', data?.login?.access_token)
+        localStorage.setItem('AUTH_TOKEN_APPOINTMED', JSON.stringify(data))
+        context?.setUser(data)
 
         navigate('/dashboard')
       } catch (err) {
         setAuth(true);
+        console.log(err)
       }
     }
   );
