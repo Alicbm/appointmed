@@ -36,3 +36,12 @@ export enum TypeButton {
   reset = 'reset',
   submit =  "submit",
 }
+
+export type CreateUserDto = {
+  name: string,
+  email: string,
+  password: string,
+  repeatPassword: string
+  createdAt: string,
+  role: string,
+}

@@ -78,6 +78,7 @@ export function LoginUser({ setLogin }: Props) {
         <Input
           label="Contraseña"
           fieldName="password"
+          type="password"
           allForm={allForm}
           rules={{ required: true }}
         />
