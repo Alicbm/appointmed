@@ -17,13 +17,16 @@ import { OptometryCreate } from "../pages/Optometry/components/OptometryCreate";
 import { OptometryList } from "../pages/Optometry/components/OptometryList";
 import { Login } from "../pages/Login";
 import { ProtectedRoutes } from "./protected.router";
+import { RedirectUser } from "./redirectUser.router";
 
 export function Router() {
   return (
     <HashRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route element={<RedirectUser />}>
+          <Route path="/" element={<Login />} />
+        </Route>
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard" element={<MainStructure />}>

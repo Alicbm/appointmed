@@ -4,7 +4,6 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { Input } from "../../../components/Input";
-import { InputSelect } from "../../../components/InputSelect";
 import { MainButton } from "../../../components/MainButton";
 import { LOGIN } from "../graphql/Mutation/createRequest";
 import { LoginType } from "../../../types";
@@ -63,12 +62,6 @@ export function LoginUser({ setLogin }: Props) {
         <div className="flex justify-center w-full bg-gray-100 border border-gray-200 px-4 py-1 rounded-md">
           <img src={logo} alt="Appointmed" />
         </div>
-        <InputSelect
-          label="Ingresar como"
-          allForm={allForm}
-          fieldName="userType"
-          listData={["Administrador", "Usuario Automatico", "Usuario propio"]}
-        />
         <Input
           label="Usuario"
           fieldName="email"

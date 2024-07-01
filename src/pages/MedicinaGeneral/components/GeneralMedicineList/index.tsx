@@ -24,8 +24,6 @@ export function GeneralMedicineList() {
     setFilterData(newData);
   }, [newData]);
 
-  console.log(requestSelected)
-
   return (
     <div className="grid justify-center gap-6 lg:justify-normal">
       <TemplatePage

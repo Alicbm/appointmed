@@ -1,80 +1,18 @@
-import { AiFillHome, AiFillMedicineBox } from "react-icons/ai";
-import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
-import { FaTeeth, FaBaby, FaEye } from "react-icons/fa6";
-import { TbGenderAndrogyne } from "react-icons/tb";
-import { MdPsychology } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
+import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
 import { userName } from "../../utils/userName";
-
-type RoutesType = {
-  label: string;
-  route: string;
-  icon: JSX.Element;
-  selected: boolean;
-};
-
-const routes: RoutesType[] = [];
-
-routes.push({
-  label: "Inicio",
-  route: "/dashboard",
-  icon: <AiFillHome />,
-  selected: true,
-});
-
-routes.push({
-  label: "Medicina General",
-  route: "/dashboard/medicina-general",
-  icon: <AiFillMedicineBox />,
-  selected: false,
-});
-
-routes.push({
-  label: "Odontología",
-  route: "/dashboard/odontologia",
-  icon: <FaTeeth />,
-  selected: false,
-});
-
-routes.push({
-  label: "Ginecología",
-  route: "/dashboard/ginecologia",
-  icon: <TbGenderAndrogyne />,
-  selected: false,
-});
-
-routes.push({
-  label: "Psiquiatría",
-  route: "/dashboard/psiquiatria",
-  icon: <MdPsychology />,
-  selected: false,
-});
-
-routes.push({
-  label: "Pediatría",
-  route: "/dashboard/pediatria",
-  icon: <FaBaby />,
-  selected: false,
-});
-
-routes.push({
-  label: "Optometría",
-  route: "/dashboard/optometria",
-  icon: <FaEye />,
-  selected: false,
-});
+import { serviceSelected } from "../../utils/serviceSelected";
+import { verfyServiceSelected } from "../../utils/verifyServiceSelected";
+import { routesServices } from "../../utils/routesServices";
 
 export function SideBar() {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation()
 
-  const serviceSelected = (label: string) => {
-    routes.map((item) =>
-      item.label != label ? (item.selected = false) : (item.selected = true)
-    );
-  };
+  verfyServiceSelected(routesServices, location);
 
   return (
     <div className="hidden lg:block">
@@ -84,12 +22,12 @@ export function SideBar() {
             <span className="mr-2">
               <FaUserCircle />
             </span>
-            <span>{userName(context?.user?.user?.firstName || '')}</span>
+            <span>{userName(context?.user?.user?.firstName || "")}</span>
           </p>
         </div>
 
         <ul className="grid gap-4 text-lg">
-          {routes.map(({ label, route, icon, selected }) => (
+          {routesServices?.map(({ label, route, icon, selected }) => (
             <li
               key={label}
               className={`${
@@ -97,12 +35,10 @@ export function SideBar() {
               } flex items-center text-slate-500 cursor-pointer px-4 py-2 rounded-md hover:bg-slate-200`}
               onClick={() => {
                 navigate(route);
-                serviceSelected(label);
+                serviceSelected(routesServices, label);
               }}
             >
-              <span
-                className={`${selected ? "text-sky-800" : ""} text-lg mr-3`}
-              >
+              <span className={`${selected ? "text-sky-800" : ""} text-lg mr-3`}>
                 {icon}
               </span>{" "}
               {label}

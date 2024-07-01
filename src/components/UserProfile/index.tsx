@@ -33,7 +33,6 @@ export function UserProfile({ setModal }: Props) {
             ...values,
             name: e.target.value
           })}
-          disabled
         />
         <Input
           label="Correo Electrónico"
@@ -44,7 +43,6 @@ export function UserProfile({ setModal }: Props) {
             ...values,
             email: e.target.value
           })}
-          disabled
           // allForm={allForm}
           // rules={{ required: true }}
         />

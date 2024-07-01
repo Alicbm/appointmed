@@ -27,10 +27,7 @@ export function Header() {
 
   return (
     <header className="flex flex-col items-center w-full max-w-[1200px] bg-slate-100 border-b border-slate-200 rounded-sm px-4 py-2 mx-auto sm:flex-row sm:justify-between sm:px-8">
-      <div
-        className="flex justify-center items-center gap-4 w-full py-2 px-1 border-b border-b-slate-200 sm:p-0 sm:border-none sm:w-auto"
-        onClick={() => navigate("/dashboard")}
-      >
+      <div className="flex justify-center items-center gap-4 w-full py-2 px-1 border-b border-b-slate-200 sm:p-0 sm:border-none sm:w-auto">
         <span
           className="hidden sm:block text-3xl text-sky-800 lg:hidden cursor-pointer"
           onClick={() => setSideBar(!sideBar)}
@@ -42,6 +39,7 @@ export function Header() {
           src={logo}
           alt="Appointmed"
           className="h-[45px] cursor-pointer lg:h-[50px]"
+          onClick={() => navigate("/dashboard")}
         />
 
         <span
