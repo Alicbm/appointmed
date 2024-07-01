@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { FieldValues, UseFormRegister, UseFormReturn } from "react-hook-form";
+import { TbEdit } from "react-icons/tb";
 import { classNames } from "../../utils";
 import { useState } from "react";
 
@@ -8,7 +10,10 @@ type Props = {
   fieldName?: string;
   rules?: Parameters<UseFormRegister<FieldValues>>[1];
   allForm?: UseFormReturn<FieldValues>;
+  onChange?: React.InputHTMLAttributes<HTMLInputElement> | Function;
   value?: string;
+  disabled?: boolean;
+  editValue?: boolean;
 };
 
 export function Input({
@@ -17,9 +22,13 @@ export function Input({
   fieldName = "empty",
   rules,
   allForm,
-  value
+  onChange,
+  value,
+  disabled,
+  editValue
 }: Props) {
   const [text, setText] = useState("");
+  const [disabledModified, setDisabledModified] = useState(disabled);
 
   const verifyError =
     allForm?.formState?.errors && allForm?.formState?.errors[fieldName];
@@ -35,6 +44,7 @@ export function Input({
         id={label}
         type={type || "text"}
         value={value}
+        disabled={disabledModified == true ? true : false}
         className={classNames([
           verifyError
             ? "border-2 border-red-400"
@@ -45,6 +55,7 @@ export function Input({
         onChange={(e) => {
           setText(e.target.value);
           allForm?.setValue && allForm?.setValue(fieldName, e.target.value);
+          onChange
         }}
       />
       <label
@@ -69,6 +80,12 @@ export function Input({
             `El campo debe tener máximo ${rules?.maxLength} caracteres`}
         </span>
       )}
+      {editValue &&
+        <span 
+          className="absolute top-4 right-4 text-xl text-sky-800 cursor-pointer"
+          onClick={() => setDisabledModified(false)}
+        ><TbEdit /></span>
+      }
     </div>
   );
 }

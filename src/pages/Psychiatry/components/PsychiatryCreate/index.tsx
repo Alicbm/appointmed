@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Input } from "../../../../components/Input";
 import { InputCheck } from "../../../../components/InputCheck";
 import { MainButton } from "../../../../components/MainButton";
@@ -7,11 +7,14 @@ import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
 import { FieldValues, useForm } from "react-hook-form";
-import { CreateRequestIT, TypeButton } from "../../../../types";
+import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
 import { useMutation } from "@apollo/client";
 import { CREATE_PSYCHIATRY } from "../../graphql/Mutation/createRequest";
 import { AlertModal } from "../../../../components/AlertModal";
 import { ModalSentData } from "../../../../components/ModalSentData";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFFile } from "../../../../components/PDFFile";
+import { AuthContext } from "../../../../AuthContext";
 
 export function PsychiatryCreate() {
   const [checked, setChecked] = useState(true);
@@ -20,14 +23,23 @@ export function PsychiatryCreate() {
   const [requeriments, setRequeriments] = useState(false);
   const [clearForm, setClearForm] = useState(false);
   const [downloadRequest, setDownloadRequest] = useState(false);
+  const [dataRequest, setDataRequest] = useState<BaseIT>();
 
   const [createPsychiatryRequest] = useMutation(CREATE_PSYCHIATRY);
+
+  const context = useContext(AuthContext)
 
   const allForm = useForm();
 
   const onDownloadRequest = () => {
-    setClearForm(false);
-    setDownloadRequest(true);
+    if (!dataRequest) {
+      if (!requeriments) {
+        alert("Es necesario que acepte los terminos y condiciones");
+      } else {
+        setClearForm(false);
+        setDownloadRequest(true);
+      }
+    }
   };
 
   const onClearForm = () => {
@@ -40,7 +52,7 @@ export function PsychiatryCreate() {
       try {
         if (requeriments) {
           setCorrect(false);
-          await createPsychiatryRequest({
+          const { data } = await createPsychiatryRequest({
             variables: {
               typeService: checked ? "EPS" : "IPS",
               registryNumber: Number(getData?.registryNumber),
@@ -55,11 +67,13 @@ export function PsychiatryCreate() {
               hour: getData?.hour,
               doctor: getData?.doctor,
               patientStatus: getData?.patientStatus,
-              status: 'Pendiente'
+              status: "Pendiente",
             },
           });
 
+          setDataRequest(data?.createPsychiatryRequest);
           setDataSent(true);
+          setRequeriments(false);
         } else {
           alert("Es necesario que acepte los terminos y condiciones");
         }
@@ -108,28 +122,32 @@ export function PsychiatryCreate() {
         <SubtitleInputs text="B. Datos del Solicitante" />
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <Input
+        <Input
             type="number"
             label="Número de Registro"
             fieldName="registryNumber"
+            value={context?.user?.user?.id}
             allForm={allForm}
             rules={{ required: true }}
           />
           <Input
             label="Nombre"
             fieldName="firstName"
+            value={context?.user?.user?.firstName}
             allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
           />
           <Input
             label="Apellido"
             fieldName="lastName"
+            value={context?.user?.user?.lastName}
             allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
           />
           <Input
             label="Correo Electrónico"
             fieldName="email"
+            value={context?.user?.user?.email}
             allForm={allForm}
             rules={{
               required: true,
@@ -143,6 +161,7 @@ export function PsychiatryCreate() {
             label="Seleccionar EPS"
             listData={epsList}
             fieldName="eps"
+            value={context?.user?.user?.eps}
             allForm={allForm}
             rules={{ required: true }}
           />
@@ -216,6 +235,7 @@ export function PsychiatryCreate() {
         <InputCheck
           label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!'
           onClick={() => setRequeriments(!requeriments)}
+          checked={requeriments}
         />
       </div>
 
@@ -225,11 +245,24 @@ export function PsychiatryCreate() {
           className="bg-red-600 hover:bg-red-700"
           onClick={onClearForm}
         />
-        <MainButton
-          text="Descargar PDF"
-          className="bg-black hover:bg-gray-900"
-          onClick={onDownloadRequest}
-        />
+        {dataRequest ? (
+          <PDFDownloadLink
+            document={<PDFFile data={dataRequest} />}
+            fileName="resume_request.pdf"
+            className="w-full"
+          >
+            <MainButton
+              text="Descargar PDF"
+              className="w-full bg-black hover:bg-gray-900"
+            />
+          </PDFDownloadLink>
+        ) : (
+          <MainButton
+            text="Descargar PDF"
+            className="w-full bg-black hover:bg-gray-900"
+            onClick={onDownloadRequest}
+          />
+        )}
         <MainButton
           type={TypeButton.submit}
           text="Enviar Solicitud"

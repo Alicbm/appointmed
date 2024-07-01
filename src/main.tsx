@@ -16,12 +16,12 @@ const httpLink = new HttpLink({ uri: "http://localhost:3000/graphql" });
 
 const authLink = new ApolloLink((operation, forward) => {
   const auth = localStorage.getItem("AUTH_TOKEN_APPOINTMED");
-  const data = auth !== null && JSON.parse(auth) 
+  const data = auth !== null && JSON.parse(auth)
 
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      Authorization: 'Bearer ' + data?.login?.access_token,
+      Authorization: 'Bearer ' + data?.access_token,
     },
   }));
 

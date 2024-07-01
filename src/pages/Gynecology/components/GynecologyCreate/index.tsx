@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { FieldValues, useForm } from "react-hook-form";
 import { Input } from "../../../../components/Input";
@@ -8,10 +8,13 @@ import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
-import { CreateRequestIT, TypeButton } from "../../../../types";
+import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
 import { CREATE_GYNECOLOGY } from "../../graphql/Mutation/createRequest";
 import { ModalSentData } from "../../../../components/ModalSentData";
 import { AlertModal } from "../../../../components/AlertModal";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFFile } from "../../../../components/PDFFile";
+import { AuthContext } from "../../../../AuthContext";
 
 export function GynecologyCreate() {
   const [checked, setChecked] = useState(true);
@@ -20,14 +23,23 @@ export function GynecologyCreate() {
   const [requeriments, setRequeriments] = useState(false);
   const [clearForm, setClearForm] = useState(false);
   const [downloadRequest, setDownloadRequest] = useState(false);
+  const [dataRequest, setDataRequest] = useState<BaseIT>();
 
   const [createGynecologyRequest] = useMutation(CREATE_GYNECOLOGY);
+
+  const context = useContext(AuthContext)
 
   const allForm = useForm();
 
   const onDownloadRequest = () => {
-    setClearForm(false);
-    setDownloadRequest(true);
+    if (!dataRequest) {
+      if(!requeriments){
+        alert("Es necesario que acepte los terminos y condiciones");
+      } else {
+        setClearForm(false);
+        setDownloadRequest(true);
+      }
+    }
   };
 
   const onClearForm = () => {
@@ -40,7 +52,7 @@ export function GynecologyCreate() {
       try {
         if (requeriments) {
           setCorrect(false);
-          await createGynecologyRequest({
+          const { data } = await createGynecologyRequest({
             variables: {
               typeService: checked ? "EPS" : "IPS",
               registryNumber: Number(getData?.registryNumber),
@@ -58,7 +70,11 @@ export function GynecologyCreate() {
               status: 'Pendiente'
             },
           });
+
+          setDataRequest(data?.createGynecologyRequest)
           setDataSent(true);
+          setRequeriments(false)
+
         } else {
           alert("Es necesario que acepte los terminos y condiciones");
         }
@@ -111,24 +127,28 @@ export function GynecologyCreate() {
             type="number"
             label="Número de Registro"
             fieldName="registryNumber"
+            value={context?.user?.user?.id}
             allForm={allForm}
             rules={{ required: true }}
           />
           <Input
             label="Nombre"
             fieldName="firstName"
+            value={context?.user?.user?.firstName}
             allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
           />
           <Input
             label="Apellido"
             fieldName="lastName"
+            value={context?.user?.user?.lastName}
             allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
           />
           <Input
             label="Correo Electrónico"
             fieldName="email"
+            value={context?.user?.user?.email}
             allForm={allForm}
             rules={{
               required: true,
@@ -142,6 +162,7 @@ export function GynecologyCreate() {
             label="Seleccionar EPS"
             listData={epsList}
             fieldName="eps"
+            value={context?.user?.user?.eps}
             allForm={allForm}
             rules={{ required: true }}
           />
@@ -215,6 +236,7 @@ export function GynecologyCreate() {
         <InputCheck
           label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!'
           onClick={() => setRequeriments(!requeriments)}
+          checked={requeriments}
         />
       </div>
 
@@ -224,11 +246,26 @@ export function GynecologyCreate() {
           className="bg-red-600 hover:bg-red-700"
           onClick={onClearForm}
         />
-        <MainButton
-          text="Descargar PDF"
-          className="bg-black hover:bg-gray-900"
-          onClick={onDownloadRequest}
-        />
+       
+       {dataRequest ? (
+          <PDFDownloadLink
+            document={<PDFFile data={dataRequest} />}
+            fileName="resume_request.pdf"
+            className="w-full"
+          >
+            <MainButton
+              text="Descargar PDF"
+              className="w-full bg-black hover:bg-gray-900"
+            />
+          </PDFDownloadLink>
+        ) : (
+          <MainButton
+            text="Descargar PDF"
+            className="w-full bg-black hover:bg-gray-900"
+            onClick={onDownloadRequest}
+          />
+        )}
+       
         <MainButton
           type={TypeButton.submit}
           text="Enviar Solicitud"

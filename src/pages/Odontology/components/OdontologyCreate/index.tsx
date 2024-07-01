@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { Input } from "../../../../components/Input";
@@ -8,10 +8,13 @@ import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
-import { CreateRequestIT, TypeButton } from "../../../../types";
+import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
 import { CREATE_ODONTOLOGY } from "../../graphql/Mutation/createRequest";
 import { AlertModal } from "../../../../components/AlertModal";
 import { ModalSentData } from "../../../../components/ModalSentData";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFFile } from "../../../../components/PDFFile";
+import { AuthContext } from "../../../../AuthContext";
 
 export function OdontologyCreate() {
   const [checked, setChecked] = useState(true);
@@ -20,14 +23,23 @@ export function OdontologyCreate() {
   const [requeriments, setRequeriments] = useState(false);
   const [clearForm, setClearForm] = useState(false);
   const [downloadRequest, setDownloadRequest] = useState(false);
-  
+  const [dataRequest, setDataRequest] = useState<BaseIT>();
+
   const [createOdontologyRequest] = useMutation(CREATE_ODONTOLOGY);
-  
+
+  const context = useContext(AuthContext);
+
   const allForm = useForm();
 
   const onDownloadRequest = () => {
-    setClearForm(false);
-    setDownloadRequest(true);
+    if (!dataRequest) {
+      if (!requeriments) {
+        alert("Es necesario que acepte los terminos y condiciones");
+      } else {
+        setClearForm(false);
+        setDownloadRequest(true);
+      }
+    }
   };
 
   const onClearForm = () => {
@@ -40,7 +52,7 @@ export function OdontologyCreate() {
       try {
         if (requeriments) {
           setCorrect(false);
-          await createOdontologyRequest({
+          const { data } = await createOdontologyRequest({
             variables: {
               typeService: checked ? "EPS" : "IPS",
               registryNumber: Number(getData?.registryNumber),
@@ -55,14 +67,17 @@ export function OdontologyCreate() {
               hour: getData?.hour,
               doctor: getData?.doctor,
               patientStatus: getData?.patientStatus,
-              status: 'Pendiente'
+              status: "Pendiente",
             },
           });
+
+          setDataRequest(data?.createOdontologyRequest);
           setDataSent(true);
+          setRequeriments(false);
         } else {
           alert("Es necesario que acepte los terminos y condiciones");
         }
-      } catch(err) {
+      } catch (err) {
         setCorrect(true);
         setDataSent(true);
       }
@@ -111,24 +126,28 @@ export function OdontologyCreate() {
             type="number"
             label="Número de Registro"
             fieldName="registryNumber"
+            value={context?.user?.user?.id}
             allForm={allForm}
             rules={{ required: true }}
           />
           <Input
             label="Nombre"
             fieldName="firstName"
+            value={context?.user?.user?.firstName}
             allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
           />
           <Input
             label="Apellido"
             fieldName="lastName"
+            value={context?.user?.user?.lastName}
             allForm={allForm}
             rules={{ required: true, minLength: 2, maxLength: 20 }}
           />
           <Input
             label="Correo Electrónico"
             fieldName="email"
+            value={context?.user?.user?.email}
             allForm={allForm}
             rules={{
               required: true,
@@ -142,6 +161,7 @@ export function OdontologyCreate() {
             label="Seleccionar EPS"
             listData={epsList}
             fieldName="eps"
+            value={context?.user?.user?.eps}
             allForm={allForm}
             rules={{ required: true }}
           />
@@ -212,9 +232,10 @@ export function OdontologyCreate() {
       </div>
 
       <div className="pl-5">
-        <InputCheck 
-          label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!' 
+        <InputCheck
+          label='Al hacer clic en "Aceptar" estás de acuerdo con nuestros términos y condiciones. Por favor, revisa detenidamente antes de continuar. ¡Gracias por confiar en nosotros!'
           onClick={() => setRequeriments(!requeriments)}
+          checked={requeriments}
         />
       </div>
 
@@ -224,11 +245,24 @@ export function OdontologyCreate() {
           className="bg-red-600 hover:bg-red-700"
           onClick={onClearForm}
         />
-        <MainButton
-          text="Descargar PDF"
-          className="bg-black hover:bg-gray-900"
-          onClick={onDownloadRequest}
-        />
+        {dataRequest ? (
+          <PDFDownloadLink
+            document={<PDFFile data={dataRequest} />}
+            fileName="resume_request.pdf"
+            className="w-full"
+          >
+            <MainButton
+              text="Descargar PDF"
+              className="w-full bg-black hover:bg-gray-900"
+            />
+          </PDFDownloadLink>
+        ) : (
+          <MainButton
+            text="Descargar PDF"
+            className="w-full bg-black hover:bg-gray-900"
+            onClick={onDownloadRequest}
+          />
+        )}
         <MainButton
           type={TypeButton.submit}
           text="Enviar Solicitud"
@@ -236,7 +270,6 @@ export function OdontologyCreate() {
         />
       </div>
 
-      
       {dataSent && (
         <div className="fixed top-[50px] right-2">
           <ModalSentData error={correct} />

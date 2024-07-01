@@ -7,6 +7,9 @@ import gynecology from "../../images/examen-pelvico.png";
 import psychiatry from "../../images/psiquiatria.png";
 import pediatrics from "../../images/pediatria.png";
 import optometry from "../../images/oftalmologia.png";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthContext";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 
 type ServicesType = {
   image: string;
@@ -60,13 +63,14 @@ services.push({
 });
 
 export function Inicio() {
+  const context = useContext(AuthContext)
   const navigate = useNavigate();
 
   return (
     <div className="grid gap-6">
       <div className="flex justify-between gap-2 bg-slate-100 rounded-lg overflow-hidden">
         <div className="flex flex-col gap-2 p-4">
-          <h1 className="text-sky-800 text-3xl font-bold md:text-4xl">Alic, Bienvenido</h1>
+          <h1 className="text-sky-800 text-3xl font-bold md:text-4xl">{capitalizeFirstLetter(context?.user?.user?.firstName || '')}, Bienvenido</h1>
           <h2 className="text-gray-600 text-lg md:text-xl">
             En Appointmed estamos encantados de recibirte
           </h2>
@@ -122,7 +126,7 @@ export function Inicio() {
                   />
                   <MainButton
                     text="Crear"
-                    className="w-full h-[30px] text-sm px-5 border border-sky-800 text-black"
+                    className="w-full h-[30px] text-sm bg-black hover:bg-gray-950 px-5"
                     onClick={() => navigate(item.createRoute)}
                   />
                 </div>

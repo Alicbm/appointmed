@@ -2,26 +2,35 @@ import { gql } from '@apollo/client';
 
 export const REGISTER = gql`
   mutation createUsersRequest(
-    $name: String!,
+    $firstName: String!,
+    $lastName: String!,
     $email: String!,
     $password: String!,
     $createdAt: String!,
     $role: String!,
+    $eps: String!,
   ) {
     createUsersRequest(
       dto: {
-        name: $name
+        firstName: $firstName
+        lastName: $lastName
         email: $email
         password: $password
         createdAt: $createdAt
         role: $role
+        eps: $eps
       }
     ) {
-      name
-      email
-      password
-      createdAt
-      role
+      access_token
+      user {
+        id
+        firstName
+        lastName
+        email
+        createdAt        
+        role
+        eps
+      }
     }
   }
 `

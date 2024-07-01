@@ -4,6 +4,9 @@ import { FaTeeth, FaBaby, FaEye } from "react-icons/fa6";
 import { TbGenderAndrogyne } from "react-icons/tb";
 import { MdPsychology } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
+import { useContext } from "react";
+import { userName } from "../../utils/userName";
 
 type RoutesType = {
   label: string;
@@ -64,6 +67,7 @@ routes.push({
 });
 
 export function SideBar() {
+  const context = useContext(AuthContext)
   const navigate = useNavigate();
 
   const serviceSelected = (label: string) => {
@@ -80,7 +84,7 @@ export function SideBar() {
             <span className="mr-2">
               <FaUserCircle />
             </span>
-            <span>Username</span>
+            <span>{userName(context?.user?.user?.firstName || '')}</span>
           </p>
         </div>
 

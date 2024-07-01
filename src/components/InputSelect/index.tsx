@@ -8,6 +8,7 @@ type Props = {
   type?: string;
   listData: string[];
   fieldName: string;
+  value?: string;
   rules?: Parameters<UseFormRegister<FieldValues>>[1];
   allForm: UseFormReturn<FieldValues>;
 };
@@ -19,6 +20,7 @@ export function InputSelect({
   fieldName,
   rules,
   allForm,
+  value
 }: Props) {
   const [showListData, setShowListData] = useState(false);
   const [text, setText] = useState("");
@@ -43,7 +45,7 @@ export function InputSelect({
       <input
         id={label}
         type={type || "text"}
-        value={text}
+        value={value || text}
         className={classNames([
           verifyError
             ? "border-2 border-red-400"

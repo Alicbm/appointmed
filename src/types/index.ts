@@ -38,10 +38,12 @@ export enum TypeButton {
 }
 
 export type CreateUserDto = {
-  name: string,
+  firstName: string,
+  lastName: string,
   email: string,
   password: string,
   repeatPassword: string
   createdAt: string,
   role: string,
+  eps: string,
 }

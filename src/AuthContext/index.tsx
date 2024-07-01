@@ -1,9 +1,21 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-// import { useNavigate } from  'react-router-dom';
+
+interface User {
+  user: {
+    id: string
+    email: string
+    firstName: string
+    lastName: string
+    role: string
+    createdAt: string
+    eps: string
+  }
+  access_token: string
+}
 
 interface AuthContextType {
-  user: string | null;
-  setUser: React.Dispatch<React.SetStateAction<string | null>>;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -13,16 +25,14 @@ interface AuthProviderProps {
 }
 
 function AuthProvider ({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const auth = localStorage.getItem("AUTH_TOKEN_APPOINTMED");
     const data = auth !== null && JSON.parse(auth) 
 
-    setUser(data)
+    setUser(data)    
   }, [])
-
-  console.log(user)
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

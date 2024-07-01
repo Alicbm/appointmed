@@ -8,7 +8,7 @@ export function Login() {
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex h-[100vh] z-10">
-      <div className="w-[50%] bg-slate-50 filter brightness-[.5]">
+      <div className="hidden md:block w-[50%] bg-slate-50 filter brightness-[.5]">
         <img
           src={bgImage}
           alt="Appointmed"

@@ -7,11 +7,13 @@ import { ContainerModal } from "../ContainerModal";
 import { MobileSideBar } from "../MobileSideBar";
 import { AuthContext } from "../../AuthContext";
 import logo from "../../images/appointmed_logo.png";
+import { UserProfile } from "../UserProfile";
 
 export function Header() {
   const context = useContext(AuthContext);
 
   const [modal, setModal] = useState(false);
+  const [userModal, setUserModal] = useState(false);
   const [sideBar, setSideBar] = useState(false);
 
   const navigate = useNavigate();
@@ -25,34 +27,39 @@ export function Header() {
 
   return (
     <header className="flex flex-col items-center w-full max-w-[1200px] bg-slate-100 border-b border-slate-200 rounded-sm px-4 py-2 mx-auto sm:flex-row sm:justify-between sm:px-8">
-      <div 
-        className='flex justify-center items-center gap-4 w-full py-2 px-1 border-b border-b-slate-200 sm:p-0 sm:border-none sm:w-auto'
+      <div
+        className="flex justify-center items-center gap-4 w-full py-2 px-1 border-b border-b-slate-200 sm:p-0 sm:border-none sm:w-auto"
         onClick={() => navigate("/dashboard")}
       >
-        <span 
-          className="hidden sm:block text-3xl text-sky-800 lg:hidden"
+        <span
+          className="hidden sm:block text-3xl text-sky-800 lg:hidden cursor-pointer"
           onClick={() => setSideBar(!sideBar)}
-        ><MdOutlineMenu /></span>
+        >
+          <MdOutlineMenu />
+        </span>
 
-        <img 
-          src={logo} 
-          alt="Appointmed" 
-          className="h-[45px] cursor-pointer lg:h-[50px]" 
+        <img
+          src={logo}
+          alt="Appointmed"
+          className="h-[45px] cursor-pointer lg:h-[50px]"
         />
-        
-        <span 
+
+        <span
           className="text-3xl text-sky-800 sm:hidden"
           onClick={() => setSideBar(!sideBar)}
-        ><MdOutlineMenu /></span>
+        >
+          <MdOutlineMenu />
+        </span>
       </div>
 
       {/* SideBar for mobile */}
-      {sideBar && <MobileSideBar sideBar={sideBar} setSideBar={setSideBar}/>}
+      {sideBar && <MobileSideBar sideBar={sideBar} setSideBar={setSideBar} />}
 
-      <div className="flex gap-4 py-2">
+      <div className="flex items-center gap-4 py-2">
         <MainButton
-          text="Cambiar de Cuenta"
+          text="Perfil de Usuario"
           className="h-[35px] text-[13px] bg-sky-800 hover:bg-sky-900 sm:text-[14px]"
+          onClick={() => setUserModal(true)}
         />
         <MainButton
           text="Cerrar Sesión"
@@ -64,7 +71,7 @@ export function Header() {
       {modal && (
         <ContainerModal>
           <div className="relative flex flex-col justify-center gap-8 w-[90%] max-w-[300px] h-[250px] bg-slate-50 px-4 py-5 rounded-sm sm:w-[500px] sm:max-w-[500px] sm:px-8">
-            <span 
+            <span
               className="absolute top-4 right-4 text-gray-600 text-2xl hover:text-gray-700 cursor-pointer sm:text-4xl"
               onClick={() => setModal(false)}
             >
@@ -90,6 +97,8 @@ export function Header() {
           </div>
         </ContainerModal>
       )}
+
+      { userModal && <UserProfile setModal={setUserModal} /> }
     </header>
   );
 }

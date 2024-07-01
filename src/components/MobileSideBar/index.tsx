@@ -5,6 +5,9 @@ import { IoClose } from "react-icons/io5";
 import { TbGenderAndrogyne } from "react-icons/tb";
 import { MdPsychology } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthContext";
+import { userName } from "../../utils/userName";
 
 type Props = {
   sideBar: boolean;
@@ -71,6 +74,7 @@ routes.push({
 });
 
 export function MobileSideBar({ sideBar, setSideBar }: Props) {
+  const context = useContext(AuthContext)
   const navigate = useNavigate();
 
   return (
@@ -81,10 +85,10 @@ export function MobileSideBar({ sideBar, setSideBar }: Props) {
             <span className="mr-2">
               <FaUserCircle />
             </span>
-            <span>Username</span>
+            <span>{userName(context?.user?.user?.firstName || '')}</span>
           </p>
           <span 
-            className="text-sky-800 text-3xl"
+            className="text-sky-800 text-3xl cursor-pointer"
             onClick={() => setSideBar(!sideBar)}
           ><IoClose /></span>
         </div>

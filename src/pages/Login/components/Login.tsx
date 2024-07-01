@@ -35,8 +35,8 @@ export function LoginUser({ setLogin }: Props) {
           }
         });
 
-        localStorage.setItem('AUTH_TOKEN_APPOINTMED', JSON.stringify(data))
-        context?.setUser(data)
+        localStorage.setItem('AUTH_TOKEN_APPOINTMED', JSON.stringify(data?.login))
+        context?.setUser(data?.login)
 
         navigate('/dashboard')
       } catch (err) {
@@ -55,7 +55,7 @@ export function LoginUser({ setLogin }: Props) {
   }, [auth])
 
   return (
-    <div className="flex items-center w-[50%] bg-slate-50 p-10">
+    <div className="w-full flex items-center md:w-[50%] bg-slate-50 p-10">
       <form
         className="flex flex-col items-center w-full max-w-[450px] gap-4 mx-auto"
         onSubmit={onSubmit}

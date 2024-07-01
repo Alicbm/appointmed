@@ -1,4 +1,4 @@
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { MainStructure } from "../pages";
 import { GeneralMedicineList } from "../pages/MedicinaGeneral/components/GeneralMedicineList";
 import { GeneralMedicineCreate } from "../pages/MedicinaGeneral/components/GeneralMedicineCreate";
@@ -16,78 +16,34 @@ import { PediatricsCreate } from "../pages/Pediatrics/components/PediatricsCreat
 import { OptometryCreate } from "../pages/Optometry/components/OptometryCreate";
 import { OptometryList } from "../pages/Optometry/components/OptometryList";
 import { Login } from "../pages/Login";
-import { AuthContext } from "../AuthContext";
-import { useContext } from "react";
+import { ProtectedRoutes } from "./protected.router";
 
 export function Router() {
-  const context = useContext(AuthContext);
-
   return (
     <HashRouter>
       <Header />
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={context?.user ? <MainStructure /> : <Navigate to="/" />}
-        >
-          <Route
-            index
-            path=""
-            element={context?.user ? <Inicio /> : <Navigate to="/" />}
-          />
-          <Route
-            path="medicina-general"
-            element={
-              context?.user ? <GeneralMedicineList /> : <Navigate to="/" />
-            }
-          />
-          <Route
-            path="medicina-general/create"
-            element={
-              context?.user ? <GeneralMedicineCreate /> : <Navigate to="/" />
-            }
-          />
-          <Route
-            path="odontologia"
-            element={context?.user ? <OdontologyList /> : <Navigate to="/" />}
-          />
-          <Route
-            path="odontologia/create"
-            element={context?.user ? <OdontologyCreate /> : <Navigate to="/" />}
-          />
-          <Route
-            path="ginecologia"
-            element={context?.user ? <GynecologyList /> : <Navigate to="/" />}
-          />
-          <Route
-            path="ginecologia/create"
-            element={context?.user ? <GynecologyCreate /> : <Navigate to="/" />}
-          />
-          <Route
-            path="psiquiatria"
-            element={context?.user ? <PsychiatryList /> : <Navigate to="/" />}
-          />
-          <Route
-            path="psiquiatria/create"
-            element={context?.user ? <PsychiatryCreate /> : <Navigate to="/" />}
-          />
-          <Route
-            path="pediatria"
-            element={context?.user ? <PediatricsList /> : <Navigate to="/" />}
-          />
-          <Route
-            path="pediatria/create"
-            element={context?.user ? <PediatricsCreate /> : <Navigate to="/" />}
-          />
-          <Route
-            path="optometria"
-            element={context?.user ? <OptometryList /> : <Navigate to="/" />}
-          />
-          <Route
-            path="optometria/create"
-            element={context?.user ? <OptometryCreate /> : <Navigate to="/" />}
-          />
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/dashboard" element={<MainStructure />}>
+            <Route index path="" element={<Inicio />} />
+            <Route path="medicina-general" element={<GeneralMedicineList />} />
+            <Route
+              path="medicina-general/create"
+              element={<GeneralMedicineCreate />}
+            />
+            <Route path="odontologia" element={<OdontologyList />} />
+            <Route path="odontologia/create" element={<OdontologyCreate />} />
+            <Route path="ginecologia" element={<GynecologyList />} />
+            <Route path="ginecologia/create" element={<GynecologyCreate />} />
+            <Route path="psiquiatria" element={<PsychiatryList />} />
+            <Route path="psiquiatria/create" element={<PsychiatryCreate />} />
+            <Route path="pediatria" element={<PediatricsList />} />
+            <Route path="pediatria/create" element={<PediatricsCreate />} />
+            <Route path="optometria" element={<OptometryList />} />
+            <Route path="optometria/create" element={<OptometryCreate />} />
+          </Route>
         </Route>
       </Routes>
       <Footer />
