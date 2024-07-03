@@ -1,0 +1,1255 @@
+{
+  "data": [
+    {
+      "Leticia": {
+        "Hospital San Rafael de Leticia": [
+          "Dr. Juan Pérez",
+          "Dra. María Gómez",
+          "Dr. Luis Fernández"
+        ],
+        "Clínica Leticia": [
+          "Dr. Carlos Rodríguez",
+          "Dra. Ana Martínez",
+          "Dr. Pedro Sánchez"
+        ]
+      },
+      "Puerto Nariño": {
+        "Centro de Salud Puerto Nariño": [
+          "Dr. Andrés García",
+          "Dra. Laura Ramírez",
+          "Dr. José Torres"
+        ]
+      },
+      "Medellín": {
+        "Hospital Pablo Tobón Uribe": [
+          "Dr. Mario Gutiérrez",
+          "Dra. Claudia López",
+          "Dr. Francisco Herrera"
+        ],
+        "Clínica del Rosario": [
+          "Dra. Marta Jiménez",
+          "Dr. Felipe Castro",
+          "Dra. Isabel Moreno"
+        ],
+        "Hospital General de Medellín": [
+          "Dr. Ricardo Mendoza",
+          "Dra. Lorena Suárez",
+          "Dr. Javier Silva"
+        ]
+      },
+      "Bello": {
+        "Clínica del Norte": [
+          "Dr. Alberto Ruiz",
+          "Dra. Sofía González",
+          "Dr. Nicolás Peña"
+        ],
+        "Hospital Marco Fidel Suárez": [
+          "Dr. Diego Vargas",
+          "Dra. Patricia Ramírez",
+          "Dr. Raúl Ortiz"
+        ]
+      },
+      "Itagüí": {
+        "Clínica Antioquia": [
+          "Dr. Sergio Gómez",
+          "Dra. Elena Duarte",
+          "Dr. Julio Castaño"
+        ],
+        "Hospital del Sur": [
+          "Dr. Alejandro Moreno",
+          "Dra. Beatriz Castillo",
+          "Dr. Fernando Salazar"
+        ]
+      },
+      "Envigado": {
+        "Hospital Manuel Uribe Ángel": [
+          "Dr. Luis Gutiérrez",
+          "Dra. Victoria Pérez",
+          "Dr. Daniel Torres"
+        ],
+        "Clínica de la Policía": [
+          "Dra. Alicia Rojas",
+          "Dr. Hernán Castro",
+          "Dra. Silvia Morales"
+        ]
+      },
+      "Apartadó": {
+        "Hospital Antonio Roldán Betancur": [
+          "Dr. Miguel Velásquez",
+          "Dra. Teresa Vargas",
+          "Dr. Óscar Herrera"
+        ],
+        "Clínica Panamericana": [
+          "Dr. Rafael Suárez",
+          "Dra. Cristina Martínez",
+          "Dr. Juan Carlos Ríos"
+        ]
+      },
+      "Arauca": {
+        "Hospital San Vicente": [
+          "Dr. Gustavo Ramírez",
+          "Dra. Mariana Herrera",
+          "Dr. Ricardo Pérez"
+        ],
+        "Clínica Santa Teresa": [
+          "Dra. Liliana Rodríguez",
+          "Dr. Eduardo Gómez",
+          "Dra. Carolina Medina"
+        ]
+      },
+      "Arauquita": {
+        "Centro de Salud Arauquita": [
+          "Dr. Álvaro Castro",
+          "Dra. Andrea Ríos",
+          "Dr. Martín Vargas"
+        ]
+      },
+      "Saravena": {
+        "Hospital del Sarare": [
+          "Dr. Juan Morales",
+          "Dra. Elena Ortiz",
+          "Dr. Mario Rojas"
+        ],
+        "Clínica Sarare": [
+          "Dr. Luis Ramírez",
+          "Dra. Patricia González",
+          "Dr. Alejandro Torres"
+        ]
+      },
+      "Tame": {
+        "Hospital San Antonio": [
+          "Dr. Fernando Pérez",
+          "Dra. Marta García",
+          "Dr. Julio Castillo"
+        ],
+        "Clínica Tame": [
+          "Dr. César Álvarez",
+          "Dra. Teresa Martínez",
+          "Dr. Nicolás Herrera"
+        ]
+      },
+      "Barranquilla": {
+        "Hospital Universidad del Norte": [
+          "Dr. Alberto Jiménez",
+          "Dra. Rosa Sánchez",
+          "Dr. Ricardo Fernández"
+        ],
+        "Clínica Portoazul": [
+          "Dra. Laura Ruiz",
+          "Dr. Javier Medina",
+          "Dra. Claudia Torres"
+        ],
+        "Clínica General del Norte": [
+          "Dr. Carlos Ramírez",
+          "Dra. Beatriz López",
+          "Dr. Andrés Castro"
+        ]
+      },
+      "Soledad": {
+        "Hospital Materno Infantil": [
+          "Dr. Guillermo García",
+          "Dra. Isabel Vega",
+          "Dr. Santiago Castillo"
+        ],
+        "Clínica de la Costa": [
+          "Dr. Pedro Rojas",
+          "Dra. María Hernández",
+          "Dr. Felipe Torres"
+        ]
+      },
+      "Malambo": {
+        "Hospital Local de Malambo": [
+          "Dr. Francisco Méndez",
+          "Dra. Ana Beltrán",
+          "Dr. Jaime Suárez"
+        ],
+        "Clínica San Rafael": [
+          "Dr. Óscar Ramírez",
+          "Dra. Lorena Díaz",
+          "Dr. Ernesto Gutiérrez"
+        ]
+      },
+      "Sabanalarga": {
+        "Hospital Departamental de Sabanalarga": [
+          "Dr. Ricardo Vargas",
+          "Dra. Catalina Ríos",
+          "Dr. Héctor Pérez"
+        ],
+        "Clínica Sabanalarga": [
+          "Dra. Julia Morales",
+          "Dr. Álvaro Salazar",
+          "Dra. Paula Ramírez"
+        ]
+      },
+      "Baranoa": {
+        "Hospital Local de Baranoa": [
+          "Dr. Jorge Martínez",
+          "Dra. Carmen Torres",
+          "Dr. Manuel Gutiérrez"
+        ],
+        "Clínica Baranoa": [
+          "Dr. Eduardo Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Alejandro Vargas"
+        ]
+      },
+      "Cartagena": {
+        "Hospital Universitario del Caribe": [
+          "Dr. Javier Ramírez",
+          "Dra. Liliana González",
+          "Dr. Raúl Torres"
+        ],
+        "Clínica Medihelp Services": [
+          "Dra. Nancy Moreno",
+          "Dr. Carlos Suárez",
+          "Dra. Lucía Gutiérrez"
+        ],
+        "Clínica Blas de Lezo": [
+          "Dr. Marcos Herrera",
+          "Dra. Verónica Díaz",
+          "Dr. Sebastián López"
+        ]
+      },
+      "Magangué": {
+        "Hospital La Divina Misericordia": [
+          "Dr. Diego Salazar",
+          "Dra. Elena Ramírez",
+          "Dr. Tomás Pérez"
+        ],
+        "Clínica Santa Teresa": [
+          "Dra. Patricia Jiménez",
+          "Dr. Gonzalo Torres",
+          "Dra. Sandra Vargas"
+        ]
+      },
+      "Turbaco": {
+        "Hospital Local de Turbaco": [
+          "Dr. Humberto Fernández",
+          "Dra. Marta Silva",
+          "Dr. Andrés Mendoza"
+        ],
+        "Clínica Madre Bernarda": [
+          "Dr. Luis Paredes",
+          "Dra. Laura González",
+          "Dr. Julián Torres"
+        ]
+      },
+      "El Carmen de Bolívar": {
+        "Hospital Nuestra Señora del Carmen": [
+          "Dr. Álvaro García",
+          "Dra. Rosaura López",
+          "Dr. Manuel Vargas"
+        ],
+        "Clínica El Carmen": [
+          "Dra. Paula Rodríguez",
+          "Dr. Fabio Jiménez",
+          "Dra. Alicia Suárez"
+        ]
+      },
+      "Tunja": {
+        "Hospital San Rafael de Tunja": [
+          "Dr. Gonzalo Pérez",
+          "Dra. Marta Morales",
+          "Dr. Alejandro Salazar"
+        ],
+        "Clínica Medilaser": [
+          "Dr. Fernando García",
+          "Dra. Claudia Ramírez",
+          "Dr. César Torres"
+        ]
+      },
+      "Duitama": {
+        "Hospital Regional de Duitama": [
+          "Dr. Juan Morales",
+          "Dra. Elena Ortiz",
+          "Dr. Mario Rojas"
+        ],
+        "Clínica Boyacá": [
+          "Dr. Luis Ramírez",
+          "Dra. Patricia González",
+          "Dr. Alejandro Torres"
+        ]
+      },
+      "Sogamoso": {
+        "Hospital Regional de Sogamoso": [
+          "Dr. Fernando Pérez",
+          "Dra. Marta García",
+          "Dr. Julio Castillo"
+        ],
+        "Clínica de Especialistas": [
+          "Dr. César Álvarez",
+          "Dra. Teresa Martínez",
+          "Dr. Nicolás Herrera"
+        ]
+      },
+      "Chiquinquirá": {
+        "Hospital Regional de Chiquinquirá": [
+          "Dr. Alberto Jiménez",
+          "Dra. Rosa Sánchez",
+          "Dr. Ricardo Fernández"
+        ],
+        "Clínica Santa Ana": [
+          "Dra. Laura Ruiz",
+          "Dr. Javier Medina",
+          "Dra. Claudia Torres"
+        ]
+      },
+      "Manizales": {
+        "Hospital Santa Sofía": [
+          "Dr. Carlos Ramírez",
+          "Dra. Beatriz López",
+          "Dr. Andrés Castro"
+        ],
+        "Clínica Versalles": [
+          "Dr. Guillermo García",
+          "Dra. Isabel Vega",
+          "Dr. Santiago Castillo"
+        ],
+        "Clínica San Marcel": [
+          "Dr. Pedro Rojas",
+          "Dra. María Hernández",
+          "Dr. Felipe Torres"
+        ]
+      },
+      "Villamaría": {
+        "Centro de Salud Villamaría": [
+          "Dr. Francisco Méndez",
+          "Dra. Ana Beltrán",
+          "Dr. Jaime Suárez"
+        ],
+        "Clínica Villamaría": [
+          "Dr. Óscar Ramírez",
+          "Dra. Lorena Díaz",
+          "Dr. Ernesto Gutiérrez"
+        ]
+      },
+      "Chinchiná": {
+        "Hospital San Marcos": [
+          "Dr. Ricardo Vargas",
+          "Dra. Catalina Ríos",
+          "Dr. Héctor Pérez"
+        ],
+        "Clínica Chinchiná": [
+          "Dra. Julia Morales",
+          "Dr. Álvaro Salazar",
+          "Dra. Paula Ramírez"
+        ]
+      },
+      "La Dorada": {
+        "Hospital San Félix": [
+          "Dr. Jorge Martínez",
+          "Dra. Carmen Torres",
+          "Dr. Manuel Gutiérrez"
+        ],
+        "Clínica Dorada": [
+          "Dr. Eduardo Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Alejandro Vargas"
+        ]
+      },
+      "Florencia": {
+        "Hospital Comunal Las Malvinas": [
+          "Dr. Javier Ramírez",
+          "Dra. Liliana González",
+          "Dr. Raúl Torres"
+        ],
+        "Clínica Medilaser": [
+          "Dra. Nancy Moreno",
+          "Dr. Carlos Suárez",
+          "Dra. Lucía Gutiérrez"
+        ]
+      },
+      "San Vicente del Caguán": {
+        "Hospital Local de San Vicente": [
+          "Dr. Marcos Herrera",
+          "Dra. Verónica Díaz",
+          "Dr. Sebastián López"
+        ],
+        "Clínica San Vicente": [
+          "Dr. Diego Salazar",
+          "Dra. Elena Ramírez",
+          "Dr. Tomás Pérez"
+        ]
+      },
+      "Puerto Rico": {
+        "Centro de Salud Puerto Rico": [
+          "Dra. Patricia Jiménez",
+          "Dr. Gonzalo Torres",
+          "Dra. Sandra Vargas"
+        ],
+        "Clínica Puerto Rico": [
+          "Dr. Humberto Fernández",
+          "Dra. Marta Silva",
+          "Dr. Andrés Mendoza"
+        ]
+      },
+      "Yopal": {
+        "Hospital Regional de la Orinoquía": [
+          "Dr. Luis Paredes",
+          "Dra. Laura González",
+          "Dr. Julián Torres"
+        ],
+        "Clínica Casanare": [
+          "Dr. Álvaro García",
+          "Dra. Rosaura López",
+          "Dr. Manuel Vargas"
+        ]
+      },
+      "Aguazul": {
+        "Hospital Juan Hernando Urrego": [
+          "Dra. Paula Rodríguez",
+          "Dr. Fabio Jiménez",
+          "Dra. Alicia Suárez"
+        ],
+        "Clínica Aguazul": [
+          "Dr. Gonzalo Pérez",
+          "Dra. Marta Morales",
+          "Dr. Alejandro Salazar"
+        ]
+      },
+      "Villanueva": {
+        "Centro de Salud Villanueva": [
+          "Dr. Fernando García",
+          "Dra. Claudia Ramírez",
+          "Dr. César Torres"
+        ],
+        "Clínica Villanueva": [
+          "Dr. Juan Morales",
+          "Dra. Elena Ortiz",
+          "Dr. Mario Rojas"
+        ]
+      },
+      "Popayán": {
+        "Hospital Universitario San José": [
+          "Dr. Luis Ramírez",
+          "Dra. Patricia González",
+          "Dr. Alejandro Torres"
+        ],
+        "Clínica La Estancia": [
+          "Dr. Fernando Pérez",
+          "Dra. Marta García",
+          "Dr. Julio Castillo"
+        ],
+        "Clínica Santa Gracia": [
+          "Dr. César Álvarez",
+          "Dra. Teresa Martínez",
+          "Dr. Nicolás Herrera"
+        ]
+      },
+      "Santander de Quilichao": {
+        "Hospital Francisco de Paula Santander": [
+          "Dr. Alberto Jiménez",
+          "Dra. Rosa Sánchez",
+          "Dr. Ricardo Fernández"
+        ],
+        "Clínica Quilichao": [
+          "Dra. Laura Ruiz",
+          "Dr. Javier Medina",
+          "Dra. Claudia Torres"
+        ]
+      },
+      "Puerto Tejada": {
+        "Hospital Local Puerto Tejada": [
+          "Dr. Carlos Ramírez",
+          "Dra. Beatriz López",
+          "Dr. Andrés Castro"
+        ],
+        "Clínica Puerto Tejada": [
+          "Dr. Guillermo García",
+          "Dra. Isabel Vega",
+          "Dr. Santiago Castillo"
+        ]
+      },
+      "Valledupar": {
+        "Hospital Rosario Pumarejo de López": [
+          "Dr. Pedro Rojas",
+          "Dra. María Hernández",
+          "Dr. Felipe Torres"
+        ],
+        "Clínica Médicos S.A.": [
+          "Dr. Francisco Méndez",
+          "Dra. Ana Beltrán",
+          "Dr. Jaime Suárez"
+        ],
+        "Clínica Valledupar": [
+          "Dr. Óscar Ramírez",
+          "Dra. Lorena Díaz",
+          "Dr. Ernesto Gutiérrez"
+        ]
+      },
+      "Aguachica": {
+        "Hospital Regional de Aguachica": [
+          "Dr. Ricardo Vargas",
+          "Dra. Catalina Ríos",
+          "Dr. Héctor Pérez"
+        ],
+        "Clínica Santa Isabel": [
+          "Dra. Julia Morales",
+          "Dr. Álvaro Salazar",
+          "Dra. Paula Ramírez"
+        ]
+      },
+      "Chimichagua": {
+        "Hospital San José": [
+          "Dr. Jorge Martínez",
+          "Dra. Carmen Torres",
+          "Dr. Manuel Gutiérrez"
+        ],
+        "Clínica Chimichagua": [
+          "Dr. Eduardo Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Alejandro Vargas"
+        ]
+      },
+      "Quibdó": {
+        "Hospital San Francisco de Asís": [
+          "Dr. Javier Ramírez",
+          "Dra. Liliana González",
+          "Dr. Raúl Torres"
+        ],
+        "Clínica SaludChocó": [
+          "Dra. Nancy Moreno",
+          "Dr. Carlos Suárez",
+          "Dra. Lucía Gutiérrez"
+        ]
+      },
+      "Istmina": {
+        "Hospital Eduardo Santos": [
+          "Dr. Carlos Morales",
+          "Dra. Beatriz López",
+          "Dr. Andrés Castillo"
+        ],
+        "Clínica Istmina": [
+          "Dr. Guillermo García",
+          "Dra. Isabel Vega",
+          "Dr. Santiago Castillo"
+        ]
+      },
+      "Riosucio": {
+        "Centro de Salud Riosucio": [
+          "Dr. Pedro Rojas",
+          "Dra. María Hernández",
+          "Dr. Felipe Torres"
+        ],
+        "Clínica Riosucio": [
+          "Dr. Francisco Méndez",
+          "Dra. Ana Beltrán",
+          "Dr. Jaime Suárez"
+        ]
+      },
+      "Montería": {
+        "Hospital San Jerónimo": [
+          "Dr. Óscar Ramírez",
+          "Dra. Lorena Díaz",
+          "Dr. Ernesto Gutiérrez"
+        ],
+        "Clínica Montería": [
+          "Dr. Ricardo Vargas",
+          "Dra. Catalina Ríos",
+          "Dr. Héctor Pérez"
+        ],
+        "Clínica Central O.H.L.": [
+          "Dra. Julia Morales",
+          "Dr. Álvaro Salazar",
+          "Dra. Paula Ramírez"
+        ]
+      },
+      "Lorica": {
+        "Hospital San Vicente de Paul": [
+          "Dr. Jorge Martínez",
+          "Dra. Carmen Torres",
+          "Dr. Manuel Gutiérrez"
+        ],
+        "Clínica Lorica": [
+          "Dr. Eduardo Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Alejandro Vargas"
+        ]
+      },
+      "Sahagún": {
+        "Hospital San Juan de Sahagún": [
+          "Dr. Javier Ramírez",
+          "Dra. Liliana González",
+          "Dr. Raúl Torres"
+        ],
+        "Clínica Sahagún": [
+          "Dra. Nancy Moreno",
+          "Dr. Carlos Suárez",
+          "Dra. Lucía Gutiérrez"
+        ]
+      },
+      "Bogotá": {
+        "Hospital Simón Bolívar": [
+          "Dr. Juan Morales",
+          "Dra. Elena Ortiz",
+          "Dr. Mario Rojas"
+        ],
+        "Clínica del Country": [
+          "Dr. Luis Ramírez",
+          "Dra. Patricia González",
+          "Dr. Alejandro Torres"
+        ],
+        "Hospital de la Misericordia": [
+          "Dr. Fernando Pérez",
+          "Dra. Marta García",
+          "Dr. Julio Castillo"
+        ]
+      },
+      "Soacha": {
+        "Hospital Mario Gaitán Yanguas": [
+          "Dr. César Álvarez",
+          "Dra. Teresa Martínez",
+          "Dr. Nicolás Herrera"
+        ],
+        "Clínica San Luis": [
+          "Dr. Alberto Jiménez",
+          "Dra. Rosa Sánchez",
+          "Dr. Ricardo Fernández"
+        ]
+      },
+      "Facatativá": {
+        "Hospital San Rafael de Facatativá": [
+          "Dra. Laura Ruiz",
+          "Dr. Javier Medina",
+          "Dra. Claudia Torres"
+        ],
+        "Clínica Santa Ana": [
+          "Dr. Carlos Ramírez",
+          "Dra. Beatriz López",
+          "Dr. Andrés Castro"
+        ]
+      },
+      "Zipaquirá": {
+        "Hospital Universitario de la Samaritana": [
+          "Dr. Guillermo García",
+          "Dra. Isabel Vega",
+          "Dr. Santiago Castillo"
+        ],
+        "Clínica Zipaquirá": [
+          "Dr. Pedro Rojas",
+          "Dra. María Hernández",
+          "Dr. Felipe Torres"
+        ]
+      },
+      "Inírida": {
+        "Hospital Manuel Elkin Patarroyo": [
+          "Dr. Francisco Méndez",
+          "Dra. Ana Beltrán",
+          "Dr. Jaime Suárez"
+        ],
+        "Clínica Inírida": [
+          "Dr. Óscar Ramírez",
+          "Dra. Lorena Díaz",
+          "Dr. Ernesto Gutiérrez"
+        ]
+      },
+      "San José del Guaviare": {
+        "Hospital Departamental de San José": [
+          "Dr. Ricardo Vargas",
+          "Dra. Catalina Ríos",
+          "Dr. Héctor Pérez"
+        ],
+        "Clínica San José": [
+          "Dra. Julia Morales",
+          "Dr. Álvaro Salazar",
+          "Dra. Paula Ramírez"
+        ]
+      },
+      "Miraflores": {
+        "Centro de Salud Miraflores": [
+          "Dr. Jorge Martínez",
+          "Dra. Carmen Torres",
+          "Dr. Manuel Gutiérrez"
+        ],
+        "Clínica Miraflores": [
+          "Dr. Eduardo Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Alejandro Vargas"
+        ]
+      },
+      "Neiva": {
+        "Hospital Universitario Hernando Moncaleano": [
+          "Dr. Javier Ramírez",
+          "Dra. Liliana González",
+          "Dr. Raúl Torres"
+        ],
+        "Clínica Medilaser": [
+          "Dra. Nancy Moreno",
+          "Dr. Carlos Suárez",
+          "Dra. Lucía Gutiérrez"
+        ],
+        "Hospital de Neiva": [
+          "Dr. Juan Morales",
+          "Dra. Elena Ortiz",
+          "Dr. Mario Rojas"
+        ]
+      },
+      "Pitalito": {
+        "Hospital Departamental San Antonio": [
+          "Dr. Luis Ramírez",
+          "Dra. Patricia González",
+          "Dr. Alejandro Torres"
+        ],
+        "Clínica Pitalito": [
+          "Dr. Fernando Pérez",
+          "Dra. Marta García",
+          "Dr. Julio Castillo"
+        ]
+      },
+      "Garzón": {
+        "Hospital Departamental San Vicente de Paúl": [
+          "Dr. César Álvarez",
+          "Dra. Teresa Martínez",
+          "Dr. Nicolás Herrera"
+        ],
+        "Clínica Garzón": [
+          "Dr. Alberto Jiménez",
+          "Dra. Rosa Sánchez",
+          "Dr. Ricardo Fernández"
+        ]
+      },
+      "Riohacha": {
+        "Hospital Nuestra Señora de los Remedios": [
+          "Dra. Laura Ruiz",
+          "Dr. Javier Medina",
+          "Dra. Claudia Torres"
+        ],
+        "Clínica Cedes": [
+          "Dr. Carlos Ramírez",
+          "Dra. Beatriz López",
+          "Dr. Andrés Castro"
+        ]
+      },
+      "Maicao": {
+        "Hospital San José": [
+          "Dr. Guillermo García",
+          "Dra. Isabel Vega",
+          "Dr. Santiago Castillo"
+        ],
+        "Clínica Maicao": [
+          "Dr. Pedro Rojas",
+          "Dra. María Hernández",
+          "Dr. Felipe Torres"
+        ]
+      },
+      "Uribia": {
+        "Hospital de Uribia": [
+          "Dr. Francisco Méndez",
+          "Dra. Ana Beltrán",
+          "Dr. Jaime Suárez"
+        ],
+        "Clínica Uribia": [
+          "Dr. Óscar Ramírez",
+          "Dra. Lorena Díaz",
+          "Dr. Ernesto Gutiérrez"
+        ]
+      },
+      "Santa Marta": {
+        "Hospital Universitario Fernando Troconis": [
+          "Dr. Ricardo Vargas",
+          "Dra. Catalina Ríos",
+          "Dr. Héctor Pérez"
+        ],
+        "Clínica El Prado": [
+          "Dra. Julia Morales",
+          "Dr. Álvaro Salazar",
+          "Dra. Paula Ramírez"
+        ],
+        "Clínica La Castellana": [
+          "Dr. Jorge Martínez",
+          "Dra. Carmen Torres",
+          "Dr. Manuel Gutiérrez"
+        ]
+      },
+      "Ciénaga": {
+        "Hospital San Cristóbal": [
+          "Dr. Eduardo Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Alejandro Vargas"
+        ],
+        "Clínica Ciénaga": [
+          "Dr. Javier Ramírez",
+          "Dra. Liliana González",
+          "Dr. Raúl Torres"
+        ]
+      },
+      "Fundación": {
+        "Hospital San Rafael": [
+          "Dr. Juan Pérez",
+          "Dra. María García",
+          "Dr. Luis Ramírez"
+        ],
+        "Clínica Fundación": [
+          "Dr. Ana Torres",
+          "Dra. Carlos Martínez",
+          "Dr. Laura Gómez"
+        ]
+      },
+      "Villavicencio": {
+        "Hospital Departamental de Villavicencio": [
+          "Dr. Pedro Sánchez",
+          "Dra. Isabel López",
+          "Dr. Andrés Rodríguez"
+        ],
+        "Clínica Primavera": [
+          "Dr. Fernando Ruiz",
+          "Dra. Patricia Fernández",
+          "Dr. Jaime Castillo"
+        ],
+        "Clínica Meta": [
+          "Dr. Oscar Gutiérrez",
+          "Dra. Cristina Ramírez",
+          "Dr. Jorge Torres"
+        ]
+      },
+      "Acacías": {
+        "Hospital Local de Acacías": [
+          "Dr. Javier Morales",
+          "Dra. Lorena Díaz",
+          "Dr. Sergio Jiménez"
+        ],
+        "Clínica Acacías": [
+          "Dr. Andrés Villa",
+          "Dra. Natalia Herrera",
+          "Dr. Gabriel Suárez"
+        ]
+      },
+      "Granada": {
+        "Hospital Departamental de Granada": [
+          "Dr. Manuel García",
+          "Dra. Julia López",
+          "Dr. Roberto Díaz"
+        ],
+        "Clínica Granada": [
+          "Dr. Francisco Méndez",
+          "Dra. Laura Ortega",
+          "Dr. Carlos Ruiz"
+        ]
+      },
+      "Pasto": {
+        "Hospital Universitario Departamental de Nariño": [
+          "Dr. Enrique Pérez",
+          "Dra. Paula Sánchez",
+          "Dr. Fernando Castillo"
+        ],
+        "Clínica San Pedro": [
+          "Dr. Miguel Morales",
+          "Dra. Andrea Gómez",
+          "Dr. Rafael Ramírez"
+        ],
+        "Clínica Los Andes": [
+          "Dr. Jorge Torres",
+          "Dra. Carolina Ramírez",
+          "Dr. Juan Herrera"
+        ]
+      },
+      "Tumaco": {
+        "Hospital San Andrés": [
+          "Dr. Eduardo Gutiérrez",
+          "Dra. Natalia López",
+          "Dr. Alejandro Suárez"
+        ],
+        "Clínica Tumaco": [
+          "Dr. Francisco Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Felipe Vargas"
+        ]
+      },
+      "Ipiales": {
+        "Hospital Civil de Ipiales": [
+          "Dr. Ricardo Vargas",
+          "Dra. Mariana Díaz",
+          "Dr. Sergio Ramírez"
+        ],
+        "Clínica Ipiales": [
+          "Dr. Fernando Méndez",
+          "Dra. Isabel Torres",
+          "Dr. Santiago Herrera"
+        ]
+      },
+      "Cúcuta": {
+        "Hospital Universitario Erasmo Meoz": [
+          "Dr. Luis Ramírez",
+          "Dra. Laura García",
+          "Dr. Andrés Torres"
+        ],
+        "Clínica Medical Duarte": [
+          "Dr. Jaime Castillo",
+          "Dra. Patricia Ramírez",
+          "Dr. Oscar Sánchez"
+        ],
+        "Clínica Norte": [
+          "Dr. Pedro Méndez",
+          "Dra. Ana Suárez",
+          "Dr. Jorge Gutiérrez"
+        ]
+      },
+      "Ocaña": {
+        "Hospital Emiro Quintero Cañizares": [
+          "Dr. Carlos Ruiz",
+          "Dra. Laura Gómez",
+          "Dr. Manuel Díaz"
+        ],
+        "Clínica Ocaña": [
+          "Dr. Fernando Gutiérrez",
+          "Dra. Gabriela Ramírez",
+          "Dr. Enrique Suárez"
+        ]
+      },
+      "Pamplona": {
+        "Hospital San Juan de Dios": [
+          "Dr. Andrés Castillo",
+          "Dra. Beatriz González",
+          "Dr. Santiago Pérez"
+        ],
+        "Clínica Pamplona": [
+          "Dr. Rafael Ruiz",
+          "Dra. Paula Torres",
+          "Dr. Francisco Morales"
+        ]
+      },
+      "Mocoa": {
+        "Hospital José María Hernández": [
+          "Dr. Jorge Ramírez",
+          "Dra. Carmen Suárez",
+          "Dr. Eduardo Pérez"
+        ],
+        "Clínica Mocoa": [
+          "Dr. Enrique García",
+          "Dra. Isabel Vargas",
+          "Dr. Luis Fernández"
+        ]
+      },
+      "Puerto Asís": {
+        "Hospital Local de Puerto Asís": [
+          "Dr. Miguel Torres",
+          "Dra. Laura Gutiérrez",
+          "Dr. Carlos Castillo"
+        ],
+        "Clínica Puerto Asís": [
+          "Dr. Juan Méndez",
+          "Dra. Patricia López",
+          "Dr. Jorge Ramírez"
+        ]
+      },
+      "Orito": {
+        "Centro de Salud Orito": [
+          "Dr. Andrés Pérez",
+          "Dra. Natalia Gutiérrez",
+          "Dr. Luis Suárez"
+        ],
+        "Clínica Orito": [
+          "Dr. Fernando Ruiz",
+          "Dra. Laura Díaz",
+          "Dr. Pedro Torres"
+        ]
+      },
+      "Armenia": {
+        "Hospital Universitario San Juan de Dios": [
+          "Dr. Miguel García",
+          "Dra. Andrea Ramírez",
+          "Dr. Jorge Suárez"
+        ],
+        "Clínica del Café": [
+          "Dr. Enrique Torres",
+          "Dra. Beatriz López",
+          "Dr. Francisco Gutiérrez"
+        ],
+        "Clínica Comfenalco": [
+          "Dr. Luis Ramírez",
+          "Dra. Julia Vargas",
+          "Dr. Jaime Castillo"
+        ]
+      },
+      "Montenegro": {
+        "Hospital de Montenegro": [
+          "Dr. Carlos Díaz",
+          "Dra. Ana Suárez",
+          "Dr. Andrés Torres"
+        ],
+        "Clínica Montenegro": [
+          "Dr. Pedro Méndez",
+          "Dra. Laura Ramírez",
+          "Dr. Fernando Gutiérrez"
+        ]
+      },
+      "Circasia": {
+        "Hospital San Vicente de Paúl": [
+          "Dr. Jorge García",
+          "Dra. Gabriela Suárez",
+          "Dr. Enrique Pérez"
+        ],
+        "Clínica Circasia": [
+          "Dr. Santiago Torres",
+          "Dra. Isabel Vargas",
+          "Dr. Luis Fernández"
+        ]
+      },
+      "Pereira": {
+        "Hospital Universitario San Jorge": [
+          "Dr. Miguel Ramírez",
+          "Dra. Laura Gutiérrez",
+          "Dr. Carlos Castillo"
+        ],
+        "Clínica Comfamiliar": [
+          "Dr. Juan Méndez",
+          "Dra. Patricia López",
+          "Dr. Jorge Ramírez"
+        ],
+        "Clínica Los Rosales": [
+          "Dr. Andrés Pérez",
+          "Dra. Natalia Gutiérrez",
+          "Dr. Luis Suárez"
+        ]
+      },
+      "Dosquebradas": {
+        "Hospital Santa Mónica": [
+          "Dr. Fernando Ruiz",
+          "Dra. Laura Díaz",
+          "Dr. Pedro Torres"
+        ],
+        "Clínica Pinares": [
+          "Dr. Miguel García",
+          "Dra. Andrea Ramírez",
+          "Dr. Jorge Suárez"
+        ]
+      },
+      "Santa Rosa de Cabal": {
+        "Hospital San Vicente de Paúl": [
+          "Dr. Enrique Torres",
+          "Dra. Beatriz López",
+          "Dr. Francisco Gutiérrez"
+        ],
+        "Clínica Santa Rosa": [
+          "Dr. Luis Ramírez",
+          "Dra. Julia Vargas",
+          "Dr. Jaime Castillo"
+        ]
+      },
+      "San Andrés": {
+        "Hospital Departamental Clarence Lynd Newball": [
+          "Dr. Carlos Díaz",
+          "Dra. Ana Suárez",
+          "Dr. Andrés Torres"
+        ],
+        "Clínica San Andrés": [
+          "Dr. Pedro Méndez",
+          "Dra. Laura Ramírez",
+          "Dr. Fernando Gutiérrez"
+        ]
+      },
+      "Providencia": {
+        "Centro de Salud Providencia": [
+          "Dr. Jorge García",
+          "Dra. Gabriela Suárez",
+          "Dr. Enrique Pérez"
+        ],
+        "Clínica Providencia": [
+          "Dr. Santiago Torres",
+          "Dra. Isabel Vargas",
+          "Dr. Luis Fernández"
+        ]
+      },
+      "Bucaramanga": {
+        "Hospital Universitario de Santander": [
+          "Dr. Miguel Ramírez",
+          "Dra. Laura Gutiérrez",
+          "Dr. Carlos Castillo"
+        ],
+        "Clínica Foscal": [
+          "Dr. Juan Méndez",
+          "Dra. Patricia López",
+          "Dr. Jorge Ramírez"
+        ],
+        "Clínica Chicamocha": [
+          "Dr. Andrés Pérez",
+          "Dra. Natalia Gutiérrez",
+          "Dr. Luis Suárez"
+        ]
+      },
+      "Barrancabermeja": {
+        "Hospital Regional del Magdalena Medio": [
+          "Dr. Fernando Ruiz",
+          "Dra. Laura Díaz",
+          "Dr. Pedro Torres"
+        ],
+        "Clínica Barrancabermeja": [
+          "Dr. Miguel García",
+          "Dra. Andrea Ramírez",
+          "Dr. Jorge Suárez"
+        ]
+      },
+      "Floridablanca": {
+        "Hospital Internacional de Colombia": [
+          "Dr. Enrique Torres",
+          "Dra. Beatriz López",
+          "Dr. Francisco Gutiérrez"
+        ],
+        "Clínica Guane": [
+          "Dr. Luis Ramírez",
+          "Dra. Julia Vargas",
+          "Dr. Jaime Castillo"
+        ]
+      },
+      "Sincelejo": {
+        "Hospital Universitario de Sincelejo": [
+          "Dr. Carlos Díaz",
+          "Dra. Ana Suárez",
+          "Dr. Andrés Torres"
+        ],
+        "Clínica Santa María": [
+          "Dr. Pedro Méndez",
+          "Dra. Laura Ramírez",
+          "Dr. Fernando Gutiérrez"
+        ],
+        "Clínica La Concepción": [
+          "Dr. Jorge García",
+          "Dra. Gabriela Suárez",
+          "Dr. Enrique Pérez"
+        ]
+      },
+      "Corozal": {
+        "Hospital Nuestra Señora de las Mercedes": [
+          "Dr. Juan Pérez",
+          "Dra. María García",
+          "Dr. Luis Ramírez"
+        ],
+        "Clínica Corozal": [
+          "Dr. Ana Torres",
+          "Dra. Carlos Martínez",
+          "Dr. Laura Gómez"
+        ]
+      },
+      "Sampués": {
+        "Centro de Salud Sampués": [
+          "Dr. Pedro Sánchez",
+          "Dra. Isabel López",
+          "Dr. Andrés Rodríguez"
+        ],
+        "Clínica Sampués": [
+          "Dr. Fernando Ruiz",
+          "Dra. Patricia Fernández",
+          "Dr. Jaime Castillo"
+        ]
+      },
+      "Ibagué": {
+        "Hospital Federico Lleras Acosta": [
+          "Dr. Oscar Gutiérrez",
+          "Dra. Cristina Ramírez",
+          "Dr. Jorge Torres"
+        ],
+        "Clínica Medicádiz": [
+          "Dr. Javier Morales",
+          "Dra. Lorena Díaz",
+          "Dr. Sergio Jiménez"
+        ],
+        "Clínica Tolima": [
+          "Dr. Andrés Villa",
+          "Dra. Natalia Herrera",
+          "Dr. Gabriel Suárez"
+        ]
+      },
+      "Espinal": {
+        "Hospital San Rafael": [
+          "Dr. Manuel García",
+          "Dra. Julia López",
+          "Dr. Roberto Díaz"
+        ],
+        "Clínica Espinal": [
+          "Dr. Francisco Méndez",
+          "Dra. Laura Ortega",
+          "Dr. Carlos Ruiz"
+        ]
+      },
+      "Melgar": {
+        "Hospital Luis Pasteur": [
+          "Dr. Enrique Pérez",
+          "Dra. Paula Sánchez",
+          "Dr. Fernando Castillo"
+        ],
+        "Clínica Melgar": [
+          "Dr. Miguel Morales",
+          "Dra. Andrea Gómez",
+          "Dr. Rafael Ramírez"
+        ]
+      },
+      "Cali": {
+        "Hospital Universitario del Valle": [
+          "Dr. Jorge Torres",
+          "Dra. Carolina Ramírez",
+          "Dr. Juan Herrera"
+        ],
+        "Clínica Imbanaco": [
+          "Dr. Eduardo Gutiérrez",
+          "Dra. Natalia López",
+          "Dr. Alejandro Suárez"
+        ],
+        "Clínica Valle del Lili": [
+          "Dr. Francisco Peña",
+          "Dra. Gabriela Suárez",
+          "Dr. Felipe Vargas"
+        ]
+      },
+      "Buenaventura": {
+        "Hospital Luis Ablanque de la Plata": [
+          "Dr. Ricardo Vargas",
+          "Dra. Mariana Díaz",
+          "Dr. Sergio Ramírez"
+        ],
+        "Clínica Santa Sofía": [
+          "Dr. Fernando Méndez",
+          "Dra. Isabel Torres",
+          "Dr. Santiago Herrera"
+        ]
+      },
+      "Palmira": {
+        "Hospital Raúl Orejuela Bueno": [
+          "Dr. Luis Ramírez",
+          "Dra. Laura García",
+          "Dr. Andrés Torres"
+        ],
+        "Clínica Palma Real": [
+          "Dr. Jaime Castillo",
+          "Dra. Patricia Ramírez",
+          "Dr. Oscar Sánchez"
+        ]
+      },
+      "Tuluá": {
+        "Hospital Rubén Cruz Vélez": [
+          "Dr. Pedro Méndez",
+          "Dra. Ana Suárez",
+          "Dr. Jorge Gutiérrez"
+        ],
+        "Clínica San Francisco": [
+          "Dr. Fernando Gutiérrez",
+          "Dra. Gabriela Ramírez",
+          "Dr. Enrique Suárez"
+        ]
+      },
+      "Mitú": {
+        "Hospital San Antonio": [
+          "Dr. Andrés Castillo",
+          "Dra. Beatriz González",
+          "Dr. Santiago Pérez"
+        ],
+        "Clínica Mitú": [
+          "Dr. Rafael Ruiz",
+          "Dra. Paula Torres",
+          "Dr. Francisco Morales"
+        ]
+      },
+      "Puerto Carreño": {
+        "Hospital San Juan de Dios": [
+          "Dr. Jorge Ramírez",
+          "Dra. Carmen Suárez",
+          "Dr. Eduardo Pérez"
+        ],
+        "Clínica Puerto Carreño": [
+          "Dr. Enrique García",
+          "Dra. Isabel Vargas",
+          "Dr. Luis Fernández"
+        ]
+      }
+    }
+  ]
+}

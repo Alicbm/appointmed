@@ -28,6 +28,7 @@ export function Input({
   editValue
 }: Props) {
   const [text, setText] = useState("");
+  const [valueDefault, setValueDefault] = useState(value);
   const [disabledModified, setDisabledModified] = useState(disabled);
 
   const verifyError =
@@ -43,7 +44,7 @@ export function Input({
       <input
         id={label}
         type={type || "text"}
-        value={value}
+        value={valueDefault }
         disabled={disabledModified == true ? true : false}
         className={classNames([
           verifyError
@@ -54,6 +55,7 @@ export function Input({
         {...allForm?.register(fieldName, rules)}
         onChange={(e) => {
           setText(e.target.value);
+          setValueDefault(e.target.value)
           allForm?.setValue && allForm?.setValue(fieldName, e.target.value);
           onChange
         }}

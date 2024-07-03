@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, useForm  } from "react-hook-form";
 import { Input } from "../../../../components/Input";
 import { InputCheck } from "../../../../components/InputCheck";
 import { MainButton } from "../../../../components/MainButton";
@@ -8,6 +8,7 @@ import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
+import { data as departamentList } from "../../../../data/departments.json";
 import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
 import { CREATE_GYNECOLOGY } from "../../graphql/Mutation/createRequest";
 import { ModalSentData } from "../../../../components/ModalSentData";
@@ -15,6 +16,7 @@ import { AlertModal } from "../../../../components/AlertModal";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PDFFile } from "../../../../components/PDFFile";
 import { AuthContext } from "../../../../AuthContext";
+import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 
 export function GynecologyCreate() {
   const [checked, setChecked] = useState(true);
@@ -30,6 +32,11 @@ export function GynecologyCreate() {
   const context = useContext(AuthContext)
 
   const allForm = useForm();
+  const { 
+    locationData, 
+    dataCityList, 
+    dataMedicalCenter, 
+    dataDoctor } = useLocationRequest(allForm)
 
   const onDownloadRequest = () => {
     if (!dataRequest) {
@@ -55,11 +62,11 @@ export function GynecologyCreate() {
           const { data } = await createGynecologyRequest({
             variables: {
               typeService: checked ? "EPS" : "IPS",
-              registryNumber: Number(getData?.registryNumber),
-              firstName: getData?.firstName,
-              lastName: getData?.lastName,
-              email: getData?.email,
-              eps: getData?.eps,
+              registryNumber: Number(context?.user?.user?.id),
+              firstName: context?.user?.user?.firstName,
+              lastName: context?.user?.user?.lastName,
+              email: context?.user?.user?.email,
+              eps: context?.user?.user?.eps,
               department: getData?.department,
               city: getData?.city,
               medicalCenter: getData?.medicalCenter,
@@ -173,21 +180,25 @@ export function GynecologyCreate() {
         <SubtitleInputs text="C. Lugar de la Cita Médica" />
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <Input
+          <InputSelect
             label="Departamento"
             fieldName="department"
+            listData={departamentList}
             allForm={allForm}
             rules={{ required: true }}
           />
-          <Input
+          <InputSelect
             label="Ciudad"
             fieldName="city"
+            listData={dataCityList[locationData.department]}
             allForm={allForm}
             rules={{ required: true }}
           />
-          <Input
+
+          <InputSelect
             label="Centro Médico"
             fieldName="medicalCenter"
+            listData={dataMedicalCenter[locationData.city]}
             allForm={allForm}
             rules={{ required: true }}
           />
@@ -199,12 +210,14 @@ export function GynecologyCreate() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <Input
+            type="date"
             label="Seleccionar Fecha"
             fieldName="date"
             allForm={allForm}
             rules={{ required: true }}
           />
           <Input
+            type="time"
             label="Seleccionar Hora"
             fieldName="hour"
             allForm={allForm}
@@ -217,15 +230,21 @@ export function GynecologyCreate() {
         <SubtitleInputs text="E. Estado del paciente y preferencias" />
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Input
+          <InputSelect
             label="Selecciona Médico"
             fieldName="doctor"
+            listData={
+              dataDoctor[locationData?.city] ?
+              dataDoctor[locationData?.city][locationData?.medicalCenter] :
+              ['']
+            }
             allForm={allForm}
             rules={{ required: true }}
           />
-          <Input
+          <InputSelect
             label="Estado del Paciente"
             fieldName="patientStatus"
+            listData={["Grave", "Estable", "Bueno"]}
             allForm={allForm}
             rules={{ required: true }}
           />
@@ -246,8 +265,8 @@ export function GynecologyCreate() {
           className="bg-red-600 hover:bg-red-700"
           onClick={onClearForm}
         />
-       
-       {dataRequest ? (
+
+        {dataRequest ? (
           <PDFDownloadLink
             document={<PDFFile data={dataRequest} />}
             fileName="resume_request.pdf"
@@ -265,7 +284,7 @@ export function GynecologyCreate() {
             onClick={onDownloadRequest}
           />
         )}
-       
+
         <MainButton
           type={TypeButton.submit}
           text="Enviar Solicitud"
