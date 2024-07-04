@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { FieldValues, UseFormRegister, UseFormReturn } from "react-hook-form";
-import { TbEdit } from "react-icons/tb";
 import { classNames } from "../../utils";
 import { useState } from "react";
 
@@ -29,7 +28,6 @@ export function Input({
 }: Props) {
   const [text, setText] = useState("");
   const [valueDefault, setValueDefault] = useState(value);
-  const [disabledModified, setDisabledModified] = useState(disabled);
 
   const verifyError =
     allForm?.formState?.errors && allForm?.formState?.errors[fieldName];
@@ -45,11 +43,12 @@ export function Input({
         id={label}
         type={type || "text"}
         value={valueDefault }
-        disabled={disabledModified == true ? true : false}
+        disabled={disabled}
         className={classNames([
           verifyError
             ? "border-2 border-red-400"
             : "border border-gray-200 focus:border-2 focus:border-sky-700",
+           editValue ? 'border-2 border-green-500' : '',
           "w-full h-full text-gray-800 bg-transparent peer outline-none px-4 pt-6 rounded-md",
         ])}
         {...allForm?.register(fieldName, rules)}
@@ -82,12 +81,6 @@ export function Input({
             `El campo debe tener máximo ${rules?.maxLength} caracteres`}
         </span>
       )}
-      {editValue &&
-        <span 
-          className="absolute top-4 right-4 text-xl text-sky-800 cursor-pointer"
-          onClick={() => setDisabledModified(false)}
-        ><TbEdit /></span>
-      }
     </div>
   );
 }

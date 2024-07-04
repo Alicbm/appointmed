@@ -10,13 +10,13 @@ import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
 import { useMutation } from "@apollo/client";
 import { CREATE_GENERAL_MEDICINE } from "../../graphql/Mutation/createRequest";
 import { data as epsList } from "../../../../data/eps.json";
+import { data as departamentList } from "../../../../data/departments.json";
 import { ModalSentData } from "../../../../components/ModalSentData";
 import { AlertModal } from "../../../../components/AlertModal";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PDFFile } from "../../../../components/PDFFile";
 import { AuthContext } from "../../../../AuthContext";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
-import { data as departamentList } from "../../../../data/departments.json";
 
 export function GeneralMedicineCreate() {
   const [checked, setChecked] = useState(true);
@@ -236,7 +236,8 @@ export function GeneralMedicineCreate() {
               dataDoctor[locationData?.city] ?
               dataDoctor[locationData?.city][locationData?.medicalCenter] :
               ['']
-            }            allForm={allForm}
+            }            
+            allForm={allForm}
             rules={{ required: true }}
           />
           <InputSelect

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Input } from "../../../../components/Input";
@@ -7,10 +7,18 @@ import { MainButton } from "../../../../components/MainButton";
 import { ContainerModal } from "../../../../components/ContainerModal";
 import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
-import { BaseIT } from "../../../../types";
+import { BaseIT, UpdateBaseIT } from "../../../../types";
 import { PDFFile } from "../../../../components/PDFFile";
 import { AuthContext } from "../../../../AuthContext";
 import { classNames } from "../../../../utils";
+import { InputSelect } from "../../../../components/InputSelect";
+import { data as departamentList } from "../../../../data/departments.json";
+import { FieldValues, useForm } from "react-hook-form";
+import { useLocationRequest } from "../../../../hooks/useLocationRequest";
+import { useMutation } from "@apollo/client";
+import { UPDATE_GENERAL_MEDICINE } from "../../graphql/Mutation/updateRequest";
+import { ModalSentData } from "../../../../components/ModalSentData";
+import { DELETE_GENERAL_MEDICINE } from "../../graphql/Mutation/deleteRequest";
 
 type Props = {
   data: BaseIT[];
@@ -19,9 +27,17 @@ type Props = {
 
 export function ModalRequest({ data, setModal }: Props) {
   const context = useContext(AuthContext);
-  const [canEdit, setCanEdit] = useState(false);
 
-  const [state, setState] = useState({
+  const [updateGeneralMedicineRequest] = useMutation(UPDATE_GENERAL_MEDICINE);
+  const [deleteGeneralMedicineRequest] = useMutation(DELETE_GENERAL_MEDICINE);
+
+  const [canEdit, setCanEdit] = useState(false);
+  const [correct, setCorrect] = useState(false);
+  const [dataSent, setDataSent] = useState(false);
+  const [canDelete, setCanDelete] = useState(false);
+  const [newData, setNewData] = useState(data[0]);
+
+  const state = {
     id: data[0]?.id,
     typeService: data[0]?.typeService,
     registryNumber: data[0]?.registryNumber,
@@ -37,7 +53,12 @@ export function ModalRequest({ data, setModal }: Props) {
     doctor: data[0]?.doctor,
     patientStatus: data[0]?.patientStatus,
     status: data[0]?.status,
-  });
+  };
+
+  const allForm = useForm();
+
+  const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
+    useLocationRequest(allForm, data[0]);
 
   const userId = context?.user?.user?.id;
   const userRole = context?.user?.user?.role;
@@ -53,9 +74,80 @@ export function ModalRequest({ data, setModal }: Props) {
     }
   };
 
+  const deleteRequest = () => {
+    if (userId == requestId || userRole == "admin") {
+      setCanDelete(true)
+    } else {
+      alert(
+        "Para poder eliminar esta consulta debes haberla creado o ser administrador, de lo contrario no puedes eliminar consultas de otros usuarios"
+      );
+    }
+  }
+
+  const onUpdateRequest = allForm?.handleSubmit(
+    async (getData: UpdateBaseIT | FieldValues) => {
+      try {
+        setCorrect(false);
+        await updateGeneralMedicineRequest({
+          variables: {
+            id: state?.id,
+            department: getData?.department,
+            city: getData?.city,
+            medicalCenter: getData?.medicalCenter,
+            date: getData?.date,
+            hour: getData?.hour,
+            doctor: getData?.doctor,
+            patientStatus: getData?.patientStatus,
+          },
+        });
+
+        setNewData({
+          ...newData,
+          department: getData?.department || state.department,
+          city: getData?.city || state.city,
+          medicalCenter: getData?.medicalCenter || state.medicalCenter, 
+          date: getData?.date || state.date,
+          hour: getData?.hour || state.hour,
+          doctor: getData?.doctor || state.doctor,
+          patientStatus: getData?.patientStatus || state.patientStatus,
+        })
+
+        setDataSent(true);
+      } catch (err) {
+        setCorrect(true);
+        setDataSent(true);
+      }
+    }
+  );
+
+  const onDeleteRequest = async () => {
+    try {
+      await deleteGeneralMedicineRequest({
+        variables: {
+          id: state.id
+        }
+      })
+
+      setModal(false)
+    } catch (error) {
+      alert('Error al tratar de eliminar la consulta')
+    }
+  }
+
+  useEffect(() => {
+    if (dataSent) {
+      setTimeout(() => {
+        setDataSent(false);
+      }, 3000);
+    }
+  }, [dataSent]);
+
   return (
     <ContainerModal>
-      <div className="relative grid gap-5 w-[95%] h-full bg-slate-50 px-6 pb-10 pt-14 mx-auto overflow-y-scroll rounded-lg overflow-hidden lg:w-[70%]">
+      <form
+        className="relative grid gap-5 w-[95%] h-full bg-slate-50 px-6 pb-10 pt-14 mx-auto overflow-y-scroll rounded-lg overflow-hidden lg:w-[70%]"
+        onSubmit={onUpdateRequest}
+      >
         <div
           className="absolute top-5 right-5 text-3xl text-sky-800 bg-slate-100 hover:text-black cursor-pointer"
           onClick={() => setModal(false)}
@@ -83,11 +175,12 @@ export function ModalRequest({ data, setModal }: Props) {
             <Input
               label="Número de Registro"
               value={String(state?.registryNumber)}
+              disabled
             />
-            <Input label="Nombre" value={state?.firstName} />
-            <Input label="Apellido" value={state?.lastName} />
-            <Input label="Correo Electrónico" value={state?.email} />
-            <Input label="Seleccionar EPS" value={state?.eps} />
+            <Input label="Nombre" value={state?.firstName} disabled />
+            <Input label="Apellido" value={state?.lastName} disabled />
+            <Input label="Correo Electrónico" value={state?.email} disabled />
+            <Input label="Seleccionar EPS" value={state?.eps} disabled />
           </div>
         </div>
 
@@ -95,40 +188,31 @@ export function ModalRequest({ data, setModal }: Props) {
           <SubtitleInputs text="C. Lugar de la Cita Médica" />
 
           <div className="grid gap-4 sm:grid-cols-3">
-            <Input
+            <InputSelect
               label="Departamento"
+              fieldName="department"
+              listData={departamentList}
+              allForm={allForm}
               value={state?.department}
-              onChange={(e: { target: { value: string } }) =>
-                setState({
-                  ...state,
-                  department: e.target.value,
-                })
-              }
-              disabled={canEdit}
+              disabled={!canEdit}
               editValue={canEdit}
             />
-            <Input
+            <InputSelect
               label="Ciudad"
+              fieldName="city"
+              listData={dataCityList[locationData.department]}
+              allForm={allForm}
               value={state?.city}
-              onChange={(e: { target: { value: string } }) =>
-                setState({
-                  ...state,
-                  city: e.target.value,
-                })
-              }
-              disabled={canEdit}
+              disabled={!canEdit}
               editValue={canEdit}
             />
-            <Input
+            <InputSelect
               label="Centro Médico"
+              fieldName="medicalCenter"
+              listData={dataMedicalCenter[locationData.city]}
+              allForm={allForm}
               value={state?.medicalCenter}
-              onChange={(e: { target: { value: string } }) =>
-                setState({
-                  ...state,
-                  medicalCenter: e.target.value,
-                })
-              }
-              disabled={canEdit}
+              disabled={!canEdit}
               editValue={canEdit}
             />
           </div>
@@ -139,27 +223,21 @@ export function ModalRequest({ data, setModal }: Props) {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Input
+              type="date"
               label="Seleccionar Fecha"
+              fieldName="date"
               value={state?.date}
-              onChange={(e: { target: { value: string } }) =>
-                setState({
-                  ...state,
-                  date: e.target.value,
-                })
-              }
-              disabled={canEdit}
+              allForm={allForm}
+              disabled={!canEdit}
               editValue={canEdit}
             />
             <Input
-              label="Seleccionar Hora"
               value={state?.hour}
-              onChange={(e: { target: { value: string } }) =>
-                setState({
-                  ...state,
-                  hour: e.target.value,
-                })
-              }
-              disabled={canEdit}
+              type="time"
+              label="Seleccionar Hora"
+              fieldName="hour"
+              allForm={allForm}
+              disabled={!canEdit}
               editValue={canEdit}
             />
           </div>
@@ -169,66 +247,132 @@ export function ModalRequest({ data, setModal }: Props) {
           <SubtitleInputs text="E. Estado del paciente y preferencias" />
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input
+            <InputSelect
               label="Selecciona Médico"
+              fieldName="doctor"
               value={state?.doctor}
-              onChange={(e: { target: { value: string } }) =>
-                setState({
-                  ...state,
-                  doctor: e.target.value,
-                })
+              listData={
+                dataDoctor[locationData?.city]
+                  ? dataDoctor[locationData?.city][locationData?.medicalCenter]
+                  : [""]
               }
-              disabled={canEdit}
+              allForm={allForm}
+              disabled={!canEdit}
               editValue={canEdit}
             />
-            <Input
+            <InputSelect
               label="Estado del Paciente"
+              fieldName="patientStatus"
               value={state?.patientStatus}
-              onChange={(e: { target: { value: string } }) =>
-                setState({
-                  ...state,
-                  patientStatus: e.target.value,
-                })
-              }
-              disabled={canEdit}
+              listData={["Grave", "Estable", "Bueno"]}
+              allForm={allForm}
+              disabled={!canEdit}
               editValue={canEdit}
             />
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <PDFDownloadLink
-            document={<PDFFile data={data[0]} />}
-            fileName="resume_request.pdf"
-            className="w-full"
-          >
-            {({ loading }) =>
-              loading ? (
-                <MainButton
-                  text="Cargando PDF"
-                  className="w-full bg-black hover:bg-gray-900"
-                />
-              ) : (
-                <MainButton
-                  text="Descargar PDF"
-                  className="w-full bg-black hover:bg-gray-900"
-                />
-              )
-            }
-          </PDFDownloadLink>
+        {!canEdit ? (
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <MainButton
+              text="Eliminar Solicitud"
+              className={classNames([
+                userId == requestId || userRole == "admin"
+                  ? ""
+                  : "opacity-[50%]",
+                "bg-red-700 hover:bg-red-800",
+              ])}
+              onClick={deleteRequest}
+            />
 
-          <MainButton
-            text="Modificar Solicitud"
-            className={classNames([
-              userId == requestId || userRole == "admin"
-                ? ""
-                : "opacity-[50%]",
-                'bg-sky-700 hover:bg-sky-800'
-            ])}
-            onClick={userCanEdit}
-          />
-        </div>
-      </div>
+            <PDFDownloadLink
+              document={<PDFFile data={newData} />}
+              fileName="resume_request.pdf"
+              className="w-full"
+            >
+              {({ loading }) =>
+                loading ? (
+                  <MainButton
+                    text="Cargando PDF"
+                    className="w-full bg-black hover:bg-gray-900"
+                  />
+                ) : (
+                  <MainButton
+                    text="Descargar PDF"
+                    className="w-full bg-black hover:bg-gray-900"
+                  />
+                )
+              }
+            </PDFDownloadLink>
+
+            <MainButton
+              text="Modificar Solicitud"
+              className={classNames([
+                userId == requestId || userRole == "admin"
+                  ? ""
+                  : "opacity-[50%]",
+                "bg-sky-700 hover:bg-sky-800",
+              ])}
+              onClick={userCanEdit}
+            />
+          </div>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <MainButton
+              text="Cancelar"
+              className={classNames([
+                userId == requestId || userRole == "admin"
+                  ? ""
+                  : "opacity-[50%]",
+                "bg-red-700 hover:bg-red-800",
+              ])}
+              onClick={() => {
+                setCanEdit(false);
+                setModal(false);
+              }}
+            />
+            <MainButton
+              text="Enviar Solicitud"
+              className={classNames([
+                userId == requestId || userRole == "admin"
+                  ? ""
+                  : "opacity-[50%]",
+                "bg-green-700 hover:bg-green-800",
+              ])}
+              onClick={() => {
+                onUpdateRequest();
+                setCanEdit(false);
+              }}
+            />
+          </div>
+        )}
+
+        {canDelete && (
+          <ContainerModal>
+            <div className="w-[90%] max-w-[500px] bg-slate-100 p-10 rounded-md mx-auto">
+              <h2 className="text-2xl text-slate-700 text-center mb-6">¿Estás seguro que deseas eliminar esta solicitud?</h2>
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2">
+                <MainButton
+                  text="Cancelar"
+                  className='bg-sky-700 hover:bg-sky-800'
+                  onClick={() => setCanDelete(false)}
+                />
+                <MainButton
+                  text="Eliminar"
+                  className='bg-red-700 hover:bg-red-800'
+                  onClick={onDeleteRequest}
+                />
+              </div>
+            </div>
+          </ContainerModal>
+        )}
+
+        {dataSent && (
+          <div className="fixed top-[50px] right-2">
+            <ModalSentData error={correct} />
+          </div>
+        )}
+      </form>
     </ContainerModal>
   );
 }

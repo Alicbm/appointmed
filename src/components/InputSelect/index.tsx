@@ -11,6 +11,8 @@ type Props = {
   value?: string;
   rules?: Parameters<UseFormRegister<FieldValues>>[1];
   allForm: UseFormReturn<FieldValues>;
+  disabled?: boolean;
+  editValue?: boolean;
 };
 
 export function InputSelect({
@@ -20,10 +22,12 @@ export function InputSelect({
   fieldName,
   rules,
   allForm,
-  value
+  value,
+  disabled,
+  editValue
 }: Props) {
   const [showListData, setShowListData] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(value || '');
   const [filteredData, setFilteredData] = useState("");
 
   const newData = listData?.filter((item) =>
@@ -45,11 +49,13 @@ export function InputSelect({
       <input
         id={label}
         type={type || "text"}
-        value={value || text}
+        value={text}
+        disabled={disabled}
         className={classNames([
           verifyError
             ? "border-2 border-red-400"
             : "border border-gray-200 focus:border-2 focus:border-sky-700",
+            editValue ? 'border-2 border-green-500' : '',
           "w-full h-full text-gray-800 bg-transparent peer outline-none px-4 pt-6 rounded-md",
         ])}
         {...register(fieldName, rules)}
@@ -79,6 +85,7 @@ export function InputSelect({
               placeholder="Busca tu EPS..."
               className="w-full h-[40px] px-2 rounded-sm outline-none"
               onChange={(e) => setFilteredData(e.target.value)}
+              disabled={disabled}
             />
           </div>
           <ul className="max-h-[200px] px-4 pb-4 overflow-y-scroll">
@@ -100,7 +107,10 @@ export function InputSelect({
       )}
 
       <span
-        className="absolute right-4 top-[15px] text-xl text-sky-700 cursor-pointer p-1 rounded-sm hover:bg-sky-100"
+        className={classNames([
+          disabled ? 'hidden' : '',
+          "absolute right-4 top-[15px] text-xl text-sky-700 cursor-pointer p-1 rounded-sm hover:bg-sky-100"
+        ])}
         onClick={() => setShowListData(!showListData)}
       >
         <IoIosArrowDown />

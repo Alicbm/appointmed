@@ -16,6 +16,17 @@ export interface BaseIT {
   status: string;
 }
 
+export interface UpdateBaseIT {
+  id?: string;
+  department?: string;
+  city?: string;
+  medicalCenter?: string;
+  date?: string;
+  hour?: string;
+  doctor?: string;
+  patientStatus?: string;
+}
+
 export type FilterItemType = Pick<
   BaseIT,
   "registryNumber" | "firstName" | "lastName" | "eps"

@@ -3,6 +3,7 @@ import { FieldValues, UseFormReturn, useWatch  } from "react-hook-form";
 import { data as cityList } from "../data/ciudades.json";
 import { data as medicalCentersList } from "../data/medicalCenters.json";
 import { data as doctorList } from "../data/doctors.json";
+import { BaseIT } from "../types";
 
 interface CityList {
   [key: string]: string[];
@@ -21,12 +22,12 @@ interface LocationData {
   doctor: string;
 }
 
-export const useLocationRequest = (allForm: UseFormReturn<FieldValues>) => {
+export const useLocationRequest = (allForm: UseFormReturn<FieldValues>, data?: BaseIT) => {
   const[locationData, setLocationData] = useState <LocationData>({
-    department: '',
-    city: '',
-    medicalCenter: '',
-    doctor: ''
+    department: data?.department || '',
+    city: data?.city || '',
+    medicalCenter: data?.medicalCenter || '',
+    doctor: data?.doctor || ''
   })
 
   const watchedInputValue = useWatch({
@@ -39,13 +40,32 @@ export const useLocationRequest = (allForm: UseFormReturn<FieldValues>) => {
   const dataDoctor: DoctorList = doctorList[0]
 
   useEffect(() => {
-    setLocationData({
-      department: watchedInputValue[0],
-      city: watchedInputValue[1],
-      medicalCenter: watchedInputValue[2],
-      doctor: watchedInputValue[3]
-    })
+    if(data) {
+      if(
+        watchedInputValue[0]?.length > 0 &&
+        watchedInputValue[1]?.length > 0 &&
+        watchedInputValue[2]?.length > 0 &&
+        watchedInputValue[3]?.length > 0
+      ) {
+        setLocationData({
+          department: watchedInputValue[0],
+          city: watchedInputValue[1],
+          medicalCenter: watchedInputValue[2],
+          doctor: watchedInputValue[3]
+        })
+      }
+    }else {
+      setLocationData({
+        department: watchedInputValue[0],
+        city: watchedInputValue[1],
+        medicalCenter: watchedInputValue[2],
+        doctor: watchedInputValue[3]
+      })
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchedInputValue]);
+
 
   return {
     locationData,
