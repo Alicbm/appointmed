@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
@@ -7,11 +7,16 @@ import { TemplatePage } from "../../../../components/TemplatePage";
 import { GET_ALL_GYNECOLOGY } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
 import { NotResults } from "../../../../components/NotResults";
-import { ModalRequest } from "../ModalRequest";
 import { IoEye } from "react-icons/io5";
+import { ModalWatchRequest } from "../../../../components/mainComponents/ModalWatchRequest";
+import { UPDATE_GYNECOLOGY } from "../../graphql/Mutation/updateRequest";
+import { DELETE_GYNECOLOGY } from "../../graphql/Mutation/deleteRequest";
 
 export function GynecologyList() {
   const { data: fetchData } = useQuery(GET_ALL_GYNECOLOGY);
+  const [updateGynecologyRequest] = useMutation(UPDATE_GYNECOLOGY);
+  const [deleteGynecologyRequest] = useMutation(DELETE_GYNECOLOGY);
+
   const newData: BaseIT[] = fetchData?.getAllGynecologyRequest;
 
   const [filterData, setFilterData] = useState(newData);
@@ -100,7 +105,13 @@ export function GynecologyList() {
       <Pagination data={newData} setData={setFilterData} />
 
       {modalRequest && (
-        <ModalRequest data={requestSelected} setModal={setModalRequest} />
+        <ModalWatchRequest
+          nameService="Ginecología"
+          data={requestSelected}
+          setModal={setModalRequest}
+          updateRequest={updateGynecologyRequest}
+          deleteRequest={deleteGynecologyRequest}
+        />
       )}
     </div>
   );

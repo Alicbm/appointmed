@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
@@ -8,10 +8,15 @@ import { GET_ALL_PSYCHIATRY } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
 import { NotResults } from "../../../../components/NotResults";
 import { IoEye } from "react-icons/io5";
-import { ModalRequest } from "../ModalRequest";
+import { ModalWatchRequest } from "../../../../components/mainComponents/ModalWatchRequest";
+import { UPDATE_PSYCHIATRY } from "../../graphql/Mutation/updateRequest";
+import { DELETE_PSYCHIATRY } from "../../graphql/Mutation/deleteRequest";
 
 export function PsychiatryList() {
   const { data: fetchData } = useQuery(GET_ALL_PSYCHIATRY);
+  const [updatePsychiatryRequest] = useMutation(UPDATE_PSYCHIATRY);
+  const [deletePsychiatryRequest] = useMutation(DELETE_PSYCHIATRY);
+
   const newData: BaseIT[] = fetchData?.getAllPsychiatryRequest;
 
   const [filterData, setFilterData] = useState(newData);
@@ -99,7 +104,13 @@ export function PsychiatryList() {
       <Pagination data={newData} setData={setFilterData} />
 
       {modalRequest && (
-        <ModalRequest data={requestSelected} setModal={setModalRequest} />
+        <ModalWatchRequest
+          nameService="Psiquiatría"
+          data={requestSelected}
+          setModal={setModalRequest}
+          updateRequest={updatePsychiatryRequest}
+          deleteRequest={deletePsychiatryRequest}
+        />
       )}
     </div>
   );

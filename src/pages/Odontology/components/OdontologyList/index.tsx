@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
 import { Table } from "../../../../components/Table";
@@ -8,10 +8,15 @@ import { GET_ALL_ODONTOLOGY } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
 import { NotResults } from "../../../../components/NotResults";
 import { IoEye } from "react-icons/io5";
-import { ModalRequest } from "../ModalRequest";
+import { UPDATE_ODONTOLOGY } from "../../graphql/Mutation/updateRequest";
+import { DELETE_ODONTOLOGY } from "../../graphql/Mutation/deleteRequest";
+import { ModalWatchRequest } from "../../../../components/mainComponents/ModalWatchRequest";
 
 export function OdontologyList() {
   const { data: fetchData } = useQuery(GET_ALL_ODONTOLOGY);
+  const [updateOdontologyRequest] = useMutation(UPDATE_ODONTOLOGY);
+  const [deleteOdontologyRequest] = useMutation(DELETE_ODONTOLOGY);
+
   const newData: BaseIT[] = fetchData?.getAllOdontologyRequest;
 
   const [filterData, setFilterData] = useState(newData);
@@ -99,7 +104,13 @@ export function OdontologyList() {
       <Pagination data={newData} setData={setFilterData} />
 
       {modalRequest && (
-        <ModalRequest data={requestSelected} setModal={setModalRequest} />
+        <ModalWatchRequest
+          nameService="Odontología"
+          data={requestSelected}
+          setModal={setModalRequest}
+          updateRequest={updateOdontologyRequest}
+          deleteRequest={deleteOdontologyRequest}
+        />
       )}
     </div>
   );

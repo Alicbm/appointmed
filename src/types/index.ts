@@ -65,3 +65,21 @@ export type RoutesType = {
   icon: JSX.Element;
   selected: boolean;
 };
+
+export type stateRequest = {
+  id: string;
+  typeService: string;
+  registryNumber: string | number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  eps: string;
+  department: string;
+  city: string;
+  medicalCenter: string;
+  date: string;
+  hour: string;
+  doctor: string;
+  patientStatus: string;
+  status: string;
+}

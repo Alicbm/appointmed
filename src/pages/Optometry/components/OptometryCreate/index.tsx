@@ -237,7 +237,8 @@ export function OptometryCreate() {
               dataDoctor[locationData?.city] ?
               dataDoctor[locationData?.city][locationData?.medicalCenter] :
               ['']
-            }            allForm={allForm}
+            }          
+            allForm={allForm}
             rules={{ required: true }}
           />
           <InputSelect

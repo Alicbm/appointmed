@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { IoEye } from "react-icons/io5";
 import { FilterItem } from "../../../../components/FilterItem";
 import { Pagination } from "../../../../components/Pagination";
@@ -8,10 +8,15 @@ import { TemplatePage } from "../../../../components/TemplatePage";
 import { GET_ALL_GENERAL_MEDICINE } from "../../graphql/Query/getAll";
 import { BaseIT } from "../../../../types";
 import { NotResults } from "../../../../components/NotResults";
-import { ModalRequest } from "../ModalRequest";
+import { UPDATE_GENERAL_MEDICINE } from "../../graphql/Mutation/updateRequest";
+import { DELETE_GENERAL_MEDICINE } from "../../graphql/Mutation/deleteRequest";
+import { ModalWatchRequest } from "../../../../components/mainComponents/ModalWatchRequest";
 
 export function GeneralMedicineList() {
   const { data: fetchData } = useQuery(GET_ALL_GENERAL_MEDICINE);
+  const [updateGeneralMedicineRequest] = useMutation(UPDATE_GENERAL_MEDICINE);
+  const [deleteGeneralMedicineRequest] = useMutation(DELETE_GENERAL_MEDICINE);
+
   const newData: BaseIT[] = fetchData?.getAllGeneralMedicineRequest;
 
   const [filterData, setFilterData] = useState(newData);
@@ -99,7 +104,13 @@ export function GeneralMedicineList() {
       <Pagination data={newData} setData={setFilterData} />
 
       {modalRequest && (
-        <ModalRequest data={requestSelected} setModal={setModalRequest} />
+        <ModalWatchRequest 
+          nameService='Medicina General'
+          data={requestSelected} 
+          setModal={setModalRequest} 
+          updateRequest={updateGeneralMedicineRequest}
+          deleteRequest={deleteGeneralMedicineRequest}
+        />
       )}
     </div>
   );
