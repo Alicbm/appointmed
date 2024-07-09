@@ -42,6 +42,17 @@ export type LoginType = {
   password: string;
 }
 
+export type UpdateUser = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  eps: string;
+  actualPassword: string;
+  newPassword: string;
+  repeatNewPassword: string;
+  passwordDeleteAccount: string;
+}
+
 export enum TypeButton {
   button = 'button',
   reset = 'reset',

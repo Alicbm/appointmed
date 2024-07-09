@@ -2,15 +2,15 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
   user: {
-    id: string
-    email: string
-    firstName: string
-    lastName: string
-    role: string
-    createdAt: string
-    eps: string
+    id?: string
+    email?: string
+    firstName?: string
+    lastName?: string
+    role?: string
+    createdAt?: string
+    eps?: string
   }
-  access_token: string
+  access_token?: string
 }
 
 interface AuthContextType {
