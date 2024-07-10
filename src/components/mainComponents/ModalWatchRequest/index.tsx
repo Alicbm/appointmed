@@ -7,25 +7,25 @@ import {
   MutationFunctionOptions,
   OperationVariables,
 } from "@apollo/client";
-import { BaseIT, stateRequest } from "../../types";
-import { AuthContext } from "../../AuthContext";
 import { useForm } from "react-hook-form";
-import { useLocationRequest } from "../../hooks/useLocationRequest";
-import { useDeleteRequest } from "../../hooks/useDeleteRequest";
-import { useUpdateRequest } from "../../hooks/useUpdateRequest";
-import { useUserCanModify } from "../../hooks/useUserCanModify";
-import { ContainerModal } from "../ContainerModal";
-import { IoClose } from "react-icons/io5";
-import { TemplatePage } from "../TemplatePage";
-import { SubtitleInputs } from "../SubtitleInputs";
-import { Input } from "../Input";
-import { InputSelect } from "../InputSelect";
-import { data as departamentList } from "../../data/departments.json";
-import { MainButton } from "../MainButton";
-import { classNames } from "../../utils";
+import { AuthContext } from "../../../AuthContext";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { PDFFile } from "../PDFFile";
-import { ModalSentData } from "../ModalSentData";
+import { BaseIT, stateRequest } from "../../../types";
+import { useLocationRequest } from "../../../hooks/useLocationRequest";
+import { useDeleteRequest } from "../../../hooks/useDeleteRequest";
+import { useUpdateRequest } from "../../../hooks/useUpdateRequest";
+import { useUserCanModify } from "../../../hooks/useUserCanModify";
+import { ContainerModal } from "../../ContainerModal";
+import { IoClose } from "react-icons/io5";
+import { TemplatePage } from "../../TemplatePage";
+import { SubtitleInputs } from "../../SubtitleInputs";
+import { Input } from "../../Input";
+import { InputSelect } from "../../InputSelect";
+import { data as departamentList } from "../../../data/departments.json";
+import { MainButton } from "../../MainButton";
+import { classNames } from "../../../utils";
+import { PDFFile } from "../../PDFFile";
+import { ModalSentData } from "../../ModalSentData";
 
 type Props = {
   data: BaseIT[];
