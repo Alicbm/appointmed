@@ -113,3 +113,20 @@ export type MutationType = {
       | undefined
   ): Promise<FetchResult<any>>;
 };
+
+export interface CityList {
+  [key: string]: string[];
+}
+
+export interface DoctorList {
+  [key: string]: {
+    [key: string]: string[];
+  };
+}
+
+export interface LocationData {
+  department: string;
+  city: string;
+  medicalCenter: string;
+  doctor: string;
+}

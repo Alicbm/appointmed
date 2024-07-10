@@ -3,24 +3,7 @@ import { FieldValues, UseFormReturn, useWatch  } from "react-hook-form";
 import { data as cityList } from "../data/ciudades.json";
 import { data as medicalCentersList } from "../data/medicalCenters.json";
 import { data as doctorList } from "../data/doctors.json";
-import { BaseIT } from "../types";
-
-interface CityList {
-  [key: string]: string[];
-}
-
-interface DoctorList {
-  [key: string]: {
-    [key: string]: string[];
-  };
-}
-
-interface LocationData {
-  department: string;
-  city: string;
-  medicalCenter: string;
-  doctor: string;
-}
+import { BaseIT, CityList, DoctorList, LocationData } from "../types";
 
 export const useLocationRequest = (allForm: UseFormReturn<FieldValues>, data?: BaseIT) => {
   const[locationData, setLocationData] = useState <LocationData>({
