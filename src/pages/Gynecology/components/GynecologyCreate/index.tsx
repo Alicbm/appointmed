@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { FieldValues, useForm  } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Input } from "../../../../components/Input";
 import { InputCheck } from "../../../../components/InputCheck";
 import { MainButton } from "../../../../components/MainButton";
@@ -9,7 +9,7 @@ import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
 import { data as departamentList } from "../../../../data/departments.json";
-import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
+import { BaseIT, TypeButton } from "../../../../types";
 import { CREATE_GYNECOLOGY } from "../../graphql/Mutation/createRequest";
 import { ModalSentData } from "../../../../components/ModalSentData";
 import { AlertModal } from "../../../../components/AlertModal";
@@ -17,6 +17,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PDFFile } from "../../../../components/PDFFile";
 import { AuthContext } from "../../../../AuthContext";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
+import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 
 export function GynecologyCreate() {
   const [checked, setChecked] = useState(true);
@@ -29,67 +30,23 @@ export function GynecologyCreate() {
 
   const [createGynecologyRequest] = useMutation(CREATE_GYNECOLOGY);
 
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
 
   const allForm = useForm();
-  const { 
-    locationData, 
-    dataCityList, 
-    dataMedicalCenter, 
-    dataDoctor } = useLocationRequest(allForm)
+  const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
+    useLocationRequest(allForm);
 
-  const onDownloadRequest = () => {
-    if (!dataRequest) {
-      if(!requeriments){
-        alert("Es necesario que acepte los terminos y condiciones");
-      } else {
-        setClearForm(false);
-        setDownloadRequest(true);
-      }
-    }
-  };
-
-  const onClearForm = () => {
-    setDownloadRequest(false);
-    setClearForm(true);
-  };
-
-  const onSubmit = allForm?.handleSubmit(
-    async (getData: CreateRequestIT | FieldValues) => {
-      try {
-        if (requeriments) {
-          setCorrect(false);
-          const { data } = await createGynecologyRequest({
-            variables: {
-              typeService: checked ? "EPS" : "IPS",
-              registryNumber: Number(context?.user?.user?.id),
-              firstName: context?.user?.user?.firstName,
-              lastName: context?.user?.user?.lastName,
-              email: context?.user?.user?.email,
-              eps: context?.user?.user?.eps,
-              department: getData?.department,
-              city: getData?.city,
-              medicalCenter: getData?.medicalCenter,
-              date: getData?.date,
-              hour: getData?.hour,
-              doctor: getData?.doctor,
-              patientStatus: getData?.patientStatus,
-              status: 'Pendiente'
-            },
-          });
-
-          setDataRequest(data?.createGynecologyRequest)
-          setDataSent(true);
-          setRequeriments(false)
-
-        } else {
-          alert("Es necesario que acepte los terminos y condiciones");
-        }
-      } catch (err) {
-        setCorrect(true);
-        setDataSent(true);
-      }
-    }
+  const { onDownloadRequest, onClearForm, onSubmit } = useCreateRequest(
+    dataRequest,
+    requeriments,
+    setClearForm,
+    setDownloadRequest,
+    setRequeriments,
+    setCorrect,
+    setDataSent,
+    setDataRequest,
+    createGynecologyRequest,
+    allForm
   );
 
   useEffect(() => {
@@ -234,9 +191,9 @@ export function GynecologyCreate() {
             label="Selecciona Médico"
             fieldName="doctor"
             listData={
-              dataDoctor[locationData?.city] ?
-              dataDoctor[locationData?.city][locationData?.medicalCenter] :
-              ['']
+              dataDoctor[locationData?.city]
+                ? dataDoctor[locationData?.city][locationData?.medicalCenter]
+                : [""]
             }
             allForm={allForm}
             rules={{ required: true }}

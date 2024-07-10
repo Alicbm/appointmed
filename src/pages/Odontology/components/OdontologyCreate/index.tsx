@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { Input } from "../../../../components/Input";
 import { InputCheck } from "../../../../components/InputCheck";
@@ -8,7 +8,7 @@ import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
-import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
+import { BaseIT, TypeButton } from "../../../../types";
 import { CREATE_ODONTOLOGY } from "../../graphql/Mutation/createRequest";
 import { AlertModal } from "../../../../components/AlertModal";
 import { ModalSentData } from "../../../../components/ModalSentData";
@@ -17,6 +17,7 @@ import { PDFFile } from "../../../../components/PDFFile";
 import { AuthContext } from "../../../../AuthContext";
 import { data as departamentList } from "../../../../data/departments.json";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
+import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 
 export function OdontologyCreate() {
   const [checked, setChecked] = useState(true);
@@ -32,63 +33,20 @@ export function OdontologyCreate() {
   const context = useContext(AuthContext);
 
   const allForm = useForm();
-  const { 
-    locationData, 
-    dataCityList, 
-    dataMedicalCenter, 
-    dataDoctor } = useLocationRequest(allForm)
+  const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
+    useLocationRequest(allForm);
 
-  const onDownloadRequest = () => {
-    if (!dataRequest) {
-      if (!requeriments) {
-        alert("Es necesario que acepte los terminos y condiciones");
-      } else {
-        setClearForm(false);
-        setDownloadRequest(true);
-      }
-    }
-  };
-
-  const onClearForm = () => {
-    setDownloadRequest(false);
-    setClearForm(true);
-  };
-
-  const onSubmit = allForm?.handleSubmit(
-    async (getData: CreateRequestIT | FieldValues) => {
-      try {
-        if (requeriments) {
-          setCorrect(false);
-          const { data } = await createOdontologyRequest({
-            variables: {
-              typeService: checked ? "EPS" : "IPS",
-              registryNumber: Number(context?.user?.user?.id),
-              firstName: context?.user?.user?.firstName,
-              lastName: context?.user?.user?.lastName,
-              email: context?.user?.user?.email,
-              eps: context?.user?.user?.eps,
-              department: getData?.department,
-              city: getData?.city,
-              medicalCenter: getData?.medicalCenter,
-              date: getData?.date,
-              hour: getData?.hour,
-              doctor: getData?.doctor,
-              patientStatus: getData?.patientStatus,
-              status: "Pendiente",
-            },
-          });
-
-          setDataRequest(data?.createOdontologyRequest);
-          setDataSent(true);
-          setRequeriments(false);
-        } else {
-          alert("Es necesario que acepte los terminos y condiciones");
-        }
-      } catch (err) {
-        setCorrect(true);
-        setDataSent(true);
-      }
-    }
+  const { onDownloadRequest, onClearForm, onSubmit } = useCreateRequest(
+    dataRequest,
+    requeriments,
+    setClearForm,
+    setDownloadRequest,
+    setRequeriments,
+    setCorrect,
+    setDataSent,
+    setDataRequest,
+    createOdontologyRequest,
+    allForm
   );
 
   useEffect(() => {
@@ -193,7 +151,7 @@ export function OdontologyCreate() {
             allForm={allForm}
             rules={{ required: true }}
           />
-          
+
           <InputSelect
             label="Centro Médico"
             fieldName="medicalCenter"
@@ -233,17 +191,17 @@ export function OdontologyCreate() {
             label="Selecciona Médico"
             fieldName="doctor"
             listData={
-              dataDoctor[locationData?.city] ?
-              dataDoctor[locationData?.city][locationData?.medicalCenter] :
-              ['']
-            }            
+              dataDoctor[locationData?.city]
+                ? dataDoctor[locationData?.city][locationData?.medicalCenter]
+                : [""]
+            }
             allForm={allForm}
             rules={{ required: true }}
           />
           <InputSelect
             label="Estado del Paciente"
             fieldName="patientStatus"
-            listData={['Grave', 'Estable', 'Bueno']}
+            listData={["Grave", "Estable", "Bueno"]}
             allForm={allForm}
             rules={{ required: true }}
           />

@@ -5,8 +5,8 @@ import { MainButton } from "../../../../components/MainButton";
 import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
-import { FieldValues, useForm } from "react-hook-form";
-import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
+import { useForm } from "react-hook-form";
+import { BaseIT, TypeButton } from "../../../../types";
 import { useMutation } from "@apollo/client";
 import { CREATE_GENERAL_MEDICINE } from "../../graphql/Mutation/createRequest";
 import { data as epsList } from "../../../../data/eps.json";
@@ -17,6 +17,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PDFFile } from "../../../../components/PDFFile";
 import { AuthContext } from "../../../../AuthContext";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
+import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 
 export function GeneralMedicineCreate() {
   const [checked, setChecked] = useState(true);
@@ -38,59 +39,22 @@ export function GeneralMedicineCreate() {
     dataMedicalCenter, 
     dataDoctor } = useLocationRequest(allForm)
 
-  const onDownloadRequest = () => {
-    if (!dataRequest) {
-      if (!requeriments) {
-        alert("Es necesario que acepte los terminos y condiciones");
-      } else {
-        setClearForm(false);
-        setDownloadRequest(true);
-      }
-    }
-  };
-
-  const onClearForm = () => {
-    setDownloadRequest(false);
-    setClearForm(true);
-    setRequeriments(false);
-  };
-
-  const onSubmit = allForm?.handleSubmit(
-    async (getData: CreateRequestIT | FieldValues) => {
-      try {
-        if (requeriments) {
-          setCorrect(false);
-          const { data } = await createGeneralMedicineRequest({
-            variables: {
-              typeService: checked ? "EPS" : "IPS",
-              registryNumber: Number(context?.user?.user?.id),
-              firstName: context?.user?.user?.firstName,
-              lastName: context?.user?.user?.lastName,
-              email: context?.user?.user?.email,
-              eps: context?.user?.user?.eps,
-              department: getData?.department,
-              city: getData?.city,
-              medicalCenter: getData?.medicalCenter,
-              date: getData?.date,
-              hour: getData?.hour,
-              doctor: getData?.doctor,
-              patientStatus: getData?.patientStatus,
-              status: "Pendiente",
-            },
-          });
-
-          setDataRequest(data?.createGeneralMedicineRequest);
-          setDataSent(true);
-          setRequeriments(false);
-        } else {
-          alert("Es necesario que acepte los terminos y condiciones");
-        }
-      } catch (err) {
-        setCorrect(true);
-        setDataSent(true);
-      }
-    }
-  );
+  const {
+    onDownloadRequest,
+    onClearForm,
+    onSubmit
+  } = useCreateRequest(
+    dataRequest,
+    requeriments,
+    setClearForm,
+    setDownloadRequest,
+    setRequeriments,
+    setCorrect,
+    setDataSent,
+    setDataRequest,
+    createGeneralMedicineRequest,
+    allForm 
+  )
 
   useEffect(() => {
     if (dataSent) {

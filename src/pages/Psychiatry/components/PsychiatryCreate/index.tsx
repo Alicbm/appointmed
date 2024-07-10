@@ -6,8 +6,8 @@ import { SubtitleInputs } from "../../../../components/SubtitleInputs";
 import { TemplatePage } from "../../../../components/TemplatePage";
 import { InputSelect } from "../../../../components/InputSelect";
 import { data as epsList } from "../../../../data/eps.json";
-import { FieldValues, useForm } from "react-hook-form";
-import { BaseIT, CreateRequestIT, TypeButton } from "../../../../types";
+import { useForm } from "react-hook-form";
+import { BaseIT, TypeButton } from "../../../../types";
 import { useMutation } from "@apollo/client";
 import { CREATE_PSYCHIATRY } from "../../graphql/Mutation/createRequest";
 import { AlertModal } from "../../../../components/AlertModal";
@@ -17,6 +17,7 @@ import { PDFFile } from "../../../../components/PDFFile";
 import { AuthContext } from "../../../../AuthContext";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 import { data as departamentList } from "../../../../data/departments.json";
+import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 
 export function PsychiatryCreate() {
   const [checked, setChecked] = useState(true);
@@ -29,66 +30,23 @@ export function PsychiatryCreate() {
 
   const [createPsychiatryRequest] = useMutation(CREATE_PSYCHIATRY);
 
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
 
   const allForm = useForm();
-  const { 
-    locationData, 
-    dataCityList, 
-    dataMedicalCenter,
-    dataDoctor } = useLocationRequest(allForm)
+  const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
+    useLocationRequest(allForm);
 
-  const onDownloadRequest = () => {
-    if (!dataRequest) {
-      if (!requeriments) {
-        alert("Es necesario que acepte los terminos y condiciones");
-      } else {
-        setClearForm(false);
-        setDownloadRequest(true);
-      }
-    }
-  };
-
-  const onClearForm = () => {
-    setDownloadRequest(false);
-    setClearForm(true);
-  };
-
-  const onSubmit = allForm?.handleSubmit(
-    async (getData: CreateRequestIT | FieldValues) => {
-      try {
-        if (requeriments) {
-          setCorrect(false);
-          const { data } = await createPsychiatryRequest({
-            variables: {
-              typeService: checked ? "EPS" : "IPS",
-              registryNumber: Number(context?.user?.user?.id),
-              firstName: context?.user?.user?.firstName,
-              lastName: context?.user?.user?.lastName,
-              email: context?.user?.user?.email,
-              eps: context?.user?.user?.eps,
-              department: getData?.department,
-              city: getData?.city,
-              medicalCenter: getData?.medicalCenter,
-              date: getData?.date,
-              hour: getData?.hour,
-              doctor: getData?.doctor,
-              patientStatus: getData?.patientStatus,
-              status: "Pendiente",
-            },
-          });
-
-          setDataRequest(data?.createPsychiatryRequest);
-          setDataSent(true);
-          setRequeriments(false);
-        } else {
-          alert("Es necesario que acepte los terminos y condiciones");
-        }
-      } catch (err) {
-        setCorrect(true);
-        setDataSent(true);
-      }
-    }
+  const { onDownloadRequest, onClearForm, onSubmit } = useCreateRequest(
+    dataRequest,
+    requeriments,
+    setClearForm,
+    setDownloadRequest,
+    setRequeriments,
+    setCorrect,
+    setDataSent,
+    setDataRequest,
+    createPsychiatryRequest,
+    allForm
   );
 
   useEffect(() => {
@@ -129,7 +87,7 @@ export function PsychiatryCreate() {
         <SubtitleInputs text="B. Datos del Solicitante" />
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-        <Input
+          <Input
             type="number"
             label="Número de Registro"
             fieldName="registryNumber"
@@ -232,17 +190,17 @@ export function PsychiatryCreate() {
             label="Selecciona Médico"
             fieldName="doctor"
             listData={
-              dataDoctor[locationData?.city] ?
-              dataDoctor[locationData?.city][locationData?.medicalCenter] :
-              ['']
-            }            
+              dataDoctor[locationData?.city]
+                ? dataDoctor[locationData?.city][locationData?.medicalCenter]
+                : [""]
+            }
             allForm={allForm}
             rules={{ required: true }}
           />
           <InputSelect
             label="Estado del Paciente"
             fieldName="patientStatus"
-            listData={['Grave', 'Estable', 'Bueno']}
+            listData={["Grave", "Estable", "Bueno"]}
             allForm={allForm}
             rules={{ required: true }}
           />

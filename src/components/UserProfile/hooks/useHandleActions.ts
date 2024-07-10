@@ -1,14 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, UseFormReturn } from "react-hook-form";
-import { UpdateUser } from "../../../types";
+import { MutationType, UpdateUser } from "../../../types";
 import { useNavigate } from "react-router-dom";
-import { ApolloCache, DefaultContext, FetchResult, MutationFunctionOptions, OperationVariables } from "@apollo/client";
 import { useContext } from "react";
 import { AuthContext } from "../../../AuthContext";
 
-type MutationType = {
-  (options?: MutationFunctionOptions<any, OperationVariables, DefaultContext, ApolloCache<any>> | undefined): Promise<FetchResult<any>>
-}
 
 export const useHandleActions = (
   setDataSent: (arg: boolean) => void,

@@ -1,3 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  ApolloCache,
+  DefaultContext,
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+} from "@apollo/client";
+
 export interface BaseIT {
   id: string;
   typeService: string;
@@ -32,15 +41,12 @@ export type FilterItemType = Pick<
   "registryNumber" | "firstName" | "lastName" | "eps"
 >;
 
-export type CreateRequestIT = Omit<
-  BaseIT,
-  "id"
->;
+export type CreateRequestIT = Omit<BaseIT, "id">;
 
 export type LoginType = {
   email: string;
   password: string;
-}
+};
 
 export type UpdateUser = {
   firstName: string;
@@ -51,24 +57,24 @@ export type UpdateUser = {
   newPassword: string;
   repeatNewPassword: string;
   passwordDeleteAccount: string;
-}
+};
 
 export enum TypeButton {
-  button = 'button',
-  reset = 'reset',
-  submit =  "submit",
+  button = "button",
+  reset = "reset",
+  submit = "submit",
 }
 
 export type CreateUserDto = {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  repeatPassword: string
-  createdAt: string,
-  role: string,
-  eps: string,
-}
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+  createdAt: string;
+  role: string;
+  eps: string;
+};
 
 export type RoutesType = {
   label: string;
@@ -93,4 +99,17 @@ export type stateRequest = {
   doctor: string;
   patientStatus: string;
   status: string;
-}
+};
+
+export type MutationType = {
+  (
+    options?:
+      | MutationFunctionOptions<
+          any,
+          OperationVariables,
+          DefaultContext,
+          ApolloCache<any>
+        >
+      | undefined
+  ): Promise<FetchResult<any>>;
+};

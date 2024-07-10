@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, UseFormReturn } from "react-hook-form";
-import { UpdateBaseIT } from "../types";
-import { stateRequest } from "../types";
+import { stateRequest, MutationType, UpdateBaseIT } from "../types";
 import { useState } from "react";
-import { ApolloCache, DefaultContext, FetchResult, MutationFunctionOptions, OperationVariables } from "@apollo/client";
 
 export const useUpdateRequest = (
   allForm: UseFormReturn<FieldValues>,
   data: stateRequest,
-  updateGeneralMedicineRequest: (options?: MutationFunctionOptions<any, OperationVariables, DefaultContext, ApolloCache<any>> | undefined) => Promise<FetchResult<any>>,
+  updateGeneralMedicineRequest: MutationType,
   setCorrect: (arg: boolean) => void,
   setDataSent: (arg: boolean) => void
 ) => {

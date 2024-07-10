@@ -1,25 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  ApolloCache,
-  DefaultContext,
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-} from "@apollo/client";
-import { stateRequest } from "../types";
+import { MutationType, stateRequest } from "../types";
 
 export const useDeleteRequest = (
   state: stateRequest,
-  deleteGeneralMedicineRequest: (
-    options?:
-      | MutationFunctionOptions<
-          any,
-          OperationVariables,
-          DefaultContext,
-          ApolloCache<any>
-        >
-      | undefined
-  ) => Promise<FetchResult<any>>,
+  deleteGeneralMedicineRequest: MutationType,
   setModal: (arg: boolean) => void
 ) => {
 
