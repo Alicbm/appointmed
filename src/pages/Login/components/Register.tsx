@@ -12,6 +12,7 @@ import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { data as epsList } from "../../../data/eps.json";
 import logo from "../../../images/appointmed_logo.png";
 import { InputSelect } from "../../../components/InputSelect";
+import { Loader } from "../../../components/Loader";
 
 type Props = {
   setLogin: Function;
@@ -20,7 +21,7 @@ type Props = {
 export function RegisterUser({ setLogin }: Props) {
   const context = useContext(AuthContext)
   
-  const [createUsersRequest] = useMutation(REGISTER);
+  const [createUsersRequest, { loading }] = useMutation(REGISTER);
   const navigate = useNavigate()
   const allForm = useForm();
 
@@ -59,6 +60,9 @@ export function RegisterUser({ setLogin }: Props) {
   return (
     <div className="w-full md:w-[50%] flex items-center bg-slate-50 p-10">
       <form className="flex flex-col items-center w-full max-w-[450px] gap-4 mx-auto">
+        
+        { loading && <Loader /> }
+        
         <div className="flex justify-center w-full bg-gray-100 border border-gray-200 px-4 py-1 rounded-md">
           <img src={logo} alt="Appointmed" />
         </div>

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
 import { userName } from "../../utils/userName";
 import { serviceSelected } from "../../utils/serviceSelected";
@@ -49,13 +49,19 @@ export function SideBar() {
 
       <div className="flex justify-around items-center gap-8 w-[250px] text-sky-800 text-4xl bg-slate-100 py-4 px-6 rounded-md">
         <span className="cursor-pointer hover:text-sky-900">
-          <FaGithub />
+          <Link to="https://github.com/Alicbm/" target="_blank" rel="noopener noreferrer">
+            <FaGithub />
+          </Link>
         </span>
         <span className="cursor-pointer hover:text-sky-900">
-          <FaLinkedin />
+          <Link to="https://www.linkedin.com/in/alic-barandica/" target="_blank" rel="noopener noreferrer">
+            <FaLinkedin />
+          </Link>
         </span>
         <span className="cursor-pointer hover:text-sky-900">
-          <FaUserCircle />
+          <Link to="https://portfolio-alicbm.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <FaUserCircle />
+          </Link>
         </span>
       </div>
     </div>

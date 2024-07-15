@@ -10,9 +10,9 @@ import { DELETE_PSYCHIATRY } from "../../graphql/Mutation/deleteRequest";
 import { BaseList } from "../../../../components/mainComponents/BaseList";
 
 export function PsychiatryList() {
-  const { data: fetchData } = useQuery(GET_ALL_PSYCHIATRY);
-  const [updatePsychiatryRequest] = useMutation(UPDATE_PSYCHIATRY);
-  const [deletePsychiatryRequest] = useMutation(DELETE_PSYCHIATRY);
+  const { data: fetchData, loading: loadingGet } = useQuery(GET_ALL_PSYCHIATRY);
+  const [updatePsychiatryRequest, { loading: loadingUpdate }] = useMutation(UPDATE_PSYCHIATRY);
+  const [deletePsychiatryRequest, { loading: loadingDelete }] = useMutation(DELETE_PSYCHIATRY);
 
   const newData: BaseIT[] = fetchData?.getAllPsychiatryRequest;
 
@@ -43,6 +43,7 @@ export function PsychiatryList() {
         setModalRequest={setModalRequest}
         setIdRequest={setIdRequest}
         routeCreateRequest="/dashboard/psiquiatria/create"
+        loading={loadingGet}
       />
 
       <Pagination data={newData} setData={setFilterData} />
@@ -54,6 +55,8 @@ export function PsychiatryList() {
           setModal={setModalRequest}
           updateRequest={updatePsychiatryRequest}
           deleteRequest={deletePsychiatryRequest}
+          loadingUpdate={loadingUpdate}
+          loadingDelete={loadingDelete}
         />
       )}
     </div>

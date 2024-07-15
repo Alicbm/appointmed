@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect, useState } from "react";
-import {
-  ApolloCache,
-  DefaultContext,
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-} from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../AuthContext";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { BaseIT, stateRequest } from "../../../types";
+import { BaseIT, MutationType, stateRequest } from "../../../types";
 import { useLocationRequest } from "../../../hooks/useLocationRequest";
 import { useDeleteRequest } from "../../../hooks/useDeleteRequest";
 import { useUpdateRequest } from "../../../hooks/useUpdateRequest";
@@ -26,31 +19,16 @@ import { MainButton } from "../../MainButton";
 import { classNames } from "../../../utils";
 import { PDFFile } from "../../PDFFile";
 import { ModalSentData } from "../../ModalSentData";
+import { Loader } from "../../Loader";
 
 type Props = {
   data: BaseIT[];
   setModal: (arg: boolean) => void;
   nameService: string,
-  updateRequest: (
-    options?:
-      | MutationFunctionOptions<
-          any,
-          OperationVariables,
-          DefaultContext,
-          ApolloCache<any>
-        >
-      | undefined
-  ) => Promise<FetchResult<any>>;
-  deleteRequest: (
-    options?:
-      | MutationFunctionOptions<
-          any,
-          OperationVariables,
-          DefaultContext,
-          ApolloCache<any>
-        >
-      | undefined
-  ) => Promise<FetchResult<any>>;
+  updateRequest: MutationType;
+  deleteRequest:MutationType;
+  loadingUpdate: boolean;
+  loadingDelete: boolean;
 };
 
 export function ModalWatchRequest({
@@ -58,7 +36,9 @@ export function ModalWatchRequest({
   setModal,
   updateRequest,
   deleteRequest,
-  nameService
+  nameService,
+  loadingUpdate,
+  loadingDelete,
 }: Props) {
   const context = useContext(AuthContext);
 
@@ -108,6 +88,9 @@ export function ModalWatchRequest({
         className="relative grid gap-5 w-[95%] h-full bg-slate-50 px-6 pb-10 pt-14 mx-auto overflow-y-scroll rounded-lg overflow-hidden lg:w-[70%]"
         onSubmit={onUpdateRequest}
       >
+
+        { loadingUpdate || loadingDelete && <Loader /> }
+
         <div
           className="absolute top-5 right-5 text-3xl text-sky-800 bg-slate-100 hover:text-black cursor-pointer"
           onClick={() => setModal(false)}

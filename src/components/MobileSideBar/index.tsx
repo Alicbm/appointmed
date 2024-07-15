@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthContext";
 import { userName } from "../../utils/userName";
@@ -69,13 +69,31 @@ export function MobileSideBar({ sideBar, setSideBar }: Props) {
 
       <div className="flex justify-evenly items-center w-[95%] min-w-[320px] max-w-[320px] gap-2 text-sky-800 text-4xl bg-slate-200 py-3 px-6 mx-auto rounded-md">
         <span className="cursor-pointer hover:text-sky-900">
-          <FaGithub />
+          <Link
+            to="https://github.com/Alicbm/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub />
+          </Link>
         </span>
         <span className="cursor-pointer hover:text-sky-900">
-          <FaLinkedin />
+          <Link
+            to="https://www.linkedin.com/in/alic-barandica/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedin />
+          </Link>
         </span>
         <span className="cursor-pointer hover:text-sky-900">
-          <FaUserCircle />
+          <Link
+            to="https://portfolio-alicbm.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaUserCircle />
+          </Link>
         </span>
       </div>
     </div>

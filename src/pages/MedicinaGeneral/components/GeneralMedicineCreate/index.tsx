@@ -7,6 +7,7 @@ import { CREATE_GENERAL_MEDICINE } from "../../graphql/Mutation/createRequest";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 import { BaseCreateRequest } from "../../../../components/mainComponents/BaseCreateRequest";
+import { Loader } from "../../../../components/Loader";
 
 export function GeneralMedicineCreate() {
   const [correct, setCorrect] = useState(false);
@@ -16,7 +17,7 @@ export function GeneralMedicineCreate() {
   const [downloadRequest, setDownloadRequest] = useState(false);
   const [dataRequest, setDataRequest] = useState<BaseIT>();
 
-  const [createGeneralMedicineRequest] = useMutation(CREATE_GENERAL_MEDICINE);
+  const [createGeneralMedicineRequest, { loading }] = useMutation(CREATE_GENERAL_MEDICINE);
 
   const allForm = useForm();
   const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
@@ -51,6 +52,8 @@ export function GeneralMedicineCreate() {
         buttonText="Ver Solicitudes"
         route="/dashboard/medicina-general/"
       />
+
+      { loading && <Loader /> }
 
       <BaseCreateRequest
         allForm={allForm}

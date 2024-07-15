@@ -7,6 +7,7 @@ import { CREATE_PSYCHIATRY } from "../../graphql/Mutation/createRequest";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 import { BaseCreateRequest } from "../../../../components/mainComponents/BaseCreateRequest";
+import { Loader } from "../../../../components/Loader";
 
 export function PsychiatryCreate() {
   const [correct, setCorrect] = useState(false);
@@ -16,7 +17,7 @@ export function PsychiatryCreate() {
   const [downloadRequest, setDownloadRequest] = useState(false);
   const [dataRequest, setDataRequest] = useState<BaseIT>();
 
-  const [createPsychiatryRequest] = useMutation(CREATE_PSYCHIATRY);
+  const [createPsychiatryRequest, { loading }] = useMutation(CREATE_PSYCHIATRY);
 
   const allForm = useForm();
   const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
@@ -51,6 +52,8 @@ export function PsychiatryCreate() {
         buttonText="Ver Solicitudes"
         route="/dashboard/psiquiatria/"
       />
+
+      { loading && <Loader /> } 
 
       <BaseCreateRequest
         allForm={allForm}

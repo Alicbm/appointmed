@@ -81,6 +81,7 @@ export function Inicio() {
           <MainButton
             text="Explorar plataforma"
             className="w-[250px] bg-sky-800 hover:bg-sky-900"
+            onClick={() => navigate("/dashboard/medicina-general")}
           />
         </div>
         <div className="hidden sm:block md:block">

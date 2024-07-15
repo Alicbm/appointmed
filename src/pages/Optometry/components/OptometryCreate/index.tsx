@@ -7,6 +7,7 @@ import { CREATE_OPTOMETRY } from "../../graphql/Mutation/createRequest";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 import { BaseCreateRequest } from "../../../../components/mainComponents/BaseCreateRequest";
+import { Loader } from "../../../../components/Loader";
 
 export function OptometryCreate() {
   const [correct, setCorrect] = useState(false);
@@ -16,7 +17,7 @@ export function OptometryCreate() {
   const [downloadRequest, setDownloadRequest] = useState(false);
   const [dataRequest, setDataRequest] = useState<BaseIT>();
 
-  const [createOptometryRequest] = useMutation(CREATE_OPTOMETRY);
+  const [createOptometryRequest, { loading }] = useMutation(CREATE_OPTOMETRY);
 
   const allForm = useForm();
   const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
@@ -51,6 +52,8 @@ export function OptometryCreate() {
         buttonText="Ver Solicitudes"
         route="/dashboard/optometria/"
       />
+
+      { loading && <Loader /> } 
 
       <BaseCreateRequest
         allForm={allForm}

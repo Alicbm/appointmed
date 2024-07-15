@@ -10,6 +10,7 @@ import { LoginType } from "../../../types";
 import { AlertModal } from "../../../components/AlertModal";
 import logo from "../../../images/appointmed_logo.png";
 import { AuthContext } from "../../../AuthContext";
+import { Loader } from "../../../components/Loader";
 
 type Props = {
   setLogin: Function;
@@ -19,7 +20,7 @@ export function LoginUser({ setLogin }: Props) {
   const context = useContext(AuthContext)
 
   const [auth, setAuth] = useState(false);
-  const [login] = useMutation(LOGIN);
+  const [login, { loading }] = useMutation(LOGIN);
   const allForm = useForm();
 
   const navigate = useNavigate()
@@ -59,6 +60,8 @@ export function LoginUser({ setLogin }: Props) {
         className="flex flex-col items-center w-full max-w-[450px] gap-4 mx-auto"
         onSubmit={onSubmit}
       >
+        { loading && <Loader /> }
+       
         <div className="flex justify-center w-full bg-gray-100 border border-gray-200 px-4 py-1 rounded-md">
           <img src={logo} alt="Appointmed" />
         </div>

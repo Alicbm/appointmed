@@ -10,9 +10,9 @@ import { DELETE_GYNECOLOGY } from "../../graphql/Mutation/deleteRequest";
 import { BaseList } from "../../../../components/mainComponents/BaseList";
 
 export function GynecologyList() {
-  const { data: fetchData } = useQuery(GET_ALL_GYNECOLOGY);
-  const [updateGynecologyRequest] = useMutation(UPDATE_GYNECOLOGY);
-  const [deleteGynecologyRequest] = useMutation(DELETE_GYNECOLOGY);
+  const { data: fetchData, loading: loadingGet } = useQuery(GET_ALL_GYNECOLOGY);
+  const [updateGynecologyRequest, { loading: loadingUpdate }] = useMutation(UPDATE_GYNECOLOGY);
+  const [deleteGynecologyRequest, { loading: loadingDelete }] = useMutation(DELETE_GYNECOLOGY);
 
   const newData: BaseIT[] = fetchData?.getAllGynecologyRequest;
 
@@ -43,6 +43,7 @@ export function GynecologyList() {
         setModalRequest={setModalRequest}
         setIdRequest={setIdRequest}
         routeCreateRequest="/dashboard/ginecologia/create"
+        loading={loadingGet}
       />
 
       <Pagination data={newData} setData={setFilterData} />
@@ -54,6 +55,8 @@ export function GynecologyList() {
           setModal={setModalRequest}
           updateRequest={updateGynecologyRequest}
           deleteRequest={deleteGynecologyRequest}
+          loadingUpdate={loadingUpdate}
+          loadingDelete={loadingDelete}
         />
       )}
     </div>

@@ -7,6 +7,7 @@ import { CREATE_GYNECOLOGY } from "../../graphql/Mutation/createRequest";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 import { BaseCreateRequest } from "../../../../components/mainComponents/BaseCreateRequest";
+import { Loader } from "../../../../components/Loader";
 
 export function GynecologyCreate() {
   const [correct, setCorrect] = useState(false);
@@ -16,7 +17,7 @@ export function GynecologyCreate() {
   const [downloadRequest, setDownloadRequest] = useState(false);
   const [dataRequest, setDataRequest] = useState<BaseIT>();
 
-  const [createGynecologyRequest] = useMutation(CREATE_GYNECOLOGY);
+  const [createGynecologyRequest, { loading }] = useMutation(CREATE_GYNECOLOGY);
 
   const allForm = useForm();
   const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
@@ -51,6 +52,8 @@ export function GynecologyCreate() {
         buttonText="Ver Solicitudes"
         route="/dashboard/ginecologia/"
       />
+
+      { loading && <Loader /> }
 
       <BaseCreateRequest 
         allForm={allForm}

@@ -10,9 +10,9 @@ import { ModalWatchRequest } from "../../../../components/mainComponents/ModalWa
 import { BaseList } from '../../../../components/mainComponents/BaseList'
 
 export function GeneralMedicineList() {
-  const { data: fetchData } = useQuery(GET_ALL_GENERAL_MEDICINE);
-  const [updateGeneralMedicineRequest] = useMutation(UPDATE_GENERAL_MEDICINE);
-  const [deleteGeneralMedicineRequest] = useMutation(DELETE_GENERAL_MEDICINE);
+  const { data: fetchData, loading: loadingGet } = useQuery(GET_ALL_GENERAL_MEDICINE);
+  const [updateGeneralMedicineRequest, { loading: loadingUpdate }] = useMutation(UPDATE_GENERAL_MEDICINE);
+  const [deleteGeneralMedicineRequest, { loading: loadingDelete }] = useMutation(DELETE_GENERAL_MEDICINE);
 
   const newData: BaseIT[] = fetchData?.getAllGeneralMedicineRequest;
 
@@ -43,6 +43,7 @@ export function GeneralMedicineList() {
         setModalRequest={setModalRequest}
         setIdRequest={setIdRequest}
         routeCreateRequest='/dashboard/medicina-general/create'
+        loading={loadingGet}
       />
 
       <Pagination data={newData} setData={setFilterData} />
@@ -54,6 +55,8 @@ export function GeneralMedicineList() {
           setModal={setModalRequest} 
           updateRequest={updateGeneralMedicineRequest}
           deleteRequest={deleteGeneralMedicineRequest}
+          loadingUpdate={loadingUpdate}
+          loadingDelete={loadingDelete}          
         />
       )}
     </div>

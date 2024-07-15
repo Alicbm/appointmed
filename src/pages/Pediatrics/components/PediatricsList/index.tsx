@@ -10,9 +10,9 @@ import { DELETE_PEDIATRICS } from "../../graphql/Mutation/deleteRequest";
 import { BaseList } from "../../../../components/mainComponents/BaseList";
 
 export function PediatricsList() {
-  const { data: fetchData } = useQuery(GET_ALL_PEDIATRICS);
-  const [updatePediatricsRequest] = useMutation(UPDATE_PEDIATRICS);
-  const [deletePediatricsRequest] = useMutation(DELETE_PEDIATRICS);
+  const { data: fetchData, loading: loadingGet } = useQuery(GET_ALL_PEDIATRICS);
+  const [updatePediatricsRequest, { loading: loadingUpdate }] = useMutation(UPDATE_PEDIATRICS);
+  const [deletePediatricsRequest, { loading: loadingDelete }] = useMutation(DELETE_PEDIATRICS);
 
   const newData: BaseIT[] = fetchData?.getAllPediatricsRequest;
 
@@ -43,6 +43,7 @@ export function PediatricsList() {
         setModalRequest={setModalRequest}
         setIdRequest={setIdRequest}
         routeCreateRequest="/dashboard/pediatria/create"
+        loading={loadingGet}
       />
 
       <Pagination data={newData} setData={setFilterData} />
@@ -54,6 +55,8 @@ export function PediatricsList() {
           setModal={setModalRequest}
           updateRequest={updatePediatricsRequest}
           deleteRequest={deletePediatricsRequest}
+          loadingUpdate={loadingUpdate}
+          loadingDelete={loadingDelete}
         />
       )}
     </div>

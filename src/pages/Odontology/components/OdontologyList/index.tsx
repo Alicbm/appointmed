@@ -10,9 +10,9 @@ import { ModalWatchRequest } from "../../../../components/mainComponents/ModalWa
 import { BaseList } from "../../../../components/mainComponents/BaseList";
 
 export function OdontologyList() {
-  const { data: fetchData } = useQuery(GET_ALL_ODONTOLOGY);
-  const [updateOdontologyRequest] = useMutation(UPDATE_ODONTOLOGY);
-  const [deleteOdontologyRequest] = useMutation(DELETE_ODONTOLOGY);
+  const { data: fetchData, loading: loadingGet} = useQuery(GET_ALL_ODONTOLOGY);
+  const [updateOdontologyRequest, { loading: loadingUpdate }] = useMutation(UPDATE_ODONTOLOGY);
+  const [deleteOdontologyRequest, { loading: loadingDelete }] = useMutation(DELETE_ODONTOLOGY);
 
   const newData: BaseIT[] = fetchData?.getAllOdontologyRequest;
 
@@ -43,6 +43,7 @@ export function OdontologyList() {
         setModalRequest={setModalRequest}
         setIdRequest={setIdRequest}
         routeCreateRequest="/dashboard/odontologia/create"
+        loading={loadingGet}
       />
 
       <Pagination data={newData} setData={setFilterData} />
@@ -54,6 +55,8 @@ export function OdontologyList() {
           setModal={setModalRequest}
           updateRequest={updateOdontologyRequest}
           deleteRequest={deleteOdontologyRequest}
+          loadingUpdate={loadingUpdate}
+          loadingDelete={loadingDelete}          
         />
       )}
     </div>

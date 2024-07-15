@@ -7,6 +7,7 @@ import { CREATE_PEDIATRICS } from "../../graphql/Mutation/createRequest";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 import { BaseCreateRequest } from "../../../../components/mainComponents/BaseCreateRequest";
+import { Loader } from "../../../../components/Loader";
 
 export function PediatricsCreate() {
   const [correct, setCorrect] = useState(false);
@@ -16,7 +17,7 @@ export function PediatricsCreate() {
   const [downloadRequest, setDownloadRequest] = useState(false);
   const [dataRequest, setDataRequest] = useState<BaseIT>();
 
-  const [createPediatricsRequest] = useMutation(CREATE_PEDIATRICS);
+  const [createPediatricsRequest, { loading }] = useMutation(CREATE_PEDIATRICS);
 
   const allForm = useForm();
   const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
@@ -51,6 +52,8 @@ export function PediatricsCreate() {
         buttonText="Ver Solicitudes"
         route="/dashboard/pediatria/"
       />
+
+      { loading && <Loader /> }
 
       <BaseCreateRequest
         allForm={allForm}

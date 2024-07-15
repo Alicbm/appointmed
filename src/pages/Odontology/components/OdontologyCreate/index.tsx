@@ -7,6 +7,7 @@ import { CREATE_ODONTOLOGY } from "../../graphql/Mutation/createRequest";
 import { useLocationRequest } from "../../../../hooks/useLocationRequest";
 import { useCreateRequest } from "../../../../hooks/useCreateRequest";
 import { BaseCreateRequest } from "../../../../components/mainComponents/BaseCreateRequest";
+import { Loader } from "../../../../components/Loader";
 
 export function OdontologyCreate() {
   const [correct, setCorrect] = useState(false);
@@ -16,7 +17,7 @@ export function OdontologyCreate() {
   const [downloadRequest, setDownloadRequest] = useState(false);
   const [dataRequest, setDataRequest] = useState<BaseIT>();
 
-  const [createOdontologyRequest] = useMutation(CREATE_ODONTOLOGY);
+  const [createOdontologyRequest, { loading }] = useMutation(CREATE_ODONTOLOGY);
 
   const allForm = useForm();
   const { locationData, dataCityList, dataMedicalCenter, dataDoctor } =
@@ -51,6 +52,8 @@ export function OdontologyCreate() {
         buttonText="Ver Solicitudes"
         route="/dashboard/odontologia"
       />
+
+      { loading && <Loader /> }
 
       <BaseCreateRequest
         allForm={allForm}

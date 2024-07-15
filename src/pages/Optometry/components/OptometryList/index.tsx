@@ -10,9 +10,9 @@ import { DELETE_OPTOMETRY } from "../../graphql/Mutation/deleteRequest";
 import { BaseList } from "../../../../components/mainComponents/BaseList";
 
 export function OptometryList() {
-  const { data: fetchData } = useQuery(GET_ALL_OPTOMETRY);
-  const [updateOptometryRequest] = useMutation(UPDATE_OPTOMETRY);
-  const [deleteOptometryRequest] = useMutation(DELETE_OPTOMETRY);
+  const { data: fetchData, loading: loadingGet } = useQuery(GET_ALL_OPTOMETRY);
+  const [updateOptometryRequest, { loading: loadingUpdate }] = useMutation(UPDATE_OPTOMETRY);
+  const [deleteOptometryRequest, { loading: loadingDelete }] = useMutation(DELETE_OPTOMETRY);
 
   const newData: BaseIT[] = fetchData?.getAllOptometryRequest;
 
@@ -43,6 +43,7 @@ export function OptometryList() {
         setModalRequest={setModalRequest}
         setIdRequest={setIdRequest}
         routeCreateRequest="/dashboard/optometria/create"
+        loading={loadingGet}
       />
 
       <Pagination data={newData} setData={setFilterData} />
@@ -54,6 +55,8 @@ export function OptometryList() {
           setModal={setModalRequest}
           updateRequest={updateOptometryRequest}
           deleteRequest={deleteOptometryRequest}
+          loadingUpdate={loadingUpdate}
+          loadingDelete={loadingDelete}          
         />
       )}
     </div>
