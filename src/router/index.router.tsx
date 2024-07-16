@@ -18,6 +18,7 @@ import { OptometryList } from "../pages/Optometry/components/OptometryList";
 import { Login } from "../pages/Login";
 import { ProtectedRoutes } from "./protected.router";
 import { RedirectUser } from "./redirectUser.router";
+import { NotFound } from "../pages/NotFound";
 
 export function Router() {
   return (
@@ -48,6 +49,7 @@ export function Router() {
             <Route path="optometria/create" element={<OptometryCreate />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />}/>
       </Routes>
       <Footer />
     </HashRouter>

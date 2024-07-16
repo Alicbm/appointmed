@@ -12,7 +12,7 @@ import { App } from "./App/App.tsx";
 import "./index.css";
 import { AuthProvider } from "./AuthContext/index.tsx";
 
-const httpLink = new HttpLink({ uri: "http://localhost:3000/graphql" });
+const httpLink = new HttpLink({ uri: "https://apollo-appointmed-1.onrender.com/graphql" });
 
 const authLink = new ApolloLink((operation, forward) => {
   const auth = localStorage.getItem("AUTH_TOKEN_APPOINTMED");
